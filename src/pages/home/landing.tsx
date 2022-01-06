@@ -10,7 +10,7 @@ function Landing() {
     const fetchData = () => {
         setLoading(true);
         setTimeout( () => {
-            localStorage.setItem('token','true')
+            sessionStorage.setItem('token','true')
             history.push('/')
         }, 2000);
         console.log(isLoading)

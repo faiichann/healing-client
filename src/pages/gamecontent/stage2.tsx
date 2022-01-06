@@ -1,7 +1,12 @@
-import { Row, Col} from "antd";
+import { Row, Col, Modal} from "antd";
+import { useAppContext } from "context/appContext";
 import { useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 import CountDownTimer from "utils/countdownTimer";
 
+const ModalStyle = styled(Modal)`
+    z-index: 99;
+`
 function GameStage2() {
     let info = [
         {text: 'smile' , value: 1},
@@ -13,13 +18,14 @@ function GameStage2() {
     ]
     const [text, setText] = useState(0)
     const [score, setScore] = useState(0)
+    const { nextStage,visible, setVisible} = useAppContext()
     // const [[hrs, mins, secs], setTime] = useState([0, 0, 10]);
 
 
     const goodButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 1){
-            score < 10 ? setScore(score + 1) : passStage();
+            score < 10 ? setScore(score + 1) : setVisible(!visible);
         } else {
             setScore(score)
         }
@@ -28,16 +34,16 @@ function GameStage2() {
     const badButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 0){
-            score < 10 ? setScore(score + 1) : passStage();
+            score < 10 ? setScore(score + 1) : setVisible(!visible);
         } else {
             setScore(score)
         }
     }
 
-    const passStage = () => {
-        alert('you pass')
-        setScore(0)
-    }
+    // const passStage = () => {
+    //     setVisible(true)
+    //     setScore(0)
+    // }
 
     // useEffect(() => {
     //         const tick = () => {
@@ -76,6 +82,8 @@ function GameStage2() {
            <Col><button onClick={()=>goodButton(text)}>GOOD</button></Col>
         </Row>
         <h4>Point : {score}</h4>
+       {visible && <button onClick={nextStage}>Next</button> }
+
        </>
     );
 }
