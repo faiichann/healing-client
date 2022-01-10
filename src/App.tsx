@@ -1,11 +1,16 @@
+import Routing from 'routes';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
+import { AppProvider } from 'context/appContext';
 
 function App() {
   return (
-    <div className="App">
-     Hello world this is faiichann
-     <h1>testtttttttttttt</h1>
-    </div>
+    <AppProvider>
+    <Router>
+        <Routing/>
+    </Router>
+    </AppProvider>
+
   );
 }
 
