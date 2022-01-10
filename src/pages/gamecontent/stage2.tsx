@@ -1,12 +1,8 @@
-import { Row, Col, Modal} from "antd";
+import { Row, Col } from "antd";
 import { useAppContext } from "context/appContext";
-import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { useState } from "react";
 import CountDownTimer from "utils/countdownTimer";
 
-const ModalStyle = styled(Modal)`
-    z-index: 99;
-`
 function GameStage2() {
     let info = [
         {text: 'smile' , value: 1},
