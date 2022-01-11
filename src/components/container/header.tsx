@@ -16,7 +16,8 @@ const HeaderStyle = styled(Row)`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: whitesmoke;
+    background-color: #A6CD9C;
+;
 `;
 
 const Header = memo(({ title, right, left }: HeaderProps) => {

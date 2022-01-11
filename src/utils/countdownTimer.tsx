@@ -1,14 +1,16 @@
+import { useAppContext } from 'context/appContext';
 import React, { useEffect, useState } from 'react'
 
 const CountDownTimer = ({hoursMinSecs} : any) => {
-   
+    const { setIsLose } = useAppContext();
     const { hours = 0, minutes = 0, seconds = 60 } = hoursMinSecs;
     const [[hrs, mins, secs], setTime] = useState([hours, minutes, seconds]);
     
 
+
     const tick = () => {
         if (hrs === 0 && mins === 0 && secs === 0) {
-            alert('you lose')
+            setIsLose(true)
             reset()
         }
         else if (mins === 0 && secs === 0) {

@@ -3,14 +3,18 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { Avatar, Card } from 'antd';
+import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 
+const { Meta } = Card;
 function Result() {
     const history = useHistory();
-    const { setStage } = useAppContext();
+    const { stage, setStage } = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [text, setText] = useState();
     const [author, setAuthor] = useState();
     const [data, setData] = useState<any>();
+
     const saveResult = () =>{
         setStage(1)
         history.push('/')
@@ -47,12 +51,26 @@ function Result() {
           {isLoading ? 
           <>
            <div>This is Your result</div>
-           <h3>Quote : {text}</h3>
-           <h4>Author: {author}</h4>
+           <Card
+            style={{ width: 300 }}
+            cover={
+            <img
+            alt="example"
+            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+            />
+            }
+            >
+            <Meta
+            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+            title={author}
+            description={text}
+            />
+        </Card>
            <button onClick={saveResult}>Save</button> 
           </>
          : 
          <>
+         <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
          <div onClick={openBox}>TAP TO OPEN BOX !!!</div>
          </>
           }

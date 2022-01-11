@@ -20,7 +20,7 @@ const AppContainer = styled.div`
     margin: 0 auto;
     z-index: 0;
     height: 100vh;
-    background-color: #dddddd;
+    background-color:#E4F1DA;
 `;
 const MainContent = styled(Content)<BodyProps>`
     height: ${(props) => {

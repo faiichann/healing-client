@@ -1,4 +1,4 @@
-import { Children, createContext, useCallback, useEffect, useState, useContext } from "react"
+import { createContext, useEffect, useState, useContext } from "react"
 
 interface IContextProps {
     children: any 
@@ -9,7 +9,7 @@ const AppContext = createContext<any>(null);
 const AppProvider = (({children}: IContextProps) =>{
 
     const [stage,setStage] = useState<number>(1)
-    const [visible, setVisible] = useState(false)
+    const [isLose,setIsLose] = useState(false)
     // const nextStage = useCallback(
     //     () => {
     //         setStage(stage+1)
@@ -23,15 +23,14 @@ const AppProvider = (({children}: IContextProps) =>{
     const value ={
         nextStage,
         stage,
-        visible, 
-        setVisible,
-        setStage
+        setStage,
+        isLose,
+        setIsLose
     }
 
     useEffect(() => {
        console.log('stage', stage)
-       console.log('Modal', visible)
-    }, [stage, visible])
+    }, [stage])
 
     return<AppContext.Provider value={value}>
         {children}
