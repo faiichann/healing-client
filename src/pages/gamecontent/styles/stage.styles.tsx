@@ -47,7 +47,20 @@ export const ProgressBar = styled(Progress)`
  }
 `
 export const DivProgress = styled.div`
-width: 90%;
-position: relative;
-display: flex;
+    width: 90%;
+    position: relative;
+    display: flex;
+`
+
+export const TextRandom = styled.div`
+    min-width: 35%;
+    background-color: var(--White);
+    color: var(--Gray-600);
+    padding: 5px 10px;
+    font-size: var(--font-48);
+    font-weight: 400;
+    border-radius: var(--Radius-56);
+    align-items: center;
+    display: flex;
+    justify-content: center;
 `

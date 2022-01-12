@@ -3,8 +3,10 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Avatar, Card } from 'antd';
+import { Avatar, Button, Card, message } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
+import { HomeFilled } from '@ant-design/icons';
+import { Box, ButtonStyle } from 'theme/components';
 
 const { Meta } = Card;
 function Result() {
@@ -14,10 +16,14 @@ function Result() {
     const [text, setText] = useState();
     const [author, setAuthor] = useState();
     const [data, setData] = useState<any>();
+    const key = 'updatable';
 
     const saveResult = () =>{
         setStage(1)
-        history.push('/')
+        message.loading({ content: 'Loading...', key });
+        setTimeout(() => {
+          message.success({ content: 'Loaded!', key, duration: 2 });
+        }, 1000);
     }
 
     const getResult = async() =>{
@@ -47,9 +53,10 @@ function Result() {
        }
     }
     return (
-       <Container header={{ title: 'Result', left: 'back' , right: 'menu' }}>
+       <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={()=> history.push('/')} />) }}>
           {isLoading ? 
           <>
+          <Box justify='center' align='center' direction='column'>
            <div>This is Your result</div>
            <Card
             style={{ width: 300 }}
@@ -66,12 +73,19 @@ function Result() {
             description={text}
             />
         </Card>
-           <button onClick={saveResult}>Save</button> 
+        <Box justify='center' align='center' direction='row'>
+        <ButtonStyle typebutton='Medium' sizebutton={30} onClick={saveResult}>
+            Save
+        </ButtonStyle>
+        </Box>
+        </Box>
           </>
          : 
          <>
+         <Box justify='center' align='center' direction='column'>
          <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
          <div onClick={openBox}>TAP TO OPEN BOX !!!</div>
+         </Box>
          </>
           }
        </Container>

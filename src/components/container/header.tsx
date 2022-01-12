@@ -11,13 +11,25 @@ interface HeaderProps {
 }
 const HeaderStyle = styled(Row)`
     width: 100%;
-    height: 8%;
+    height: 57px;
     top: 0;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background-color: #A6CD9C;
-;
+    justify-content: center;
+    background-color: var(--Green-300);
+`;
+
+const ColHeader = styled(Col)`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const Title = styled.div`
+    color: var(--Green-400);
+    font-weight: 800;
+    font-size: var(--font-18);
 `;
 
 const Header = memo(({ title, right, left }: HeaderProps) => {
@@ -49,15 +61,15 @@ const Header = memo(({ title, right, left }: HeaderProps) => {
     return (
         <>
             <HeaderStyle>
-                <Col span={4}>
+                <ColHeader span={4}>
                     <div>{leftCon}</div>
-                </Col>
-                <Col span={16}>
-                    <div>{title}</div>
-                </Col>
-                <Col span={4}>
+                </ColHeader>
+                <ColHeader span={16}>
+                    <Title>{title}</Title>
+                </ColHeader>
+                <ColHeader span={4}>
                     <div>{rightCon}</div>
-                </Col>
+                </ColHeader>
             </HeaderStyle>
         </>
     );

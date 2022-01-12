@@ -20,12 +20,12 @@ const AppContainer = styled.div`
     margin: 0 auto;
     z-index: 0;
     height: 100vh;
-    background-color:#E4F1DA;
+    background-color: var(--Green-200);
 `;
 const MainContent = styled(Content)<BodyProps>`
     height: ${(props) => {
-        const isheader = props?.isheader ? 8 : 0;
-        return `calc(100vh - ${isheader}%); `;
+        const isheader = props?.isheader ? 100 : 0;
+        return `calc(100vh - ${isheader})px; `;
     }};
     width: 100%;
     overflow-y: scroll;
@@ -34,7 +34,11 @@ const Container = memo(({ children, header }: ContainerProps) => {
     return (
         <AppContainer>
             {header && <Header {...header} />}
-            <MainContent isheader={header ? 'true' : 'false'}> {children}</MainContent>
+            <MainContent 
+            isheader={header ? 'true' : 'false'}
+            > 
+            {children}
+            </MainContent>
         </AppContainer>
     );
 });

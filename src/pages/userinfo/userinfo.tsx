@@ -2,6 +2,7 @@ import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
 import { Input } from 'antd';
 import { useEffect, useState } from 'react';
+import { Box, ButtonStyle } from 'theme/components';
 
 interface userInfo{
     userName : string;
@@ -39,7 +40,7 @@ function UserInfo() {
     }, [])
     return (
         <Container header={{ title: 'Information', left: 'back' }}>
-        
+           <Box justify='center' align='center' direction='column'>
         {loading? data() :null}
 
         <Input placeholder="Input username" name="userName" 
@@ -49,7 +50,10 @@ function UserInfo() {
         onChange={({ target: { value ,name} }) => { submitUsername(name,value) }} />
         <button onClick={() => userShow()}>Sumbmit</button>
 
-        <button onClick={() => history.push('/Gamecontent')}>Next</button>
+        <Box justify='center' align='center' direction='row'>
+           <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
+        </Box>
+        </Box>
         </Container>
     );
 }

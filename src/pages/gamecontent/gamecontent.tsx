@@ -4,6 +4,7 @@ import { useAppContext } from 'context/appContext';
 import { useState , useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { Box } from 'theme/components';
 import GameStage1 from './stage1';
 import GameStage2 from './stage2';
 import GameStage3 from './stage3';
@@ -25,10 +26,12 @@ function GameContent() {
         <>
        <Container header={{ title: 'Game Content', left: 'back' }}>
        <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
-           <h2>Stage : {stage}</h2>
+       <Box justify='center' align='center' direction='column'>
+       <h2>Stage : {stage}</h2>
            {stage === 1 && <GameStage1/>} 
            {stage === 2  && <GameStage2/>}
            {stage === 3 && <GameStage3/>}
+       </Box>
        </Container>
        </>
     );

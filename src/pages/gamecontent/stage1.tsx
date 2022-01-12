@@ -1,6 +1,7 @@
 import { Input } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
+import { Box, ButtonStyle } from "theme/components";
 
 function GameStage1() {
     
@@ -52,18 +53,19 @@ function GameStage1() {
        <>
        <div>Versus Game</div>
         {finish ? 
-            <div>
+           <Box justify='center' align='center' direction='column'>
                 <h1>{goal}</h1>
                 <p>พิมพ์เป้าหมายของคุณที่นี่!!!</p>
                 <Input placeholder="Basic usage" />
-                <button onClick={nextStage}>ส่ง</button>
-            </div>
+                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={nextStage}> Submit </ButtonStyle>
+            </Box>
         : 
-            <span>
+        <Box justify='center' align='center' direction='row'>
             <div onClick={selectItem1}> {select[select.length - 1]} </div> 
             <h1> VS </h1> 
             <div onClick={selectItem2}>{select[select.length - 2]}  </div>
-             </span>
+         </Box>
+    
         }
 
        </>

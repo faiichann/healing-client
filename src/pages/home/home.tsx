@@ -1,12 +1,15 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
+import { Box, ButtonStyle } from 'theme/components';
 
 function Home() {
     const history = useHistory();
     return (
        <Container header={{ title: 'Healing', right: 'menu' }}>
+           <Box justify='center' align='center' direction='column'>
            <div>This is home page</div>
-           <button onClick={() => history.push('/intro')}>PLAY</button>
+           <ButtonStyle  typebutton='Medium'  sizebutton={30} onClick={() => history.push('/intro')}>PLAY</ButtonStyle>
+           </Box>
        </Container>
     );
 }

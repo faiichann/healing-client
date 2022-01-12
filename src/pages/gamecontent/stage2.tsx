@@ -1,8 +1,9 @@
 import { Row, Col, Button, Progress} from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
+import { Box } from "theme/components";
 import CountDownTimer from "utils/countdownTimer";
-import { ConfirmModal } from "./styles/stage.styles";
+import { ConfirmModal, TextRandom } from "./styles/stage.styles";
 
 function GameStage2() {
     let info = [
@@ -55,16 +56,24 @@ function GameStage2() {
         <ConfirmModal title="lose" visible={isLose} onOk={handleLoseOk} >
             <p>You fail please try again</p>
         </ConfirmModal>
-
+        <Box justify='center' align='center' direction='column'>
        <p>Speed game</p>
        <CountDownTimer  hoursMinSecs={hoursMinSecs}/>
-        <div><h1>{info[text].text}</h1></div>
-       <Row>
-           <Col><button onClick={()=>badButton(text)}>BAD</button></Col> 
-           <Col><button onClick={()=>goodButton(text)}>GOOD</button></Col>
-        </Row>
-        
-        <h4>Point : <Progress strokeLinecap="square" percent={score * 10} /> </h4>
+
+       <Box justify='center' align='center' direction='row'>
+           <TextRandom>{info[text].text}</TextRandom>
+        </Box>
+       <Box justify='center' align='center' direction='row'>
+           <Col><Button onClick={()=>badButton(text)}>BAD</Button></Col> 
+           <Col><Button onClick={()=>goodButton(text)}>GOOD</Button></Col>
+        </Box>
+        <Box justify='center' align='center' direction='row'>
+            <Col span={4}> <h4>Point :  </h4> </Col>
+            <Col span={20}>
+            <Progress strokeLinecap="square" percent={score * 10} />
+            </Col>
+        </Box>
+        </Box>
        </>
     );
 }
