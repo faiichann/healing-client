@@ -64,3 +64,12 @@ export const TextRandom = styled.div`
     display: flex;
     justify-content: center;
 `
+export const TextCutScene = styled.div`
+    color: var(--Gray-600);
+    padding: 5px 10px;
+    font-size: var(--font-48);
+    font-weight: 400;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+`

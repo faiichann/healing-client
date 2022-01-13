@@ -19,7 +19,7 @@ function Result() {
     const key = 'updatable';
 
     const saveResult = () =>{
-        setStage(1)
+        setStage(0)
         message.loading({ content: 'Loading...', key });
         setTimeout(() => {
           message.success({ content: 'Loaded!', key, duration: 2 });
@@ -56,7 +56,7 @@ function Result() {
        <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={()=> history.push('/')} />) }}>
           {isLoading ? 
           <>
-          <Box justify='center' align='center' direction='column'>
+          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}}>
            <div>This is Your result</div>
            <Card
             style={{ width: 300 }}

@@ -1,7 +1,9 @@
-import { Input } from "antd";
+import { Alert, Input, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
+
+const { Title } = Typography;
 
 function GameStage1() {
     
@@ -10,6 +12,8 @@ function GameStage1() {
     const [finish, setFinish] = useState(false)
     const [goal, setGoal] = useState('')
     const { nextStage } = useAppContext();
+    const [isSkip, setIsSkip] = useState(false)
+    const [index, setIndex] = useState(0);
     
     console.log('-----------item----------',items[items.length-1])
 
@@ -49,25 +53,58 @@ function GameStage1() {
             console.log('-----------select2----------',select)
         }
     }
+
+    const message = [
+        'เอาละในขั้นแรกคุณจำเป็นต้องมีเป้าหมายที่ชัดเจนก่อน', 
+        'กถ้ายังไม่แน่ใจเรามีตัวช่วยให้คุณ', 
+        'เลือกสิ่งที่คุณชอบมากที่สุดจากไอเทมที่ปรากฎ', 
+        'มีโอกาสเลือกครั้งเดียวนะ',
+        'ถ้าพร้อมแล้วไปเริ่มกันเลย'
+    ] 
+
+    const onSkip = () =>{
+        setIsSkip(true)
+    }
+    const nextIndex = () =>{
+        if (index + 1 <= message.length - 1){
+            setIndex(index + 1 )
+        }else{
+            setIsSkip(true)
+        }
+      }
+
     return (
        <>
-       <div>Versus Game</div>
+       {isSkip && 
+       <>
+        <div>Versus Game</div>
         {finish ? 
-           <Box justify='center' align='center' direction='column'>
+           <Box justify='center' align='center' direction='column'  style={{height: 'calc(100vh - 400px)'}}>
                 <h1>{goal}</h1>
                 <p>พิมพ์เป้าหมายของคุณที่นี่!!!</p>
                 <Input placeholder="Basic usage" />
                 <ButtonStyle typebutton='Medium' sizebutton={30} onClick={nextStage}> Submit </ButtonStyle>
             </Box>
         : 
-        <Box justify='center' align='center' direction='row'>
+        <Box justify='center' align='center' direction='row'  style={{height: 'calc(100vh - 400px)'}}>
             <div onClick={selectItem1}> {select[select.length - 1]} </div> 
             <h1> VS </h1> 
             <div onClick={selectItem2}>{select[select.length - 2]}  </div>
          </Box>
-    
         }
+       </>
+       }
 
+        {!isSkip && 
+       <>
+       <Box justify='flex-end' align='center' direction='row' onClick={onSkip}>
+            <Title level={5}> Skip </Title>
+       </Box>
+        <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}} onClick={nextIndex}>
+            <Alert style={{ margin: '16px 0', width: '50%', justifyContent: 'center' }} message={message[index]} />
+        </Box>
+       </>
+        }
        </>
     );
 }

@@ -1,7 +1,9 @@
-import { Alert, Button, Input, Radio } from "antd";
+import { Alert, Button, Input, Radio, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
+
+const { Title } = Typography;
 
 function GameStage3() {
     const { nextStage } = useAppContext();
@@ -22,6 +24,8 @@ function GameStage3() {
       const [item1, setItem1] = useState('❓');
       const [item2, setItem2] = useState('❓');
       const [item3, setItem3] = useState('❓');
+      const [isSkip, setIsSkip] = useState(false)
+      const [indexCut, setIndexCut] = useState(0);
 
       const random = () => {
         let randomItem1 = Math.floor(Math.random() * items.length);
@@ -44,10 +48,30 @@ function GameStage3() {
       const nextIndex = () =>{
         setIndex(index + 1 )
       }
+
+      const messageCut = [
+        'คุณเก่งมากเลย', 
+        'งั้นคุณช่วยเราหน่อยได้ไหม', 
+        '',
+        'ขอบคุณนะคุณใจดีจริงๆ',
+        'เอาละไปช่วยเหลือคนที่เดือดร้อนกันเถอะ', 
+    ] 
+
+    const goSpecial = () =>{
+      nextStage()
+      }
+    const nextIndexCut = () =>{
+        if (indexCut + 1 <= messageCut.length - 1){
+          setIndexCut(indexCut + 1 )
+        }else{
+            setIsSkip(true)
+        }
+      }
     return (
        <>
-       <div>This is Game stage 3</div>
-       {
+        { isSkip &&
+       <>
+        {
          isCutScene ?
          <>
          {index === 3 ?
@@ -76,6 +100,7 @@ function GameStage3() {
          :
          <>
           <Box justify='center' align='center' direction='column'>
+          <div>This is Game stage 3</div>
         <Radio.Group>
         <Radio.Button value="large">{item1}</Radio.Button>
         <Radio.Button value="default">{item2}</Radio.Button>
@@ -89,6 +114,26 @@ function GameStage3() {
         </Box>
         </Box>
          </>
+       }
+       </>
+       }
+      
+
+       { !isSkip &&
+       <>
+          { indexCut === 2 ?
+            <>
+            <Box justify='center' align='center' direction='row'>
+              <Button type="primary" onClick={nextIndexCut}>Yes I'll lhelp </Button>
+              <Button danger onClick={goSpecial}>No I'm not </Button>
+            </Box>
+            </>
+          :
+          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}} onClick={nextIndexCut}>
+            <Alert style={{ margin: '16px 0', width: '50%', justifyContent: 'center' }} message={messageCut[indexCut]} />
+          </Box>
+          }
+       </>
        }
        </>
     );

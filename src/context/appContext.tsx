@@ -8,7 +8,7 @@ const AppContext = createContext<any>(null);
 
 const AppProvider = (({children}: IContextProps) =>{
 
-    const [stage,setStage] = useState<number>(1)
+    const [stage,setStage] = useState<number>(0)
     const [isLose,setIsLose] = useState(false)
     // const nextStage = useCallback(
     //     () => {

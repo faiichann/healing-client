@@ -2,6 +2,7 @@ import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
 import { Spin } from 'antd';
 import { useEffect, useState } from 'react';
+import { Box } from 'theme/components';
 
 function Landing() {
     const history = useHistory();
@@ -12,7 +13,7 @@ function Landing() {
         setTimeout( () => {
             sessionStorage.setItem('token','true')
             history.push('/')
-        }, 2000);
+        }, 3000);
         console.log(isLoading)
     };
     useEffect(() => {
@@ -20,8 +21,11 @@ function Landing() {
     })
     return (
        <Container header={null}>
-            <h1>loadingggggggggg</h1>
-            <Spin/>
+            <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
+            <Spin size='large'/>
+            <h4>loading....</h4>
+            </Box>
+            
        </Container>
     );
 }

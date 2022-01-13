@@ -6,7 +6,7 @@ function Home() {
     const history = useHistory();
     return (
        <Container header={{ title: 'Healing', right: 'menu' }}>
-           <Box justify='center' align='center' direction='column'>
+           <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
            <div>This is home page</div>
            <ButtonStyle  typebutton='Medium'  sizebutton={30} onClick={() => history.push('/intro')}>PLAY</ButtonStyle>
            </Box>

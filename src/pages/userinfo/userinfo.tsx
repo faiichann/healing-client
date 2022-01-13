@@ -1,20 +1,21 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
-import { Input } from 'antd';
+import { Button, Input, Select } from 'antd';
 import { useEffect, useState } from 'react';
 import { Box, ButtonStyle } from 'theme/components';
 
 interface userInfo{
     userName : string;
-    userAvartar : string;
 }
+const { Option } = Select;
 
 function UserInfo() {
     const history = useHistory();
-    const [userData, setUserdata] = useState<userInfo>({userName : '' , userAvartar: ''});
+    const [userData, setUserdata] = useState<userInfo>({userName : ''});
     const [loading,setLoading] = useState<boolean>(false)
+
     const userShow = async()=>{
-        if (userData.userName && userData.userAvartar){
+        if (userData.userName){
             await data();
             setLoading(true);
         }else{
@@ -26,7 +27,6 @@ function UserInfo() {
         return(
             <>
             <h4>Username : {userData.userName} </h4>
-            <h4>UserAvartar {userData.userAvartar}: </h4>
             </>
         )
     }
@@ -35,20 +35,32 @@ function UserInfo() {
         setUserdata((prev) => ({...prev,[name]:value }))
     }
 
-    useEffect(() => {
-        setUserdata({userName : '' , userAvartar: ''})
-    }, [])
     return (
         <Container header={{ title: 'Information', left: 'back' }}>
-           <Box justify='center' align='center' direction='column'>
+           <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}}>
         {loading? data() :null}
 
-        <Input placeholder="Input username" name="userName" 
+        <Input.Group compact>
+            <Input style={{ width: 'calc(100% - 200px)' }} placeholder="type your name"
+             name="userName" 
+            onChange={({ target: { value ,name } }) => { submitUsername(name,value) }} 
+             />
+            <Button type="primary" onClick={() => userShow()}>Submit</Button>
+        </Input.Group>
+
+        <Select defaultValue="🦄" style={{ width: 120 }}>
+        <Option value="👻">👻</Option>
+        <Option value="🦄">🦄</Option>
+        </Select>
+
+        {/* <Button type="primary" onClick={() => userShow()}> Select </Button> */}
+
+        {/* <Input placeholder="Input username" name="userName" 
         onChange={({ target: { value ,name } }) => { submitUsername(name,value) }} />
 
         <Input placeholder="Input Avartar" name="userAvartar" 
-        onChange={({ target: { value ,name} }) => { submitUsername(name,value) }} />
-        <button onClick={() => userShow()}>Sumbmit</button>
+        onChange={({ target: { value ,name} }) => { submitUsername(name,value) }} /> */}
+        
 
         <Box justify='center' align='center' direction='row'>
            <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
