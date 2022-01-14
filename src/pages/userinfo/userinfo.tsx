@@ -1,8 +1,8 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
 import { Button, Input, Select } from 'antd';
-import { useEffect, useState } from 'react';
 import { Box, ButtonStyle } from 'theme/components';
+import { useState } from 'react';
 
 interface userInfo{
     userName : string;

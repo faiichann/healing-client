@@ -1,12 +1,13 @@
-import { Alert, Button, Input, Radio, Typography } from "antd";
+import { Alert, Button, Input, Radio } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, ButtonStyle } from "theme/components";
 
-const { Title } = Typography;
 
 function GameStage3() {
     const { nextStage } = useAppContext();
+    const history = useHistory();
     const items = [
         "🍭",
         "❌",
@@ -58,7 +59,8 @@ function GameStage3() {
     ] 
 
     const goSpecial = () =>{
-      nextStage()
+      history.push('/hangman-stage')
+      // nextStage()
       }
     const nextIndexCut = () =>{
         if (indexCut + 1 <= messageCut.length - 1){

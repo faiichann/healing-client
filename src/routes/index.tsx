@@ -7,6 +7,7 @@ import Result from 'pages/result/result';
 import PrivateRoute from './privateroute';
 import Landing from 'pages/home/landing';
 import Test from 'pages/test';
+import HangmanStage from 'pages/gamecontent/hangmanStage';
 
 function Routing(){
     return(
@@ -18,6 +19,8 @@ function Routing(){
               <Route exact path="/gamecontent" component={GameContent}/>
               <Route exact path="/result" component={Result}/>
               <Route exact path="/test" component={Test}/>
+              <Route exact path="/hangman-stage" component={HangmanStage}/>
+
         </Switch>
     )
 }
