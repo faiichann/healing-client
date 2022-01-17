@@ -4,7 +4,6 @@ import Popup from "components/hangman/Popup";
 import Word from "components/hangman/Word";
 import WrongLetters from "components/hangman/WrongLetters";
 import { useEffect, useState } from "react";
-// import Notification from "components/hangman/Notification"
 import Container from "components/container/container";
 import "./styles/hangman.css"
 import { Box } from "theme/components";
@@ -22,7 +21,7 @@ const words = [
     const [playable, setPlayable] = useState(true);
     const [correctLetters, setCorrectLetters] = useState([String]);
     const [wrongLetters, setWrongLetters] = useState([String]);
-    // const [showNotification, setShowNotification] = useState(false);
+    const [loseTime, setLoseTime] = useState(0);
 
     useEffect(() => {
     const handleKeydown = (event: { key: any; keyCode: any; }) => {
@@ -46,7 +45,8 @@ const words = [
   }, [correctLetters, wrongLetters, playable]);
 
   const playAgain = () => {
-    console.log('playyyy')
+    setLoseTime(loseTime + 1)
+    console.log(loseTime )
     setPlayable(true);
     setCorrectLetters([]);
     setWrongLetters([]);
@@ -65,8 +65,12 @@ const words = [
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
       </div>
-      <Popup correctLetters={correctLetters} wrongLetters={wrongLetters} selectedWord={selectedWord} playAgain={playAgain}/>
-      {/* <Notification showNotification={showNotification} /> */}
+      <Popup 
+      correctLetters={correctLetters} 
+      wrongLetters={wrongLetters} 
+      selectedWord={selectedWord} 
+      playAgain={playAgain}
+      loseTime={loseTime} />
       </Box>
       </Container>
     </>
