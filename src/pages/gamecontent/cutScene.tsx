@@ -7,11 +7,12 @@ import { TextCutScene } from "./styles/stage.styles";
 function Cutscene() {
     
     const [isTab, setIsTab] = useState(false)
-    const { nextStage } = useAppContext();
+    const { nextStage , isName, isAvatar } = useAppContext();
     const [index, setIndex] = useState(0);
 
     const message = [
-        'HI USER001',
+        `HI  ${isName}`,
+        `you so cute  ${isAvatar}`,
         'Welcome to Healing',
         'Let us make you happy', 
         'ARE YOU READY!', 
