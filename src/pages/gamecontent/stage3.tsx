@@ -3,44 +3,40 @@ import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, ButtonStyle } from "theme/components";
-
+import randomSlot from 'api/mocks/RandomSlot.json'
 
 function GameStage3() {
     const { nextStage } = useAppContext();
     const history = useHistory();
-    const items = [
-        "🍭",
-        "❌",
-        "⛄️",
-        "🦄",
-        "🍌",
-        "💩",
-        "👻",
-        "😻",
-        "💵",
-        "🤡",
-        "🦖",
-        "🍎"
-      ];
+    const items1 = randomSlot.avatar
+    const items2 = randomSlot.problem
+    const items3 = randomSlot.power
+
       const [item1, setItem1] = useState('❓');
       const [item2, setItem2] = useState('❓');
       const [item3, setItem3] = useState('❓');
       const [isSkip, setIsSkip] = useState(false)
       const [indexCut, setIndexCut] = useState(0);
+      const [name, setName] = useState('');
+      const [problem, setProblem] = useState('');
+      const [power, setPower] = useState('');
 
       const random = () => {
-        let randomItem1 = Math.floor(Math.random() * items.length);
-        let randomItem2 = Math.floor(Math.random() * items.length);
-        let randomItem3 = Math.floor(Math.random() * items.length);
-        setItem1(items[randomItem1])
-        setItem2(items[randomItem2])
-        setItem3(items[randomItem3])
+        let randomItem1 = Math.floor(Math.random() * items1.length);
+        let randomItem2 = Math.floor(Math.random() * items2.length);
+        let randomItem3 = Math.floor(Math.random() * items3.length);
+        setItem1(items1[randomItem1].img)
+        setItem2(items2[randomItem2].img)
+        setItem3(items3[randomItem3].img)
+        setName(items1[randomItem1].name)
+        setProblem(items2[randomItem2].name)
+        setPower(items3[randomItem3].name)
       }
 
       const message = [
-        `Hi my name is ${item1}` ,
-        `My problem is ${item2}` ,
-        `I give you a ${item3} power`,
+        `${item1} Hi my name is "${name}" ` ,
+        `${item2} My problem is "${problem}" ` ,
+        `${item3} I give you a "${power}" power`,
         'please help me',
         'wonderful! Thank you I give you a gift'
       ]
@@ -60,8 +56,8 @@ function GameStage3() {
 
     const goSpecial = () =>{
       history.push('/hangman-stage')
-      // nextStage()
       }
+
     const nextIndexCut = () =>{
         if (indexCut + 1 <= messageCut.length - 1){
           setIndexCut(indexCut + 1 )
@@ -94,8 +90,8 @@ function GameStage3() {
          </Box>
          </>
          :
-         <Box justify='center' align='center' direction='row'>
-          <Alert style={{ margin: '16px 0' }} message={message[index]} onClick={nextIndex}/>
+         <Box justify='center' align='center' direction='column' onClick={nextIndex}>
+          <Alert style={{ margin: '16px 0' }} message={message[index]} />
           </Box>
          }
          </>

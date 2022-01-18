@@ -2,11 +2,13 @@ import styled from 'styled-components';
 import { Layout } from 'antd';
 import { memo } from 'react';
 import Header from './header'
+import FooterContainer from './footer';
+
 
 interface ContainerProps {
     children: any;
-    // footer: any
-    header: any;
+    footer?: any
+    header?: any;
 }
 interface BodyProps {
     isheader: string;
@@ -30,7 +32,7 @@ const MainContent = styled(Content)<BodyProps>`
     width: 100%;
     overflow-y: scroll;
 `;
-const Container = memo(({ children, header }: ContainerProps) => {
+const Container = memo(({ children, header, footer }: ContainerProps) => {
     return (
         <AppContainer>
             {header && <Header {...header} />}
@@ -38,6 +40,7 @@ const Container = memo(({ children, header }: ContainerProps) => {
             isheader={header ? 'true' : 'false'}
             > 
             {children}
+            {footer && <FooterContainer/>}
             </MainContent>
         </AppContainer>
     );

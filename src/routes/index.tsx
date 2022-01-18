@@ -14,12 +14,12 @@ function Routing(){
         <Switch>
               <Route exact path="/landing" component={Landing}/>
               <PrivateRoute exact path="/" component={Home}/>
-              <Route exact path="/intro" component={Intro}/>
-              <Route exact path="/userinfo" component={UserInfo}/>
-              <Route exact path="/gamecontent" component={GameContent}/>
-              <Route exact path="/result" component={Result}/>
+              <PrivateRoute exact path="/intro" component={Intro}/>
+              <PrivateRoute exact path="/userinfo" component={UserInfo}/>
+              <PrivateRoute exact path="/gamecontent" component={GameContent}/>
+              <PrivateRoute exact path="/result" component={Result}/>
               <Route exact path="/test" component={Test}/>
-              <Route exact path="/hangman-stage" component={HangmanStage}/>
+              <PrivateRoute exact path="/hangman-stage" component={HangmanStage}/>
 
         </Switch>
     )

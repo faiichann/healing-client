@@ -2,12 +2,13 @@ import { Alert, Input, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
+import goalItem from 'api/mocks/selcetItems.json'
 
 const { Title } = Typography;
 
 function GameStage1() {
     
-    let items = ['การเงิน', 'การงาน', 'ครอบครัว', 'สังคม', 'ความรัก', 'อิสระ', 'ท่องเที่ยว', 'ความสุข'] 
+    let items = goalItem
     const [select, setSelect] = useState(items)
     const [finish, setFinish] = useState(false)
     const [goal, setGoal] = useState('')
@@ -15,22 +16,15 @@ function GameStage1() {
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
     
-    console.log('-----------item----------',items[items.length-1])
+    console.log('-----------item----------',items[items.length-1].goal)
 
     const selectItem1 = async() => {
         if (select.length <= 2 ){
-            await setGoal( select[select.length - 1]);
+            await setGoal( select[select.length - 1].goal);
             setFinish(true);
-            // alert('Done'+ select[select.length - 1])
         } else {
-            // const index = select.indexOf(select[select.length - 2]);
-            // if (index > -1) {
-            //     const newItem = select.splice(index,1)
-            //     await setSelect( newItem)
-            // }
             const newItem = select.filter((item) =>item !== select[select.length - 2]);
             setSelect( newItem)
-           
             console.log('-----------select1----------',select)
         }
 
@@ -38,15 +32,9 @@ function GameStage1() {
 
     const selectItem2 = async() => {
         if (select.length <= 2){
-            await setGoal( select[select.length - 2]);
+            await setGoal( select[select.length - 2].goal);
             setFinish(true);
-            // alert('Done'+ select[select.length -2])
         } else {
-            // const index = select.indexOf(select[select.length - 1]);
-            // if (index > -1) {
-            //     const newItem = select.splice(index,1)
-            //     await setSelect( newItem)
-            // }
             const newitem = select.filter((item) => item !== select[select.length - 1]);
             setSelect( newitem)
             
@@ -87,9 +75,9 @@ function GameStage1() {
             </Box>
         : 
         <Box justify='center' align='center' direction='row'  style={{height: 'calc(100vh - 400px)'}}>
-            <div onClick={selectItem1}> {select[select.length - 1]} </div> 
+            <div onClick={selectItem1}> {select[select.length - 1].goal} </div> 
             <h1> VS </h1> 
-            <div onClick={selectItem2}>{select[select.length - 2]}  </div>
+            <div onClick={selectItem2}>{select[select.length - 2].goal}  </div>
          </Box>
         }
        </>

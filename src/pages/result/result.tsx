@@ -3,7 +3,7 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Avatar, Button, Card, message } from 'antd';
+import { Avatar, Card, message } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
@@ -56,7 +56,7 @@ function Result() {
        <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={()=> history.push('/')} />) }}>
           {isLoading ? 
           <>
-          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}}>
+          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)', marginTop: '80px' }}>
            <div>This is Your result</div>
            <Card
             style={{ width: 300 }}
@@ -84,7 +84,10 @@ function Result() {
          <>
          <Box justify='center' align='center' direction='column'>
          <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
-         <div onClick={openBox}>TAP TO OPEN BOX !!!</div>
+         <Box justify='center' align='center' direction='column'onClick={openBox}
+         style={{height: '40vh', width: '100%'}} >
+         <div>TAP TO OPEN BOX !!!</div>
+         </Box>
          </Box>
          </>
           }

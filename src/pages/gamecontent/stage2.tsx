@@ -4,18 +4,11 @@ import { useState } from "react";
 import { Box } from "theme/components";
 import CountDownTimer from "utils/countdownTimer";
 import { ConfirmModal, TextRandom } from "./styles/stage.styles";
-
+import randomWord from 'api/mocks/RandomWord.json'
 const { Title } = Typography;
 
 function GameStage2() {
-    let info = [
-        {text: 'smile' , value: 1},
-        {text: 'cry' , value: 0},
-        {text: 'happy' , value: 1},
-        {text: 'love' , value: 1},
-        {text: 'angry' , value: 0},
-        {text: 'satisfy' , value: 1}
-    ]
+    let info = randomWord
     const [text, setText] = useState(0)
     const [score, setScore] = useState(0)
     const { nextStage, isLose, setIsLose } = useAppContext()
@@ -26,7 +19,7 @@ function GameStage2() {
     const goodButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 1){
-            score < 10 ? setScore(score + 1) : setIsPassVisible(!isPassVisible);
+            score > 10 ? setIsPassVisible(!isPassVisible) : setScore(score + 1);
         } else {
             setScore(score)
         }
@@ -35,7 +28,7 @@ function GameStage2() {
     const badButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 0){
-            score < 10 ? setScore(score + 1) : setIsPassVisible(!isPassVisible);
+            score > 10 ? setIsPassVisible(!isPassVisible) : setScore(score + 1);
         } else {
             setScore(score)
         }
