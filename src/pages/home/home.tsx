@@ -1,22 +1,54 @@
-import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
-import { Image } from 'antd';
+import { Image, Typography } from 'antd';
 import  logo  from 'assets/tests/healing_logo.png'
+import { ContainerHome, ImageContent, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon } from './styles/home.styles';
+import CarouselHome from 'components/carousels/CarouselHome';
+const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
     return (
-       <Container header={{ title: 'Healing', right: 'menu' }} footer>
-           <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
-           <div>This is home page</div>
-           <Image
+       <LayoutHome>
+           <ContainerHome>
+
+            {/* ----Section1---- */}
+           <SectionFirst>
+            <Box justify='flex-end' align='center' direction='row'> 
+                <MenuIcon/>
+            </Box>
+            <Box justify='center' align='center' direction='column'
+            style={{margin: '50px 0 95px 0'}}>
+                <Image
+                    width={100}
+                    src={logo}
+                />
+                  <Title level={2}>Healing</Title>
+                  <Text type="secondary">Gamification Inspiration</Text>
+            </Box>
+           
+           <ButtonStyle  typebutton='Medium'  sizebutton={50} onClick={() => history.push('/intro')}>PLAY</ButtonStyle>
+           </SectionFirst>
+
+           {/* ----Section2---- */}
+           <SectionSecond>
+            {/* <CarouselHome/> */}
+            <ImageContent>
+            <Image
             width={100}
             src={logo}
             />
-           <ButtonStyle  typebutton='Medium'  sizebutton={30} onClick={() => history.push('/intro')}>PLAY</ButtonStyle>
-           </Box>
-       </Container>
+            </ImageContent>
+           </SectionSecond>
+
+           {/* ----footer---- */}
+           <FooterHome>
+           <Title level={5}>Develop by</Title>
+           <Text type="secondary">Nichkamon Promputta</Text>
+           <Text type="secondary">Peerapat Kaewmanee</Text>
+           </FooterHome>
+           </ContainerHome>
+       </LayoutHome>
     );
 }
 

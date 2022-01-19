@@ -1,8 +1,12 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
-import { Spin } from 'antd';
+import { Image, Typography } from 'antd';
 import { useEffect, useState } from 'react';
 import { Box } from 'theme/components';
+import Logo  from 'assets/animation/logo.gif';
+import { Shadow } from './styles/home.styles';
+
+const { Title } = Typography;
 
 function Landing() {
     const history = useHistory();
@@ -13,7 +17,7 @@ function Landing() {
         setTimeout( () => {
             sessionStorage.setItem('token','true')
             history.push('/')
-        }, 3000);
+        }, 4000);
         console.log(isLoading)
     };
     useEffect(() => {
@@ -22,8 +26,13 @@ function Landing() {
     return (
        <Container header={null}>
             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
-            <Spin size='large'/>
-            <h4>loading....</h4>
+            <Image
+            width={100}
+            src={Logo}
+            style={{margin: '20px 0'}}
+            />
+            <Shadow />
+            <Title level={2}>Healing</Title>
             </Box>
             
        </Container>

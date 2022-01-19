@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     --Pink-100: #FDE3DB;
 
     //COLORS_GREEN
+    --Green-500: #BADEB3;
     --Green-400: #41653A;
     --Green-300: #A6CD9C;
     --Green-200: #E4F1DA;
