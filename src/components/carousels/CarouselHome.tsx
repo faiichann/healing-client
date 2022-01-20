@@ -2,9 +2,29 @@ import { ImageContent } from "pages/home/styles/home.styles";
 import { Carousel } from "antd";
 import { Image, Typography } from 'antd';
 import  logo  from 'assets/tests/healing_logo.png'
-import { Box } from "theme/components";
+import styled from "styled-components";
 const { Title, Text } = Typography;
-  
+
+const ContentSlide = styled.div`
+    height: max-content;
+    text-align: center;
+    background: transparent;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  `;
+
+const BoxSlide = styled.div`
+    display: block;
+    width: 100%;
+`;
+
+const CarouselStyle = styled(Carousel)`
+    & .slick-dots-bottom{
+    bottom: -30px !important;
+}
+`;
 function CarouselHome() {
     const images = [ 
         {tile: 'Content 1' , img: logo} ,
@@ -13,21 +33,23 @@ function CarouselHome() {
     ];
 
     return (
-        <Box justify='center' align="center" direction="row">
-       <Carousel>
+        <BoxSlide>
+       <CarouselStyle autoplay dots>
         {images.map((image,index) => {
         return (
-        <ImageContent key={index}> 
-        <Title level={5}>{image.tile}</Title>
+        <ContentSlide  key={index}>
+            <Title level={5}>{image.tile}</Title>
+            <ImageContent> 
             <Image
             width={100}
             src={image.img}
             />
-        </ImageContent>
+            </ImageContent>
+        </ContentSlide>
          );
         })}
-        </Carousel>
-        </Box>
+        </CarouselStyle>
+        </BoxSlide>
     )
 }
 

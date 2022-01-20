@@ -1,12 +1,11 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
-import { Image, Typography } from 'antd';
+import { Image } from 'antd';
 import { useEffect, useState } from 'react';
 import { Box } from 'theme/components';
 import Logo  from 'assets/animation/logo.gif';
+import Healing  from 'assets/animation/healing.gif';
 import { Shadow } from './styles/home.styles';
-
-const { Title } = Typography;
 
 function Landing() {
     const history = useHistory();
@@ -32,7 +31,10 @@ function Landing() {
             style={{margin: '20px 0'}}
             />
             <Shadow />
-            <Title level={2}>Healing</Title>
+            <Image
+            width={180}
+            src={Healing}
+            />
             </Box>
             
        </Container>

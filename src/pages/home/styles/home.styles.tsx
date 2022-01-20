@@ -27,7 +27,7 @@ export const SectionFirst = styled.div`
 `
 export const SectionSecond = styled.div`
     width: 100%;
-    height: 500px;
+    height: 70vh;;
     background: var(--Green-500);
     display: flex;
     justify-content: center;
@@ -36,10 +36,10 @@ export const SectionSecond = styled.div`
 `
 export const ImageContent = styled.div`
     width: 70%;
-    height: 450px;
+    height: 400px;
     background: var(--White);
     border-radius: var(--Radius-12);
-    margin: 50px 16px;
+    margin: 10px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -64,7 +64,7 @@ export const Shadow = styled.div`
     border-radius: 50%;
     display: inline-block;
     position: absolute;
-    transform: translateY(20px);
+    transform: translateY(22px);
 `
 export const MenuIcon = () => {
     return(

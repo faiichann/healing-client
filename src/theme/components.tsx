@@ -35,7 +35,8 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
       ${css`
     width : ${(props: ButtonProps) => props.sizebutton? props.sizebutton  : 100 }%;
     color:  ${(props: ButtonProps) => props.colorbutton? props.colorbutton : 'var(--White)'};
-    `}
+    `}  
+    font-weight: 700;
     border-radius: var(--Radius-115);
     box-shadow: var(--Shadow-btn);
     ${( props: ButtonProps ) =>  {
