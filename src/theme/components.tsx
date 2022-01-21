@@ -79,7 +79,7 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
         return css`
         background-color: transparent !important;
         border: 3px solid var(--Green-300);
-        color: var(--Green-300);
+        color: var(--Green-600);
         box-shadow: none;
         &:hover{
             color: var(--White);

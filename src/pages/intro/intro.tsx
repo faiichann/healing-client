@@ -16,7 +16,7 @@ function Intro() {
         <Container header={{ title: 'Introduction', left: 'back' }}>
             <BoxContent>
             <BoxSlide>
-                <CarouselStyle>
+                <CarouselStyle autoplay>
             {data.map((item,index) => {
         return (
                 <ContentStyle key={index}>
