@@ -58,7 +58,11 @@ export const ContentAvatar = styled.div`
     align-items: center;
     object-fit: cover;
   `;
-  export const ImageSlide = styled.div`
+
+  interface ActiveProps{
+    selected: boolean
+  }
+  export const ImageSlide = styled.div<ActiveProps>`
     width: 230px;
     height: 230px;
     background: transparent;
@@ -68,6 +72,9 @@ export const ContentAvatar = styled.div`
     justify-content: center;
     align-items: center;
     object-fit: cover;
+    border-left: ${(props: ActiveProps) => props.selected === true ? '15px solid var(--Pink-300)' : 'none' };
+    /* background-color: ${(props: ActiveProps) => props.selected === true ? 'white' : 'none' }; */
+    border-radius: ${(props: ActiveProps) => props.selected === true ? '15px' : 'none' };
 `;
 export const Shadow = styled.div`
     height: 40px;

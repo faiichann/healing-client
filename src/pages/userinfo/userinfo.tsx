@@ -1,14 +1,13 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
-import { Button, Select, Image, Row, Col } from 'antd';
+import { Button, Select, Image, Row, Col, Typography } from 'antd';
 import { Box, ButtonStyle } from 'theme/components';
 import { useState } from 'react';
 import { useAppContext } from 'context/appContext';
 import { BoxSlide, CarouselStyle, ContentAvatar, ImageSlide, InputName, Shadow, InputStyle } from './styles/userInfo.styles'
-import Avatar1 from 'assets/images/Avatars/npc1.png'
-import Avatar2 from 'assets/images/Avatars/npc2.png'
 import { RightOutlined, LeftOutlined } from '@ant-design/icons';
-const { Option } = Select;
+import { Avatar } from 'api/mocks/Avatars'
+const { Text } = Typography;
 
 function UserInfo() {
     const history = useHistory();
@@ -16,11 +15,10 @@ function UserInfo() {
     const [username, setUsername] = useState<string |null>(null);
     const [avatar, setAvatar] = useState<String |null>(null);
     const [isConfirm, setIsConfirm] = useState(false);
+    const [isSelect, setIsSelect] = useState<String |null>(null);
 
-    const avatars = [
-        { img: Avatar1, width: 200 },
-        { img: Avatar2, width: 140 }
-    ]
+    const avatars = Avatar
+
     const data =()=>{
         return(
             <>
@@ -38,17 +36,19 @@ function UserInfo() {
 
     const handleChange = (value: string) => {
         setAvatar(value)
+        setIsSelect(value)
+        console.log(avatar)
       }
 
       const RightArrow = () => {
         return (
-            <RightOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'block' }}/>
+            <RightOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'right', transform: 'translateY(-130px)'}}/>
         )
     }
     
     const LeftArrow = () => {
         return (
-            <LeftOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'block' }}/>
+            <LeftOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'left', transform: 'translateY(110px)'}}/>
         )
     }
     const settings = {
@@ -70,14 +70,18 @@ function UserInfo() {
         <BoxSlide>
             <Row>
                 <Col>
-                <CarouselStyle arrows {...settings}>
+                <CarouselStyle 
+                arrows {...settings}
+                >
             {avatars.map((item,index) => {
         return (
-            <ContentAvatar key={index}>
-                <ImageSlide>
+            <ContentAvatar key={index} >
+                <ImageSlide selected={ isSelect === item.value ? true : false}>
             <Image
+                    preview={false}
                     width={item.width}
                     src={item.img}
+                    onClick={()=> handleChange(item.value)}
                 />
                 <Shadow/>
                 </ImageSlide>
@@ -89,20 +93,15 @@ function UserInfo() {
             </Row>
         </BoxSlide>
         </Box>
-
-        <Select defaultValue="👻" style={{ width: 120 }}
-        onChange={handleChange}>
-        <Option value="👻">👻</Option>
-        <Option value="🦄">🦄</Option>
-        <Option value="🤡">🤡</Option>
-        <Option value="😻">😻</Option>
-        <Option value="🐸">🐸</Option>
-        </Select>
-
-        <Button type="primary"  onClick={()=> onConfirm(username, avatar)}>Confirm</Button><br/>
-
         <Box justify='center' align='center' direction='row'>
-           <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
+            {
+                isConfirm ?
+                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
+                :
+                !avatar || !username ?   <Text type="secondary">Click Image for select </Text>
+                :
+                <ButtonStyle typebutton='Medium' sizebutton={30} pattern='Light' onClick={()=> onConfirm(username, avatar)}> Confirm </ButtonStyle>
+            }
         </Box>
         </Box>
         </Container>
