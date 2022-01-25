@@ -1,9 +1,13 @@
-import { Alert, Col, Image, Row } from "antd";
+import { Col, Image, Row } from "antd";
 import { useAppContext } from "context/appContext";
 import { useEffect, useState } from "react";
 import { Box } from "theme/components";
-import { TextCutScene } from "./styles/stage.styles";
+import { MessageCutScene, TextCutScene } from "./styles/cutScene.styles";
 import { Avatar } from 'api/mocks/Avatars'
+import { Shadow } from "pages/home/styles/home.styles";
+import Logo  from 'assets/animation/logo.gif';
+import NPC from 'assets/images/Avatars/npc3.png'
+import Animation from 'theme/animations'
 
 function Cutscene() {
     
@@ -43,27 +47,52 @@ useEffect(() => {
        <>
             {isTab && 
             <> 
-             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 300px)'}} onClick={nextIndex}>
-                <Alert style={{ margin: '16px 0', width: '40%', justifyContent: 'center' }} message={message[index]}/>
-              {isUserAvatar && 
+             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 100px)'}} onClick={nextIndex}>
+             <Animation 
+                onEnter="fadeIn" 
+                key={index} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                <MessageCutScene >
+                    {message[index]}
+                </MessageCutScene>
+            </Animation>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
               <Row>
-                  <Col>
-                  </Col>
-                  <Col>
+                  <Col span={8}>
                   <Image 
-                width={200}
+                width={75}
                 preview={false}
-                src={isUserAvatar}
+                src={NPC}
                 />
                   </Col>
+                  {isUserAvatar && 
+                  <Col span={8} offset={6}>
+                  <Image 
+                width={100}
+                preview={false}
+                src={isUserAvatar}
+                style={{transform: 'scaleX(-1)'}}
+                />
+                  </Col>
+                   }
               </Row>
-              }
+              </Box>
             </Box>
             </>
             }
             {!isTab && 
             <>
-             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={()=>setIsTab(true)}>
+             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 10vh)'}} onClick={()=>setIsTab(true)}>
+             <Image
+            width={100}
+            src={Logo}
+            preview={false}
+            style={{margin: '20px 0'}}
+            />
+            <Shadow />
                  <TextCutScene> Tab Screen to play ! </TextCutScene>
              </Box>
             </>}

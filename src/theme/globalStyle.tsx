@@ -19,6 +19,8 @@ const GlobalStyle = createGlobalStyle`
     --Green-400: #41653A;
     --Green-300: #A6CD9C;
     --Green-200: #E4F1DA;
+    --Green-100: #8FB486;
+
 
     //COLORS_GRAY
     --Gray-700: #737373;
@@ -26,7 +28,7 @@ const GlobalStyle = createGlobalStyle`
     --Gray-500: #3E4357;
     --Gray-400: #B2B2B2;
     --Gray-300: #80879B;
-    --Gray-200: #9EA0AC;
+    --Gray-200: #C2CBBB;
     --Gray-100: #BEC3CE;
 
     //FONTS_SIZE

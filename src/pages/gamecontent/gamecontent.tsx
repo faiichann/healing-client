@@ -26,9 +26,8 @@ function GameContent() {
     return (
         <>
        <Container header={{ title: 'Game Content', left: 'back' }}>
-       <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
+       <DivProgress><ProgressBar percent={stage * 25} steps={4} showInfo={false} strokeWidth={10}/></DivProgress>
        <Box justify='center' align='center' direction='column'>
-       <h2>Stage : {stage}</h2>
            {stage === 0 && <Cutscene/>}
            {stage === 1 && <GameStage1/>} 
            {stage === 2  && <GameStage2/>}

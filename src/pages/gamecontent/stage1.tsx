@@ -1,8 +1,11 @@
-import { Alert, Input, Typography } from "antd";
+import { Col, Input, Row, Typography, Image } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
 import goalItem from 'api/mocks/selcetItems.json'
+import { MessageCutScene } from "./styles/cutScene.styles";
+import Animation from 'theme/animations'
+import NPC from 'assets/images/Avatars/npc3.png'
 
 const { Title } = Typography;
 
@@ -86,10 +89,31 @@ function GameStage1() {
         {!isSkip && 
        <>
        <Box justify='flex-end' align='center' direction='row' onClick={onSkip}>
-            <Title level={5}> Skip </Title>
+            <Title level={5} style={{color: 'var(--Green-100)', margin: '20px'}}> Skip </Title>
        </Box>
-        <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}} onClick={nextIndex}>
-            <Alert style={{ margin: '16px 0', width: '50%', justifyContent: 'center' }} message={message[index]} />
+        <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={nextIndex}>
+        <Animation 
+                onEnter="fadeIn" 
+                key={index} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                <MessageCutScene >
+                    {message[index]}
+                </MessageCutScene>
+            </Animation>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
         </Box>
        </>
         }
