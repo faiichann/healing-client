@@ -2,31 +2,34 @@ import { Col, Input, Row, Typography, Image } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
-import goalItem from 'api/mocks/selcetItems.json'
+import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/npc3.png'
+import { GoalContainer, GoalText, RowVsgame, VsContainer, VsText } from "./styles/stage.styles";
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 function GameStage1() {
     
     let items = goalItem
     const [select, setSelect] = useState(items)
     const [finish, setFinish] = useState(false)
-    const [goal, setGoal] = useState('')
+    const [goal, setGoal] = useState<any>()
     const { nextStage } = useAppContext();
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
-    
+    const [animation1, setAnimation1] = useState(0);
+    const [animation2, setAnimation2] = useState(0);
     console.log('-----------item----------',items[items.length-1].goal)
 
     const selectItem1 = async() => {
         if (select.length <= 2 ){
-            await setGoal( select[select.length - 1].goal);
+            await setGoal( select[select.length - 1]);
             setFinish(true);
         } else {
             const newItem = select.filter((item) =>item !== select[select.length - 2]);
+            setAnimation2(animation2+1)
             setSelect( newItem)
             console.log('-----------select1----------',select)
         }
@@ -35,10 +38,11 @@ function GameStage1() {
 
     const selectItem2 = async() => {
         if (select.length <= 2){
-            await setGoal( select[select.length - 2].goal);
+            await setGoal( select[select.length - 2]);
             setFinish(true);
         } else {
             const newitem = select.filter((item) => item !== select[select.length - 1]);
+            setAnimation1(animation1+1)
             setSelect( newitem)
             
             console.log('-----------select2----------',select)
@@ -68,20 +72,64 @@ function GameStage1() {
        <>
        {isSkip && 
        <>
-        <div>Versus Game</div>
         {finish ? 
            <Box justify='center' align='center' direction='column'  style={{height: 'calc(100vh - 400px)'}}>
-                <h1>{goal}</h1>
-                <p>พิมพ์เป้าหมายของคุณที่นี่!!!</p>
-                <Input placeholder="Basic usage" />
-                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={nextStage}> Submit </ButtonStyle>
+               <GoalText> {goal.goal}  </GoalText>
+               <Text type="secondary">เพื่อนที่ดี ไม่ยืมตังกันเย้</Text>
+               <GoalContainer>
+                    <Image 
+                        width={100}
+                        preview={false}
+                        src={goal.img} 
+                        />
+                    </GoalContainer>
+                {/* <Input placeholder="Basic usage" />
+                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={nextStage}> Submit </ButtonStyle> */}
             </Box>
         : 
-        <Box justify='center' align='center' direction='row'  style={{height: 'calc(100vh - 400px)'}}>
-            <div onClick={selectItem1}> {select[select.length - 1].goal} </div> 
-            <h1> VS </h1> 
-            <div onClick={selectItem2}>{select[select.length - 2].goal}  </div>
+        <>
+        <Title level={4}  style={{margin: '50px', color: '#737373'}}>Round {9 - select.length}/7</Title>
+        <Box justify='center' align='center' direction='column'  style={{height: 'calc(100vh - 40vh)'}}>
+            <RowVsgame gutter={[40, 16]} justify="space-around">
+                <Col span={10}  style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                <Animation 
+                onEnter="fadeIn" 
+                key={animation1} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                     <VsContainer onClick={selectItem1}> 
+                     <Image 
+                        width={90}
+                        preview={false}
+                        src={select[select.length - 1].img} 
+                        />
+                     </VsContainer> 
+                </Animation>
+                </Col>
+                <Col span={10}  style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>  
+                <Animation 
+                onEnter="fadeIn" 
+                key={animation2} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                    <VsContainer onClick={selectItem2}>
+                    <Image 
+                        width={90}
+                        preview={false}
+                        src={select[select.length - 2].img} 
+                        />
+                    </VsContainer>
+                    </Animation>
+                </Col>
+                <Col span={10}><VsText> {select[select.length - 1].goal}  </VsText></Col>
+                <Col span={10}><VsText> {select[select.length - 2].goal} </VsText></Col>
+            </RowVsgame>
          </Box>
+         </>
         }
        </>
        }

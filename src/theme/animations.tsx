@@ -133,6 +133,15 @@ const jelloVertical = keyframes`
   }
 `;
 
+const pulse = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 type AnimationType =
     | 'fadeIn'
     | 'bounceUp'
@@ -145,7 +154,8 @@ type AnimationType =
     | 'bounceIn'
     | 'jelloVertical'
     | 'slideOutLeft'
-    | 'slideOutRight';
+    | 'slideOutRight'
+    | 'pulse';
 
 type AnimationProps = {
     duration?: number;
@@ -221,6 +231,10 @@ const jelloAnimation = css`
     animation: ${jelloVertical} 2.5s infinite both !important;
 `;
 
+const PulseAnimation = css`
+    animation: ${pulse} 750ms infinite alternate!important;
+`;
+
 const Wrapper = styled.div<{
     type?: AnimationType;
 }>`
@@ -251,6 +265,8 @@ const Wrapper = styled.div<{
                     return bounceInAnimation;
                 case 'jelloVertical':
                     return jelloAnimation;
+                case 'pulse':
+                    return PulseAnimation;
                 default:
                     return fadeInAnimation;
             }
