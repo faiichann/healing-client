@@ -1,4 +1,5 @@
 import { useAppContext } from 'context/appContext';
+import { TimeText } from 'pages/gamecontent/styles/stage.styles';
 import React, { useEffect, useState } from 'react'
 
 const CountDownTimer = ({hoursMinSecs} : any) => {
@@ -32,11 +33,12 @@ const CountDownTimer = ({hoursMinSecs} : any) => {
 
     
     return (
-        <div>
-            <p>{`${hrs.toString().padStart(2, '0')}:${mins
+        <TimeText>
+            {`${secs.toString().padStart(2, '0')} s`}
+            {/* <p>{`${hrs.toString().padStart(2, '0')}:${mins
             .toString()
-            .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p> 
-        </div>
+            .padStart(2, '0')}:${secs.toString().padStart(2, '0')}`}</p>  */}
+        </TimeText>
     );
 }
 

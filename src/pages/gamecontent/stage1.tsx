@@ -1,4 +1,4 @@
-import { Col, Input, Row, Typography, Image } from "antd";
+import { Col, Row, Typography, Image } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
@@ -6,7 +6,7 @@ import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/npc3.png'
-import { GoalContainer, GoalText, RowVsgame, VsContainer, VsText } from "./styles/stage.styles";
+import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, VsContainer, VsText } from "./styles/stage.styles";
 
 const { Title, Text } = Typography;
 
@@ -73,9 +73,9 @@ function GameStage1() {
        {isSkip && 
        <>
         {finish ? 
-           <Box justify='center' align='center' direction='column'  style={{height: 'calc(100vh - 400px)'}}>
+           <Box justify='center' align='center' direction='column'  style={{marginTop: '10%'}}>
                <GoalText> {goal.goal}  </GoalText>
-               <Text type="secondary">เพื่อนที่ดี ไม่ยืมตังกันเย้</Text>
+               <Text type="secondary">{goal.des}</Text>
                <GoalContainer>
                     <Image 
                         width={100}
@@ -83,8 +83,10 @@ function GameStage1() {
                         src={goal.img} 
                         />
                     </GoalContainer>
-                {/* <Input placeholder="Basic usage" />
-                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={nextStage}> Submit </ButtonStyle> */}
+                <InputGoalStyle>
+                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} />
+                </InputGoalStyle>
+                <ButtonStyle typebutton='Large' sizebutton={50} onClick={nextStage}> Sent Wish </ButtonStyle>
             </Box>
         : 
         <>

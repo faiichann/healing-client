@@ -1,10 +1,15 @@
-import { Row, Col, Button, Progress, Typography, Alert} from "antd";
+import { Row, Col, Typography, Image} from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box } from "theme/components";
 import CountDownTimer from "utils/countdownTimer";
-import { ConfirmModal, TextRandom } from "./styles/stage.styles";
+import { ButtonFace, ColSpeedgame, ConfirmModal, PointDiv, ProgressStyle, RowSpeedgame, TextRandom } from "./styles/stage.styles";
 import randomWord from 'api/mocks/RandomWord.json'
+import { MessageCutScene } from "./styles/cutScene.styles";
+import Animation from 'theme/animations'
+import NPC from 'assets/images/Avatars/npc3.png'
+import Mad from 'assets/images/stage/Mad.png'
+import Smile from 'assets/images/stage/Smile.png'
 const { Title } = Typography;
 
 function GameStage2() {
@@ -19,7 +24,7 @@ function GameStage2() {
     const goodButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 1){
-            score > 10 ? setIsPassVisible(!isPassVisible) : setScore(score + 1);
+            score < 10 ? setScore(score + 1) : score === 10? setIsPassVisible(!isPassVisible) : setScore(10);
         } else {
             setScore(score)
         }
@@ -28,7 +33,7 @@ function GameStage2() {
     const badButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 0){
-            score > 10 ? setIsPassVisible(!isPassVisible) : setScore(score + 1);
+            score < 10 ? setScore(score + 1) : score === 10? setIsPassVisible(!isPassVisible) : setScore(10);
         } else {
             setScore(score)
         }
@@ -70,27 +75,58 @@ function GameStage2() {
         <ConfirmModal title="Won" visible={isPassVisible} onOk={handleOk} >
         <p>You Pass</p>
         </ConfirmModal>
-        <ConfirmModal title="lose" visible={isLose} onOk={handleLoseOk} >
+        <ConfirmModal title="lose" visible={isPassVisible?  false : isLose} onOk={handleLoseOk} >
             <p>You fail please try again</p>
         </ConfirmModal>
 
         {isSkip && 
-        <Box justify='center' align='center' direction='column'>
-       <p>Speed game</p>
-       <CountDownTimer  hoursMinSecs={hoursMinSecs}/>
-
-       <Box justify='center' align='center' direction='row'>
-           <TextRandom>{info[text].text}</TextRandom>
+        <Box justify='center' align='center' direction='column' style={{marginTop: '10%'}}>
+            <Box justify='center' align='center' direction='row' style={{width: '100%', display: 'inline-block'}}>
+                <PointDiv>
+                <Col span={18}>
+                    <ProgressStyle 
+                    strokeColor={score * 10 ===100 ? '#A6CD9C' : "#F9A186" }
+                    trailColor={"#FDE3DB"}
+                    strokeLinecap="square" 
+                    percent={score * 10} />
+                </Col> 
+                </PointDiv>
+            </Box>
+            <Box justify='center' align='center' direction='row' style={{width: '100%'}}>
+            <CountDownTimer  hoursMinSecs={hoursMinSecs}/>
+            </Box>
+       <Box justify='center' align='center' direction='row' style={{margin: '60px 16px 100px 16px'}}>
+       <Animation 
+                onEnter="fadeIn" 
+                key={text} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+           <TextRandom>{info[text].text.toUpperCase()}</TextRandom>
+        </Animation>
         </Box>
        <Box justify='center' align='center' direction='row'>
-           <Col><Button onClick={()=>badButton(text)}>BAD</Button></Col> 
-           <Col><Button onClick={()=>goodButton(text)}>GOOD</Button></Col>
-        </Box>
-        <Box justify='center' align='center' direction='row'>
-            <Col span={4}> <h4>Point :  </h4> </Col>
-            <Col span={20}>
-            <Progress strokeLinecap="square" percent={score * 10} />
-            </Col>
+        <RowSpeedgame gutter={[24, 8]} justify="space-around">
+            <ColSpeedgame span={12} > 
+            <ButtonFace  type='bad' onClick={()=>badButton(text)}>
+            <Image 
+                width={75}
+                preview={false}
+                src={Mad}
+                />
+            </ButtonFace>
+            </ColSpeedgame> 
+            <ColSpeedgame span={12} >
+            <ButtonFace type='good' onClick={()=>goodButton(text)}>
+            <Image 
+                width={75}
+                preview={false}
+                src={Smile}
+                />
+            </ButtonFace>
+            </ColSpeedgame> 
+        </RowSpeedgame>
         </Box>
         </Box>
         }
@@ -98,10 +134,31 @@ function GameStage2() {
         {!isSkip && 
        <>
        <Box justify='flex-end' align='center' direction='row' onClick={onSkip}>
-            <Title level={5}> Skip </Title>
+            <Title level={5} style={{color: 'var(--Green-100)', margin: '20px'}}> Skip </Title>
        </Box>
-        <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}} onClick={nextIndex}>
-            <Alert style={{ margin: '16px 0', width: '50%', justifyContent: 'center' }} message={message[index]} />
+        <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={nextIndex}>
+            <Animation 
+                onEnter="fadeIn" 
+                key={index} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                <MessageCutScene >
+                    {message[index]}
+                </MessageCutScene>
+            </Animation>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
         </Box>
        </>
         }
