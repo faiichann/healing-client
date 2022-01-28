@@ -15,6 +15,7 @@ const AppProvider = (({children}: IContextProps) =>{
 
     const [stage,setStage] = useState<number>(0)
     const [isLose,setIsLose] = useState(false)
+    const [isReset,setIsReset] = useState(false)
     const [isName,setIsName] = useState('')
     const [isAvatar,setIsAvartar] = useState('')
     // const nextStage = useCallback(
@@ -41,7 +42,9 @@ const AppProvider = (({children}: IContextProps) =>{
         setIsLose,
         userInfo,
         isName,
-        isAvatar
+        isAvatar,
+        isReset,
+        setIsReset
     }
 
     useEffect(() => {

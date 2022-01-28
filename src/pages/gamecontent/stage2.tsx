@@ -1,7 +1,7 @@
-import { Row, Col, Typography, Image} from "antd";
+import { Row, Col, Typography, Image, Modal, Button} from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
-import { Box } from "theme/components";
+import { Box, ButtonStyle } from "theme/components";
 import CountDownTimer from "utils/countdownTimer";
 import { ButtonFace, ColSpeedgame, ConfirmModal, PointDiv, ProgressStyle, RowSpeedgame, TextRandom } from "./styles/stage.styles";
 import randomWord from 'api/mocks/RandomWord.json'
@@ -16,7 +16,7 @@ function GameStage2() {
     let info = randomWord
     const [text, setText] = useState(0)
     const [score, setScore] = useState(0)
-    const { nextStage, isLose, setIsLose } = useAppContext()
+    const { nextStage, isLose, setIsLose, isReset, setIsReset } = useAppContext()
     const [isPassVisible, setIsPassVisible] = useState(false);
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
@@ -24,7 +24,9 @@ function GameStage2() {
     const goodButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 1){
-            score < 10 ? setScore(score + 1) : score === 10? setIsPassVisible(!isPassVisible) : setScore(10);
+            score < 10 ? setScore(score + 1) : score === 10? 
+            setIsPassVisible(!isPassVisible) 
+            : setScore(10);
         } else {
             setScore(score)
         }
@@ -33,7 +35,9 @@ function GameStage2() {
     const badButton = (text:number) => {
         setText(prev => (prev + 1 ) % info.length)
         if (info[text].value === 0){
-            score < 10 ? setScore(score + 1) : score === 10? setIsPassVisible(!isPassVisible) : setScore(10);
+            score < 10 ? setScore(score + 1) : score === 10? 
+            setIsPassVisible(!isPassVisible) 
+            : setScore(10);
         } else {
             setScore(score)
         }
@@ -48,6 +52,7 @@ function GameStage2() {
     const handleLoseOk = () => {
         setScore(0)
         setIsLose(!isLose)
+        setIsReset(!isReset)
     };
 
     const message = [
@@ -72,10 +77,46 @@ function GameStage2() {
       
     return (
        <>
-        <ConfirmModal title="Won" visible={isPassVisible} onOk={handleOk} >
-        <p>You Pass</p>
+        <ConfirmModal title={<>
+            <div style={{zIndex: '100',display: 'flex'}}>
+            <svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="42" cy="42" r="42" fill="white"/>
+            <path d="M36.608 23.2643L36.608 33.1163L26.852 33.1163L26.852 23.2643L36.608 23.2643ZM56.3601 23.2643L56.3601 33.1163L46.5081 33.1163L46.5081 23.2643L56.3601 23.2643ZM66.116 43.3967L56.3601 43.3967L56.3601 63.0046L26.7559 63.0046L26.7559 43.3967L17 43.3967L17 53.2487L66.116 53.2487L66.116 43.3967Z" fill="#8FB486"/>
+            </svg>
+            </div>
+        </>} 
+        type="pass"
+        visible={isPassVisible} 
+        onOk={handleOk} 
+        closable={false}
+        footer={[
+            <ButtonStyle typebutton='Large' sizebutton={75} 
+            backgroundbutton={'var(--Green-300)'} 
+            style={{fontWeight: '400', fontSize: '18px'}}
+            onClick={handleOk}> CONTINUE </ButtonStyle>
+          ]}>
+               <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU WIN!</Title>
+                <p>You Pass</p>
         </ConfirmModal>
-        <ConfirmModal title="lose" visible={isPassVisible?  false : isLose} onOk={handleLoseOk} >
+        <ConfirmModal title={<>
+            <div style={{zIndex: '100',display: 'flex'}}>
+            <svg width="84" height="84" viewBox="0 0 84 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="42" cy="42" r="42" fill="white"/>
+            <path d="M36.608 23.4007L36.608 33.2527L26.852 33.2527L26.852 23.4007L36.608 23.4007ZM56.3601 23.4007L56.3601 33.2527L46.5081 33.2527L46.5081 23.4007L56.3601 23.4007ZM56.4562 43.533L56.4562 63.141L66.2121 63.141L66.2121 53.3851L17.0961 53.3851L17.0961 63.141L26.852 63.141L26.852 43.533L56.4562 43.533Z" fill="#F9A186"/>
+            </svg>
+            </div>
+        </>}
+        type="fail"
+        visible={isPassVisible?  false : isLose} 
+        onOk={handleLoseOk} 
+        closable={false}
+        footer={[
+            <ButtonStyle typebutton='Large' 
+            sizebutton={75} 
+            onClick={handleLoseOk} 
+            style={{fontWeight: '400', fontSize: '18px'}}> PLAY AGAIN </ButtonStyle>
+          ]}>
+            <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU lOSE!</Title>
             <p>You fail please try again</p>
         </ConfirmModal>
 
@@ -93,7 +134,7 @@ function GameStage2() {
                 </PointDiv>
             </Box>
             <Box justify='center' align='center' direction='row' style={{width: '100%'}}>
-            <CountDownTimer  hoursMinSecs={hoursMinSecs}/>
+            <CountDownTimer  hoursMinSecs={hoursMinSecs} />
             </Box>
        <Box justify='center' align='center' direction='row' style={{margin: '60px 16px 100px 16px'}}>
        <Animation 

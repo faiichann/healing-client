@@ -137,29 +137,46 @@ export const TextRandom = styled.div`
     display: flex;
     justify-content: center;
 `
-export const ConfirmModal = styled(Modal)`
+type TypeModal = "fail" | "pass";
+interface ModalProps {
+    type?: TypeModal
+  }
+
+export const ConfirmModal = styled(Modal)<ModalProps>`
     display: flex;
     justify-content: center;
     z-index: 99;
     & .ant-modal-content {
-        width: 343px;
-        height: 249px;
+        width: 70%;
+        height: 280px;
         border-radius: 15px;
-        margin-top: 100px;
+        margin-top: 20%;
     }
     & .ant-modal-header {
-        height: 89px;
+        height: 160px;
+        ${( props: ModalProps ) =>  {
+         if ( props.type === "fail"){
+        return css`
+         background-color: #FDE3DB;
+        ` }
+        else{
+        return css`
+         background-color: #C5E1B4;
+        `
+        }
+    }}
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 15px;
+        border-radius: 15px 15px 0 0;
     }
     & .ant-modal-body {
-        height: 30px;
+        height: 80px;
         display: flex;
         align-items: center;
         text-align: center;
         justify-content: center;
+        flex-direction: column;
     }
     & .ant-modal-footer {
         height: 130px;
@@ -184,9 +201,9 @@ export const ColSpeedgame = styled(Col)`
     text-align: center;
 `
 type Typebutton = "bad" | "good";
+
 interface ButtonProps {
     type?: Typebutton
-    
   }
 export const ButtonFace = styled.div<ButtonProps>`
     width: 130px;

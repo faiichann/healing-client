@@ -5,7 +5,7 @@ import { Box, ButtonStyle } from 'theme/components';
 import { useState } from 'react';
 import { useAppContext } from 'context/appContext';
 import { BoxSlide, CarouselStyle, ContentAvatar, ImageSlide, InputName, Shadow, InputStyle } from './styles/userInfo.styles'
-import { RightOutlined, LeftOutlined } from '@ant-design/icons';
+// import { RightOutlined, LeftOutlined } from '@ant-design/icons';
 import { Avatar } from 'api/mocks/Avatars'
 const { Text } = Typography;
 
@@ -14,24 +14,25 @@ function UserInfo() {
     const { userInfo } = useAppContext();
     const [username, setUsername] = useState<string |null>(null);
     const [avatar, setAvatar] = useState<String |null>(null);
-    const [isConfirm, setIsConfirm] = useState(false);
+    // const [isConfirm, setIsConfirm] = useState(false);
     const [isSelect, setIsSelect] = useState<String |null>(null);
 
     const avatars = Avatar
 
-    const data =()=>{
-        return(
-            <>
-            <h4>Username : {username} </h4>
-            <h4>Avatar : {avatar} </h4>
-            </>
-        )
-    }
+    // const data =()=>{
+    //     return(
+    //         <>
+    //         <h4>Username : {username} </h4>
+    //         <h4>Avatar : {avatar} </h4>
+    //         </>
+    //     )
+    // }
 
     const onConfirm = (username: string | any, avatar: string| any) => {
         if ( username && avatar )
-        setIsConfirm(true) 
+        // setIsConfirm(true) 
         userInfo({ username, avatar })
+        history.push('/Gamecontent')
     }
 
     const handleChange = (value: string) => {
@@ -40,25 +41,26 @@ function UserInfo() {
         console.log(avatar)
       }
 
-      const RightArrow = () => {
-        return (
-            <RightOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'right', transform: 'translateY(-130px)'}}/>
-        )
-    }
+    //   const RightArrow = () => {
+    //     return (
+    //         <RightOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'right', transform: 'translateY(-130px)'}}/>
+    //     )
+    // }
     
-    const LeftArrow = () => {
-        return (
-            <LeftOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'left', transform: 'translateY(110px)'}}/>
-        )
-    }
-    const settings = {
-        nextArrow: <RightArrow />,
-        prevArrow: <LeftArrow />
-      }
+    // const LeftArrow = () => {
+    //     return (
+    //         <LeftOutlined style={{ fontSize: '45px', color: '#41653A', opacity: '40%', display: 'flex', float: 'left', transform: 'translateY(110px)'}}/>
+    //     )
+    // }
+    // const settings = {
+    //     nextArrow: <RightArrow />,
+    //     prevArrow: <LeftArrow />
+    //   }
+
     return (
         <Container header={{ title: 'Information', left: 'back' }}>
            <Box justify='center' align='center' direction='column' style={{height: '80vh'}}>
-        { isConfirm ? data() :null}
+        {/* { isConfirm ? data() :null} */}
 
         <Box justify='center' align='center' direction='column'>
         <InputStyle>
@@ -71,7 +73,7 @@ function UserInfo() {
             <Row>
                 <Col>
                 <CarouselStyle 
-                arrows {...settings}
+                // arrows {...settings}
                 >
             {avatars.map((item,index) => {
         return (
@@ -95,12 +97,13 @@ function UserInfo() {
         </Box>
         <Box justify='center' align='center' direction='row'>
             {
-                isConfirm ?
-                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
+                // isConfirm ?
+                // <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
+                // :
+                !avatar || !username ?   
+                <Text type="secondary">Click Image for select </Text>
                 :
-                !avatar || !username ?   <Text type="secondary">Click Image for select </Text>
-                :
-                <ButtonStyle typebutton='Medium' sizebutton={30} pattern='Light' onClick={()=> onConfirm(username, avatar)}> Confirm </ButtonStyle>
+                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={()=> onConfirm(username, avatar)}> Confirm </ButtonStyle>
             }
         </Box>
         </Box>

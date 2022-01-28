@@ -62,6 +62,7 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
        if ( props.backgroundbutton ){
         return css`
         background-color: ${props.backgroundbutton} !important ;
+        box-shadow: 0px 7px 30px 10px ${props.backgroundbutton};
         &:hover{
             border: 2px solid ${props.backgroundbutton};
             color: ${props.backgroundbutton};

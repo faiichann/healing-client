@@ -3,16 +3,15 @@ import { TimeText } from 'pages/gamecontent/styles/stage.styles';
 import React, { useEffect, useState } from 'react'
 
 const CountDownTimer = ({hoursMinSecs} : any) => {
-    const { setIsLose } = useAppContext();
+    const { setIsLose, isReset, setIsReset } = useAppContext();
     const { hours = 0, minutes = 0, seconds = 60 } = hoursMinSecs;
     const [[hrs, mins, secs], setTime] = useState([hours, minutes, seconds]);
     
 
 
     const tick = () => {
-        if (hrs === 0 && mins === 0 && secs === 0) {
-            setIsLose(true)
-            reset()
+        if ((hrs === 0 && mins === 0 && secs === 0) && !isReset) {
+            setIsLose(true);
         }
         else if (mins === 0 && secs === 0) {
             setTime([hrs - 1, 59, 59]);
@@ -20,6 +19,10 @@ const CountDownTimer = ({hoursMinSecs} : any) => {
             setTime([hrs, mins - 1, 59]);
         } else {
             setTime([hrs, mins, secs - 1]);
+        }
+        if ((hrs === 0 && mins === 0 && secs === 0) && isReset) {
+            reset();
+            setIsReset(!isReset)
         }
     };
 
