@@ -1,9 +1,14 @@
-import { Alert, Button, Input, Radio } from "antd";
+import { Alert, Button, Input, Radio, Row, Image, Col, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, ButtonStyle } from "theme/components";
 import randomSlot from 'api/mocks/RandomSlot.json'
+import { MessageCutScene } from "./styles/cutScene.styles";
+import Animation from 'theme/animations'
+import NPC from 'assets/images/Avatars/npc3.png'
+import { ItemContainer, RandomContainer } from "./styles/stage.styles";
+const { Title, Text } = Typography;
 
 function GameStage3() {
     const { nextStage } = useAppContext();
@@ -16,6 +21,7 @@ function GameStage3() {
       const [item2, setItem2] = useState('❓');
       const [item3, setItem3] = useState('❓');
       const [isSkip, setIsSkip] = useState(false)
+      const [isRandom, setIsRandom] = useState(false)
       const [indexCut, setIndexCut] = useState(0);
       const [name, setName] = useState('');
       const [problem, setProblem] = useState('');
@@ -31,6 +37,7 @@ function GameStage3() {
         setName(items1[randomItem1].name)
         setProblem(items2[randomItem2].name)
         setPower(items3[randomItem3].name)
+        setIsRandom(true)
       }
 
       const message = [
@@ -65,6 +72,11 @@ function GameStage3() {
             setIsSkip(true)
         }
       }
+    
+    const StyleButtonSpecial = {
+        boxShadow: 'none',
+        margin: '10px 0px' 
+      }
     return (
        <>
         { isSkip &&
@@ -97,19 +109,23 @@ function GameStage3() {
          </>
          :
          <>
-          <Box justify='center' align='center' direction='column'>
-          <div>This is Game stage 3</div>
-        <Radio.Group>
-        <Radio.Button value="large">{item1}</Radio.Button>
-        <Radio.Button value="default">{item2}</Radio.Button>
-        <Radio.Button value="small">{item3}</Radio.Button>
-        </Radio.Group>
+          <Box justify='center' align='center' direction='column' style={{marginTop: '20%' }}>
+          <Title level={2} style={{fontSize: '36px', fontWeight: '700', color: 'var(--Green-300)' }}>Good Luck!</Title> 
+          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random NPC power and problem.</Text>
+          <RandomContainer onClick={random}>
+          <Row gutter={[32, 16]} style={{width: '100%'}}>
+            <Col span={8}> <ItemContainer > {item1} </ItemContainer> </Col>
+            <Col span={8}> <ItemContainer colorBg={'#FBB19B'}> {item2} </ItemContainer> </Col>
+            <Col span={8}> <ItemContainer colorBg={'#FFF1A7'} > {item3} </ItemContainer> </Col>
+          </Row>
+          </RandomContainer>
+        
         <Box justify='center' align='center' direction='column' style={{marginBottom: '20px'}}>
-          <ButtonStyle typebutton="Medium" sizebutton={30} onClick={random}> Random </ButtonStyle>
+        <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'Random again' : 'Tap Card to Random' } </Title>
         </Box>
-        <Box justify='center' align='center' direction='column'>
-        <ButtonStyle typebutton="Medium" sizebutton={30} pattern="Light" onClick={()=> setIsCutScene(true)}>เลือก</ButtonStyle>
-        </Box>
+        { isRandom && <Box justify='center' align='center' direction='column'>
+            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> setIsCutScene(true)}>COMFIRM</ButtonStyle>
+        </Box>}
         </Box>
          </>
        }
@@ -121,14 +137,49 @@ function GameStage3() {
        <>
           { indexCut === 2 ?
             <>
-            <Box justify='center' align='center' direction='row'>
-              <Button type="primary" onClick={nextIndexCut}>Yes I'll lhelp </Button>
-              <Button danger onClick={goSpecial}>No I'm not </Button>
+            <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
+            <MessageCutScene >
+                   คุณเต็มใจช่วย NPC ที่ลำยากหรือไม่ ตอบ Yes หรือ NO เพื่อไปต่อ
+                </MessageCutScene>
+                <Box justify='center' align='center' direction='row'  style={{margin: '40px 0 20px 0'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
+              <ButtonStyle typebutton="Medium" backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={45} onClick={nextIndexCut}>YES</ButtonStyle>
+              <ButtonStyle typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
             </Box>
             </>
           :
-          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 400px)'}} onClick={nextIndexCut}>
-            <Alert style={{ margin: '16px 0', width: '50%', justifyContent: 'center' }} message={messageCut[indexCut]} />
+          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={nextIndexCut}>
+            <Animation 
+                onEnter="fadeIn" 
+                key={indexCut} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                <MessageCutScene >
+                    {messageCut[indexCut]}
+                </MessageCutScene>
+            </Animation>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
           </Box>
           }
        </>

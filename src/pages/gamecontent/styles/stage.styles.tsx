@@ -256,3 +256,27 @@ text-align: center;
      font-size: 18px;
  `
 //----------------------Stage 3----------------------//
+export const RandomContainer = styled.div`
+    width: 90%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 180px;
+    background-color: var(--White);
+    border-radius: 20px;
+    margin: 10% 0px;
+`
+interface RandomProps {
+    colorBg?: string
+  }
+export const ItemContainer = styled.div<RandomProps>`
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
+    background-color: ${(props: RandomProps) => props.colorBg? props.colorBg  : '#A6CD9C'};
+    border-radius: 10px;
+`

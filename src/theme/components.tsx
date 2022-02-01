@@ -36,7 +36,7 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
     width : ${(props: ButtonProps) => props.sizebutton? props.sizebutton  : 100 }%;
     color:  ${(props: ButtonProps) => props.colorbutton? props.colorbutton : 'var(--White)'};
     `}  
-    font-weight: 700;
+    font-weight: 600;
     border-radius: var(--Radius-115);
     box-shadow: var(--Shadow-btn);
     ${( props: ButtonProps ) =>  {
@@ -92,6 +92,9 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
             background-color: transparent;
             border: none;
             color: var(--Green-300);
+            box-shadow: none;
+            font-size: 24px;
+            font-weight: 700;
             `
         }
         else{
