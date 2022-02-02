@@ -1,4 +1,4 @@
-import { Alert, Button, Input, Radio, Row, Image, Col, Typography } from "antd";
+import { Row, Image, Col, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -41,11 +41,9 @@ function GameStage3() {
       }
 
       const message = [
-        `${item1} Hi my name is "${name}" ` ,
-        `${item2} My problem is "${problem}" ` ,
-        `${item3} I give you a "${power}" power`,
-        'please help me',
-        'wonderful! Thank you I give you a gift'
+        `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
+        `${item1} หมายความว่า "${name}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${problem}" ดวงคุณมัน ${item3} "${power}" เลยละ` ,
+        'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
       const [index, setIndex] = useState(0)
@@ -54,11 +52,11 @@ function GameStage3() {
       }
 
       const messageCut = [
-        'คุณเก่งมากเลย', 
-        'งั้นคุณช่วยเราหน่อยได้ไหม', 
+        'ผ่านแล้ว เก่งมากเลยยยย', 
+        'เรามีคำถามาจะถามด้วยละ', 
         '',
-        'ขอบคุณนะคุณใจดีจริงๆ',
-        'เอาละไปช่วยเหลือคนที่เดือดร้อนกันเถอะ', 
+        'เราลองมาทายชะตาเป้าหมายของคุณกัน',
+        'ลองสุ่มดวงของคุณจนกว่าจะพอใจแล้วให้เราทำนายกันเถอะ', 
     ] 
 
     const goSpecial = () =>{
@@ -84,27 +82,52 @@ function GameStage3() {
         {
          isCutScene ?
          <>
-         {index === 3 ?
+         {index === 2 ?
          <>
-         <Box justify='center' align='center' direction='column'>
-         <Alert style={{ margin: '16px 0' }} message={message[index]} />
-         <Input.Group compact>
-         <Input style={{ width: 'calc(100% - 200px)' }} defaultValue="type here!!" />
-         <Button type="primary" onClick={nextIndex} >help</Button>
-          </Input.Group>
-          </Box>
-          </>
-         : index === 4 ?
-         <>
-         <Box justify='center' align='center' direction='column'>
-         <Alert style={{ margin: '16px 0' }} message={message[index]} />
-         <button onClick={nextStage}>รับของขวัญ</button>
+         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
+            <MessageCutScene onClick={nextStage}>
+                {message[index]}
+            </MessageCutScene>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
          </Box>
          </>
          :
-         <Box justify='center' align='center' direction='column' onClick={nextIndex}>
-          <Alert style={{ margin: '16px 0' }} message={message[index]} />
+         <>
+         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={nextIndex}>
+         <Animation 
+                onEnter="fadeIn" 
+                key={index} 
+                duration={1000} 
+                delay={200}
+                style={{width: '100%', display: 'flex', justifyContent: 'center' }}
+             >
+                <MessageCutScene >
+                   {message[index]}
+                </MessageCutScene>
+            </Animation>
+            <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
+              <Row>
+                  <Col span={8}>
+                  <Image 
+                width={75}
+                preview={false}
+                src={NPC}
+                />
+                  </Col>
+              </Row>
+              </Box>
           </Box>
+          </>
          }
          </>
          :
@@ -139,7 +162,7 @@ function GameStage3() {
             <>
             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
             <MessageCutScene >
-                   คุณเต็มใจช่วย NPC ที่ลำยากหรือไม่ ตอบ Yes หรือ NO เพื่อไปต่อ
+                   คุณเชื่อในเรื่องดวงชะตาหรือไม่ ตอบ Yes หรือ NO เพื่อไปต่อ
                 </MessageCutScene>
                 <Box justify='center' align='center' direction='row'  style={{margin: '40px 0 20px 0'}}>
               <Row>

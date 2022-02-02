@@ -102,9 +102,9 @@ export const Shadow = styled.div`
 export const MenuIcon = () => {
     return(
 <svg width="24" height="24" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-<line x1="1.5" y1="1.5" x2="16.5" y2="1.5" stroke="#41653A" stroke-width="3" stroke-linecap="round"/>
-<line x1="1.5" y1="7.5" x2="16.5" y2="7.5" stroke="#41653A" stroke-width="3" stroke-linecap="round"/>
-<line x1="7.5" y1="13.5" x2="16.5" y2="13.5" stroke="#41653A" stroke-width="3" stroke-linecap="round"/>
+<line x1="1.5" y1="1.5" x2="16.5" y2="1.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
+<line x1="1.5" y1="7.5" x2="16.5" y2="7.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
+<line x1="7.5" y1="13.5" x2="16.5" y2="13.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
 </svg>
 )
 }
