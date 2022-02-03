@@ -11,7 +11,7 @@ import { ItemContainer, RandomContainer } from "./styles/stage.styles";
 const { Title, Text } = Typography;
 
 function GameStage3() {
-    const { nextStage } = useAppContext();
+    const { nextStage, cardRandomInfo } = useAppContext();
     const history = useHistory();
     const items1 = randomSlot.avatar
     const items2 = randomSlot.problem
@@ -47,6 +47,19 @@ function GameStage3() {
       ]
       const [isCutScene, setIsCutScene] = useState(false)
       const [index, setIndex] = useState(0)
+
+      const onConfirm = (emoji: string, msgbot: string, colorbg: string) =>{
+        console.log('Data3--->', emoji,msgbot,colorbg)
+        if(emoji && msgbot && colorbg)
+        cardRandomInfo({emoji, msgbot, colorbg})
+        setIsCutScene(true)
+      }
+
+      const sentData = () =>{
+        console.log('fetch API')
+        nextStage()
+      }
+
       const nextIndex = () =>{
         setIndex(index + 1 )
       }
@@ -84,8 +97,8 @@ function GameStage3() {
          <>
          {index === 2 ?
          <>
-         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
-            <MessageCutScene onClick={nextStage}>
+         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={()=>sentData()}>
+            <MessageCutScene>
                 {message[index]}
             </MessageCutScene>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
@@ -147,7 +160,7 @@ function GameStage3() {
         <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'Random again' : 'Tap Card to Random' } </Title>
         </Box>
         { isRandom && <Box justify='center' align='center' direction='column'>
-            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> setIsCutScene(true)}>COMFIRM</ButtonStyle>
+            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(item1,item2,item3)}>CONFIRM</ButtonStyle>
         </Box>}
         </Box>
          </>

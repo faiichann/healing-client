@@ -9,21 +9,36 @@ interface userData {
     username: string | any
     avatar: string | any
   }
+
+  interface goalData {
+    typeGoal: string | any
+    msgGoal: string | any
+  }
+
+  interface cardRandomData {
+    emoji: string | any
+    msgbot: string | any
+    colorbg: string | any
+  }
 const AppContext = createContext<any>(null);
 
 const AppProvider = (({children}: IContextProps) =>{
 
-    const [stage,setStage] = useState<number>(3)
+    const [stage,setStage] = useState<number>(0)
     const [isLose,setIsLose] = useState(false)
     const [isReset,setIsReset] = useState(false)
-    const [isName,setIsName] = useState('')
+
+    //------------Data 1------------------------//
+    const [isName,setIsName] = useState('USER001')
     const [isAvatar,setIsAvartar] = useState('')
-    // const nextStage = useCallback(
-    //     () => {
-    //         setStage(stage+1)
-    //     },
-    //     [],
-    // )
+     //------------Data 2------------------------//
+    const [isGoalType,setIsGoalType] = useState('')
+    const [isGoalMsg,setIsGoalMsg] = useState('')
+    //------------DAta 3------------------------//
+    const [isEmoji,setIsEmoji] = useState('')
+    const [isMsgBot,setIsMsgBot] = useState('')
+    const [isColorBg,setIsColorBg] = useState('')
+
     const nextStage = () => {
             setStage(stage+1)
         }
@@ -32,6 +47,20 @@ const AppProvider = (({children}: IContextProps) =>{
             console.log('props: ', { username, avatar });
             setIsName(username)
             setIsAvartar(avatar)
+        };
+
+    const goalInfo = ({ typeGoal, msgGoal }: goalData) => {
+            console.log('props: ', { typeGoal, msgGoal });
+            setIsGoalType(typeGoal)
+            setIsGoalMsg(msgGoal)
+            nextStage()
+        };
+    
+    const cardRandomInfo = ({ emoji, msgbot, colorbg }: cardRandomData) => {
+            console.log('props: ', { emoji, msgbot, colorbg });
+            setIsEmoji(emoji)
+            setIsMsgBot(msgbot)
+            setIsColorBg(colorbg)
         };
 
     const value ={
@@ -44,7 +73,14 @@ const AppProvider = (({children}: IContextProps) =>{
         isName,
         isAvatar,
         isReset,
-        setIsReset
+        setIsReset,
+        goalInfo,
+        cardRandomInfo,
+        isGoalType,
+        isGoalMsg,
+        isEmoji,
+        isMsgBot,
+        isColorBg
     }
 
     useEffect(() => {

@@ -16,7 +16,8 @@ function GameStage1() {
     const [select, setSelect] = useState(items)
     const [finish, setFinish] = useState(false)
     const [goal, setGoal] = useState<any>()
-    const { nextStage } = useAppContext();
+    const [userGoal, setUserGoal]= useState<String |null>(null);
+    const { nextStage, goalInfo } = useAppContext();
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
     const [animation1, setAnimation1] = useState(0);
@@ -68,6 +69,12 @@ function GameStage1() {
         }
       }
 
+    const submitWish = (typeGoal: string ,msgGoal: any) => {
+        console.log('Data2--->', typeGoal,msgGoal)
+        if(typeGoal && msgGoal)
+        goalInfo({typeGoal, msgGoal})
+        nextStage()
+    }
     return (
        <>
        {isSkip && 
@@ -84,9 +91,10 @@ function GameStage1() {
                         />
                     </GoalContainer>
                 <InputGoalStyle>
-                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} />
+                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`}
+                 onChange={({ target: { value } }) => { setUserGoal(value) }} />
                 </InputGoalStyle>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={nextStage}> Sent Wish </ButtonStyle>
+                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal)}> Sent Wish </ButtonStyle>
             </Box>
         : 
         <>
