@@ -13,6 +13,7 @@ interface userData {
   interface goalData {
     typeGoal: string | any
     msgGoal: string | any
+    starRate: number | any
   }
 
   interface cardRandomData {
@@ -34,6 +35,7 @@ const AppProvider = (({children}: IContextProps) =>{
      //------------Data 2------------------------//
     const [isGoalType,setIsGoalType] = useState('')
     const [isGoalMsg,setIsGoalMsg] = useState('')
+    const [isRateStar,setRateStar] = useState(0)
     //------------DAta 3------------------------//
     const [isEmoji,setIsEmoji] = useState('')
     const [isMsgBot,setIsMsgBot] = useState('')
@@ -49,10 +51,11 @@ const AppProvider = (({children}: IContextProps) =>{
             setIsAvartar(avatar)
         };
 
-    const goalInfo = ({ typeGoal, msgGoal }: goalData) => {
-            console.log('props: ', { typeGoal, msgGoal });
+    const goalInfo = ({ typeGoal, msgGoal , starRate}: goalData) => {
+            console.log('props: ', { typeGoal, msgGoal, starRate });
             setIsGoalType(typeGoal)
             setIsGoalMsg(msgGoal)
+            setRateStar(starRate)
             nextStage()
         };
     
@@ -78,6 +81,7 @@ const AppProvider = (({children}: IContextProps) =>{
         cardRandomInfo,
         isGoalType,
         isGoalMsg,
+        isRateStar,
         isEmoji,
         isMsgBot,
         isColorBg

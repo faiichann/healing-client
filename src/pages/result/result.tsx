@@ -3,7 +3,7 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Avatar, Card, message, Image, Row, Col, Typography } from 'antd';
+import { Rate, Card, message, Image, Row, Col, Typography } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
@@ -11,11 +11,10 @@ import Logo  from 'assets/animation/logo.gif';
 import { CardContainer, ImageContainer } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
 
-const { Text, Link } = Typography;
-const { Meta } = Card;
+const { Text } = Typography;
 function Result() {
     const history = useHistory();
-    const { stage, setStage, isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg } = useAppContext();
+    const { stage, setStage, isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, isRateStar } = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState();
@@ -75,7 +74,11 @@ function Result() {
           <Box justify='center' align='center' direction='column' >
            <CardContainer>
            <Row>
-                <Col flex="60%">{isGoalMsg}</Col>
+                <Col flex="60%">{isGoalMsg} 
+                <Row>
+                    <Rate disabled defaultValue={isRateStar} />
+                </Row>
+            </Col>
                 <Col flex="auto">{isGoalType}</Col>
             </Row>
             <Row>
@@ -98,21 +101,6 @@ function Result() {
              <Text italic style={{fontSize: '10px'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
             </Box>
            </CardContainer>
-           {/* <Card
-            style={{ width: 300 }}
-            cover={
-            <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-            />
-            }
-            >
-            <Meta
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-            title={author}
-            description={text}
-            />
-        </Card> */}
         <Box justify='center' align='center' direction='row'>
         <ButtonStyle typebutton='Medium' sizebutton={30} onClick={saveResult}>
             Save

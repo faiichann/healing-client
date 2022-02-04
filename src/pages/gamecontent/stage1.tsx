@@ -1,4 +1,4 @@
-import { Col, Row, Typography, Image } from "antd";
+import { Col, Row, Typography, Image, Rate } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
@@ -6,7 +6,7 @@ import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/npc3.png'
-import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, VsContainer, VsText } from "./styles/stage.styles";
+import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, VsContainer, VsText } from "./styles/stage.styles";
 
 const { Title, Text } = Typography;
 
@@ -19,6 +19,8 @@ function GameStage1() {
     const [userGoal, setUserGoal]= useState<String |null>(null);
     const { nextStage, goalInfo } = useAppContext();
     const [isSkip, setIsSkip] = useState(false)
+    const [starRate, setStarRate] = useState(0)
+    const [isRating, setRating] = useState(false)
     const [index, setIndex] = useState(0);
     const [animation1, setAnimation1] = useState(0);
     const [animation2, setAnimation2] = useState(0);
@@ -69,21 +71,42 @@ function GameStage1() {
         }
       }
 
-    const submitWish = (typeGoal: string ,msgGoal: any) => {
-        console.log('Data2--->', typeGoal,msgGoal)
+    const submitWish = (typeGoal: string ,msgGoal: any, starRate: number) => {
+        console.log('Data2--->', typeGoal,msgGoal,starRate)
         if(typeGoal && msgGoal)
-        goalInfo({typeGoal, msgGoal})
+        goalInfo({typeGoal, msgGoal, starRate})
         nextStage()
     }
+    const handleChangeRate = ( value:number) =>{
+        setStarRate(value)
+    }
+    const desc = ['ระดับ1', 'ระดับ2', 'ระดับ3', 'ระดับ4', 'ระดับ5'];
+    const meaning = ['ทำก็ได้ไม่ทำก็ได้', 'มีแรงบันดาลใจอยากทำ', 'ตั้งใจจะทำให้สำเร็จ', 'เชื่อมั่นว่าต้องทำได้แน่นอน', 'ยากแค่ไหนก็ต้องทำให้ได้เลย'];
+
     return (
        <>
        {isSkip && 
        <>
         {finish ? 
            <Box justify='center' align='center' direction='column'  style={{marginTop: '10%'}}>
-               <GoalText> {goal.goal}  </GoalText>
-               <Text type="secondary">{goal.des}</Text>
-               <GoalContainer>
+                {isRating?
+                <>
+                <GoalText> " {userGoal} " </GoalText>
+                <Text type="secondary">ให้คะแนนระดับการตั้งเป้าหมายของคุณกัน</Text>
+                    <StarCard>
+                    <Box justify='center' align='center' direction='column'>
+                    {starRate > 0 ? <span className="ant-rate-text">{meaning[starRate - 1]}</span> : 'How You Need it!'}
+                    <Rate defaultValue={starRate} tooltips={desc} onChange={handleChangeRate} value={starRate}
+                    style={{fontSize: '30px'}}/>
+                    </Box>
+                    </StarCard>
+                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> NEXT </ButtonStyle>
+                </>
+                :
+                <>
+                <GoalText> {goal.goal}  </GoalText>
+                <Text type="secondary">{goal.des}</Text>
+                <GoalContainer>
                     <Image 
                         width={100}
                         preview={false}
@@ -94,7 +117,9 @@ function GameStage1() {
                 <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`}
                  onChange={({ target: { value } }) => { setUserGoal(value) }} />
                 </InputGoalStyle>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal)}> Sent Wish </ButtonStyle>
+                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>
+                </>
+                }
             </Box>
         : 
         <>

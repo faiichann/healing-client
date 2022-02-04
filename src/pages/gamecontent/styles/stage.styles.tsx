@@ -122,6 +122,19 @@ export const InputGoalStyle = styled(Input.Group)`
     width: 80%;
     text-align: center;
 `
+export const StarCard = styled.div`
+    width: 70%;
+    height: 230px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 16px;
+    box-shadow: (9px 8px 20px rgba(0, 0, 0, 0.25));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: white;
+`
 //----------------------Stage 2----------------------//
 export const TextRandom = styled.div`
     min-width: 35%;
@@ -272,7 +285,7 @@ interface RandomProps {
   }
 export const ItemContainer = styled.div<RandomProps>`
     width: 100%;
-    padding: 16px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;

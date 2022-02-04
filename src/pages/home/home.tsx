@@ -1,13 +1,13 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
-import { Image, Typography } from 'antd';
+import { Divider, Image, Typography } from 'antd';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
 import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 const { Title, Text } = Typography;
 
@@ -51,8 +51,17 @@ function Home() {
            </ImgContainer>
 
            </SectionFirst>
-
-           {/* ----Section2---- */}
+            {/* ----Section2---- */}
+            <NumberDisplay>
+                 <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
+                 <Divider style={{margin: '16px', borderTop: '11px solid rgba(0, 0, 0, 0.06)',minWidth: '70%',width: '70%'}}/>
+                <Title level={2}style={{color: '#73A253',margin: '0'}}>ผลิตการ์ดไปแล้วจำนวน </Title>
+                <Title  style={{color: '#F9A186',margin: '0'}}>{ 0 }</Title>
+                <Title level={2}style={{color: '#73A253',margin: '0'}}>ใบ</Title> 
+                <Divider style={{margin: '16px', borderTop: '11px solid rgba(0, 0, 0, 0.06)',minWidth: '70%',width: '70%'}}/>
+                </Box>
+            </NumberDisplay>
+           {/* ----Section3---- */}
            <SectionSecond>
             <CarouselHome/>
            </SectionSecond>

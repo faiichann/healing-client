@@ -1,14 +1,23 @@
+import { LetterBox, WordContainer } from "pages/gamecontent/styles/hangman.styles";
+
 const Word = ({ selectedWord, correctLetters }: any) => {
   return (
-    <div className="word">
+    <WordContainer>
       {selectedWord.split("").map((letter :string, i:number) => {
         return (
-          <span className="letter" key={i}>
-            {correctLetters.includes(letter) ? letter : ""}
-          </span>
+          <div key={i}>
+            {correctLetters.includes(letter) ? 
+              <LetterBox correct={true}>
+                  {letter}
+                </LetterBox>
+            :
+            <LetterBox key={i}>
+            {null}
+          </LetterBox>}
+          </div>
         );
       })}
-    </div>
+    </WordContainer>
   );
 };
 

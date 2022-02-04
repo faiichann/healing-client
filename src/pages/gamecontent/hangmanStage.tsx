@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 import Container from "components/container/container";
 import "./styles/hangman.css"
 import { Box } from "theme/components";
+import { GameContainer } from "./styles/hangman.styles";
+
 const words = [
     'fai',
     'faiicha',
@@ -57,14 +59,14 @@ const words = [
 
   return (
     <>
-      <Container header={{ title: 'Game Content', left: 'back' }}>
+      <Container header={{ title: 'Special Game', left: 'back' }}>
       <Box justify='center' align='center' direction='column'>
       <Header />
-      <div className="game-container">
+      <GameContainer>
         <Figure wrongLetters={wrongLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
-      </div>
+      </GameContainer>
       <Popup 
       correctLetters={correctLetters} 
       wrongLetters={wrongLetters} 
