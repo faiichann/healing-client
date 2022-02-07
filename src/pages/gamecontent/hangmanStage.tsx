@@ -10,8 +10,8 @@ import { Box } from "theme/components";
 import { GameContainer } from "./styles/hangman.styles";
 
 const words = [
-    'fai',
-    'faiicha',
+    'think',
+    'blink',
     'work',
     'money',
     'game',
@@ -60,12 +60,12 @@ const words = [
   return (
     <>
       <Container header={{ title: 'Special Game', left: 'back' }}>
-      <Box justify='center' align='center' direction='column'>
+      <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 100px)', marginTop: '60px'}}>
       <Header />
       <GameContainer>
         <Figure wrongLetters={wrongLetters} />
-        <WrongLetters wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
+        <WrongLetters wrongLetters={wrongLetters} />
       </GameContainer>
       <Popup 
       correctLetters={correctLetters} 
