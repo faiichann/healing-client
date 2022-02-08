@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Image, Layout } from 'antd';
+import { Image, Layout, Drawer } from 'antd';
 
 const { Content } = Layout;
 
@@ -118,4 +118,26 @@ export const NumberDisplay = styled.div`
     justify-content: center;
     align-items: center ;
     flex-direction: column;
+`
+export const NumBox = styled.div`
+    background-color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    margin: 5px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color:#8FB486;
+`
+export const HomeDrawer = styled(Drawer)`
+.ant-drawer-mask{
+    width: 50% !important;
+}
+& .ant-drawer-content-wrapper{
+    width: 50% !important;
+}
 `

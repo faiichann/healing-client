@@ -5,20 +5,32 @@ import styled ,{ css, keyframes } from 'styled-components';
 
 export const ProgressBar = styled(Progress)`
     /* width: 90%; */
- &.ant-progress-steps {
-    width: 25%;
-    }
- &.ant-progress-steps-item {
-    max-width: 25%;
- }
 `;
-
 export const DivProgress = styled.div`
-    width: 100%;
+    width: 90%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+`
+export const NotiModal = styled(Modal)`
+    display: flex;
+    justify-content: center;
+.ant-modal-header{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.ant-modal-content{
+        width: 90%;
+        border-radius: 20px;
+    }
+
+.ant-modal-body {
+    padding: 5px;
+    font-size: 16px;
+}
+`
+export const TextHeadModal = styled.span`
 `
 
 //----------------------Stage 1----------------------//
@@ -56,6 +68,16 @@ export const GoalText = styled.div`
     text-align: center;
     color: #A6CD9C;
     font-size: 36px;
+    font-weight: 700;
+`
+export const StarGoalText = styled.div`
+    display: flex;
+    justify-content: center;
+    padding: 16px 0 0 0;
+    align-items: center;
+    text-align: center;
+    color: #A6CD9C;
+    font-size: 24px;
     font-weight: 700;
 `
 export const RowVsgame = styled(Row)`
@@ -124,11 +146,11 @@ export const InputGoalStyle = styled(Input.Group)`
 `
 export const StarCard = styled.div`
     width: 70%;
-    height: 230px;
+    height: 350px;
     border-radius: 20px;
     padding: 10px;
-    margin: 16px;
-    box-shadow: (9px 8px 20px rgba(0, 0, 0, 0.25));
+    margin: 16px 16px 40px 16px;
+    box-shadow: 0px 0px 83px -23px rgba(0, 0, 0, 0.25);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,7 +182,7 @@ export const ConfirmModal = styled(Modal)<ModalProps>`
     justify-content: center;
     z-index: 99;
     & .ant-modal-content {
-        width: 70%;
+        width: 75%;
         height: 280px;
         border-radius: 15px;
         margin-top: 20%;

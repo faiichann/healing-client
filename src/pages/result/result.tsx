@@ -31,6 +31,11 @@ function Result() {
         }, 1000);
     }
 
+    const goHome = () => {
+        setStage(0)
+        history.push('/')
+    }
+
     const getResult = async() =>{
         try {
             await axios.get('https://type.fit/api/quotes').then((response) => {
@@ -68,7 +73,7 @@ function Result() {
     }
 
     return (
-       <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={()=> history.push('/')} />) }}>
+       <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={goHome} />) }}>
           {isLoading ? 
           <>
           <Box justify='center' align='center' direction='column' >
@@ -111,7 +116,7 @@ function Result() {
          : 
          <>
          <Box justify='center' align='center' direction='column'>
-         <DivProgress><ProgressBar percent={stage * 25} steps={4} /></DivProgress>
+         <DivProgress><ProgressBar percent={stage * 25} showInfo={true} strokeWidth={10}/></DivProgress>
          <Box justify='center' align='center' direction='column'onClick={openBox}
          style={{height: 'calc(100vh - 200px)', width: '100%'}}>
          {isOpen ?       

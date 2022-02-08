@@ -1,27 +1,49 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
-import { Divider, Image, Typography } from 'antd';
+import { Image, Typography } from 'antd';
+import { useState } from 'react';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
 import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
+
 const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
+    let numShow = '001'
+    const [visible, setVisibleModal] = useState(false)
+
+    const handleButton = () => {
+     setVisibleModal(!visible)
+    };
+  
+    const onClose = () => {
+      setVisibleModal( false)
+    };
     return (
        <LayoutHome>
            <ContainerHome>
-
+           <HomeDrawer
+          title="-ข้อมูลเพิ่มเติม"
+          placement="right"
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+          <p>Some contents...</p>
+        </HomeDrawer>
             {/* ----Section1---- */}
            <SectionFirst>
-            <Box justify='flex-end' align='center' direction='row' 
+            <Box justify='flex-end' align='center' direction='row' onClick={handleButton}
             style={{ padding: '16px',position: 'absolute', zIndex: '1' }}> 
-                <MenuIcon/>
+                <MenuIcon  />
             </Box>
             <Box justify='center' align='center' direction='column'
             style={{margin: '80px 0 95px 0',position: 'absolute', zIndex: '1'}}>
@@ -53,13 +75,22 @@ function Home() {
            </SectionFirst>
             {/* ----Section2---- */}
             <NumberDisplay>
-                 <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
-                 <Divider style={{margin: '16px', borderTop: '11px solid rgba(0, 0, 0, 0.06)',minWidth: '70%',width: '70%'}}/>
-                <Title level={2}style={{color: '#73A253',margin: '0'}}>ผลิตการ์ดไปแล้วจำนวน </Title>
-                <Title  style={{color: '#F9A186',margin: '0'}}>{ 0 }</Title>
-                <Title level={2}style={{color: '#73A253',margin: '0'}}>ใบ</Title> 
-                <Divider style={{margin: '16px', borderTop: '11px solid rgba(0, 0, 0, 0.06)',minWidth: '70%',width: '70%'}}/>
-                </Box>
+            <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
+                <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
+                <Box justify='center' align='center' direction='row'>
+                {numShow.split("").map((text :string, i:number) => {
+                return (
+                   
+                    <div key={i}>
+                        <NumBox>
+                        {text}
+                        </NumBox>
+                    </div>
+                   
+                    );
+                })}
+                 </Box>
+            </Box>
             </NumberDisplay>
            {/* ----Section3---- */}
            <SectionSecond>

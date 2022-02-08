@@ -6,7 +6,7 @@ import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/npc3.png'
-import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, VsContainer, VsText } from "./styles/stage.styles";
+import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, StarGoalText, VsContainer, VsText } from "./styles/stage.styles";
 
 const { Title, Text } = Typography;
 
@@ -91,16 +91,21 @@ function GameStage1() {
            <Box justify='center' align='center' direction='column'  style={{marginTop: '10%'}}>
                 {isRating?
                 <>
-                <GoalText> " {userGoal} " </GoalText>
-                <Text type="secondary">ให้คะแนนระดับการตั้งเป้าหมายของคุณกัน</Text>
+                    <Text type="secondary" style={{margin: '10px 0 10px 0'}}>ให้คะแนนระดับการตั้งเป้าหมายของคุณกัน</Text>
                     <StarCard>
                     <Box justify='center' align='center' direction='column'>
-                    {starRate > 0 ? <span className="ant-rate-text">{meaning[starRate - 1]}</span> : 'How You Need it!'}
+                    <Image 
+                        width={100}
+                        preview={false}
+                        src={goal.img} 
+                        />
+                    <StarGoalText> " {userGoal} " </StarGoalText>
                     <Rate defaultValue={starRate} tooltips={desc} onChange={handleChangeRate} value={starRate}
-                    style={{fontSize: '30px'}}/>
+                    style={{fontSize: '30px',marginTop: '20px'}}/>
+                      {starRate > 0 ? <span className="ant-rate-text">{meaning[starRate - 1]}</span> : 'How You Need it!'}
                     </Box>
                     </StarCard>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> NEXT </ButtonStyle>
+                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
                 </>
                 :
                 <>
