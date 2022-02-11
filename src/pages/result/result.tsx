@@ -8,6 +8,8 @@ import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles'
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
 import Logo  from 'assets/animation/logo.gif';
+import CloseBox from 'assets/animation/Box.gif'
+import OpenBox from 'assets/animation/BoxOpen.gif'
 import { CardContainer, ImageContainer } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
 
@@ -16,6 +18,7 @@ function Result() {
     const history = useHistory();
     const { stage, setStage, isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, isRateStar } = useAppContext();
     const [isLoading, setLoading] = useState(false);
+    const [isClick, setIsClick] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [text, setText] = useState();
     const [currentYear, setCurrentYear] = useState('');
@@ -59,6 +62,9 @@ function Result() {
 
     const openBox = async() =>{
         setIsOpen(true)
+        setTimeout( () => {
+            setIsClick(true)
+        }, 1000);
        if(data) {
         console.log('------------Data----------', data)
            let random = Math.floor(Math.random() * data.length)
@@ -66,7 +72,7 @@ function Result() {
            setAuthor(data[random].author);
            setTimeout( () => {
             setLoading(true)
-        }, 2000);
+        }, 3000);
        }else{
             console.error('fetch error');
        }
@@ -121,11 +127,21 @@ function Result() {
          style={{height: 'calc(100vh - 200px)', width: '100%'}}>
          {isOpen ?       
           <Image
-            width={100}
-            src={Logo}
+            width={isOpen && isClick ? 100 : 200}
+            src={isOpen && isClick ? Logo : OpenBox}
+            preview={false}
             style={{margin: '20px 0'}}
             /> 
-            : <div>TAP TO OPEN BOX !!!</div>}
+            : <>
+                <Image
+            width={150}
+            src={CloseBox}
+            preview={false}
+            style={{margin: '20px 0'}}
+            /> 
+                 <Text strong>TAP TO OPEN BOX !!!</Text>
+                </>
+            }
          </Box>
          </Box>
          </>

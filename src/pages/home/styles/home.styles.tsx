@@ -34,27 +34,38 @@ export const SectionFirst = styled.div`
 export const ImgContainer = styled.div`
     width: 100%;
     overflow: hidden;
+    height: 100vh;
 `
 export const ImgSection = styled(Image)`
-    position: relative;
+    /* position: relative; */
     top: 0;
     left: 0;
-    object-fit: cover;
+    object-fit: contain;
     width: 100%;
     height: 100%;
     float: left;
     &.cloud{
         transform: translateY(149px);
         transform: translateX(-159px);
+        position: relative;
     }
     &.mountain{
-        transform: translateY(49px);
+        transform: translateY(-47px);
+        position: relative;
     }
     &.Green_mountain{
-        transform: translateY(-158px);
+        transform: translateY(-236px);
+        @media only screen and (min-width: 500px) {
+            transform: translateY(-306px);
+        }
+        position: relative;
     }
     &.forest{
-        transform: translateY(-361px);
+        transform: translateY(223px);
+        @media only screen and (min-width: 500px) {
+            transform: translateY(332px);
+        }
+        position: relative;
     }
 `
 export const SectionSecond = styled.div`
@@ -66,6 +77,8 @@ export const SectionSecond = styled.div`
     justify-content: center;
     align-items: center ;
     flex-direction: column;
+    z-index: 100;
+    position: relative;
 `
 export const ImageContent = styled.div`
     width: 70%;
@@ -88,6 +101,8 @@ export const FooterHome = styled.div`
     padding: 20px 0;
     left: 0;
     bottom: 0;
+    z-index: 100;
+    position: relative;
 `
 export const Shadow = styled.div`
     height: 20px;
@@ -118,6 +133,8 @@ export const NumberDisplay = styled.div`
     justify-content: center;
     align-items: center ;
     flex-direction: column;
+    z-index: 100;
+    position: relative;
 `
 export const NumBox = styled.div`
     background-color: white;

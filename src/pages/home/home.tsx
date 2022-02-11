@@ -1,7 +1,7 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
 import { Image, Typography } from 'antd';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
 import mountain from 'assets/images/bgHome/mountain.png'
@@ -10,6 +10,7 @@ import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
 import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
+import Animation from 'theme/animations'
 
 const { Title, Text } = Typography;
 
@@ -17,6 +18,7 @@ function Home() {
     const history = useHistory();
     let numShow = '001'
     const [visible, setVisibleModal] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleButton = () => {
      setVisibleModal(!visible)
@@ -25,6 +27,16 @@ function Home() {
     const onClose = () => {
       setVisibleModal( false)
     };
+    useEffect(() => {
+        setTimeout( () => {
+            setIsLoading(true)
+        }, 500);
+    }, [])
+    const flexStyle = {
+        justifyContent: 'center',
+        alignItem:'center',
+        display: 'flex'
+    }
     return (
        <LayoutHome>
            <ContainerHome>
@@ -47,16 +59,25 @@ function Home() {
             </Box>
             <Box justify='center' align='center' direction='column'
             style={{margin: '80px 0 95px 0',position: 'absolute', zIndex: '1'}}>
-                <Image
-                    width={100}
-                    src={logo}
-                    preview={false}
-                />
+              {isLoading && 
+              <Animation type='bounceUp' duration={1000} delay={200}>
+              <Image
+              width={100}
+              src={logo}
+              preview={false}
+          />
+              </Animation>
+             
+              }
+                   {isLoading && 
+                <Animation type='slideFromBottom' duration={1000} delay={200} style={flexStyle}>
                 <Image
                     width={120}
                     src={healingText}
                     preview={false}
                 />
+                </Animation>
+                    }
                   {/* <Title level={2}>Healing</Title> */}
                   <Text type="secondary" style={{fontWeight: '700'}}>Gamification Inspiration</Text>
                   <ButtonStyle  
@@ -66,10 +87,12 @@ function Home() {
                   onClick={() => history.push('/intro')}>PLAY</ButtonStyle>
             </Box>
            <ImgContainer>
-           <ImgSection  className="cloud"  width={730} src={cloud}/>
-           <ImgSection  className="mountain"  src={mountain}/>
-           <ImgSection  className="Green_mountain" src={greenMountain}/>
-           <ImgSection  className="forest"  src={forest}/>           
+           <ImgSection  className="cloud"  width={730} src={cloud} preview={false} />
+           <div style={{position: 'fixed'}}>
+           <ImgSection  className="mountain"  src={mountain} preview={false}/>
+           <ImgSection  className="Green_mountain" src={greenMountain} preview={false}/>
+           </div>
+           <ImgSection  className="forest"  src={forest} preview={false}/>           
            </ImgContainer>
 
            </SectionFirst>
