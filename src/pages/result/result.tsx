@@ -12,6 +12,7 @@ import CloseBox from 'assets/animation/Box.gif'
 import OpenBox from 'assets/animation/BoxOpen.gif'
 import { CardContainer, ImageContainer } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
+import { ApiGetCardData } from 'api/ApiCard/card.api';
 
 const { Text } = Typography;
 function Result() {
@@ -24,6 +25,7 @@ function Result() {
     const [currentYear, setCurrentYear] = useState('');
     const [author, setAuthor] = useState();
     const [data, setData] = useState<any>();
+    const [dataCard, setDataCard] = useState<any>();
     const key = 'updatable';
 
     const saveResult = () =>{
@@ -59,24 +61,47 @@ function Result() {
         getResult()
         getYear()
     }, []);
+    
+    // const card = ApiGetCardData()
 
     const openBox = async() =>{
-        setIsOpen(true)
-        setTimeout( () => {
-            setIsClick(true)
-        }, 1000);
+            setIsOpen(true)
+        try {
+            await axios.get('http://localhost:5000/results/1').then(async (response) => {
+                const card = await response.data;
+                setDataCard(card)
+              });
+        } catch (error) {
+            console.log(error);
+            return error;
+        }
+       
+        // setTimeout( () => {
+           
+        // }, 1000);
        if(data) {
         console.log('------------Data----------', data)
            let random = Math.floor(Math.random() * data.length)
            setText(data[random].text);
            setAuthor(data[random].author);
-           setTimeout( () => {
-            setLoading(true)
-        }, 3000);
+           
+        //    setTimeout( () => {
+           
+        // }, 3000);
        }else{
             console.error('fetch error');
        }
     }
+    useEffect(() => {
+        if(dataCard){
+            setTimeout( () => {
+                setIsClick(true)   
+        }, 1000);
+        setTimeout( () => {
+                setLoading(true)     
+        }, 2000);
+        }
+    }, [dataCard]);
 
     return (
        <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={goHome} />) }}>
@@ -85,21 +110,27 @@ function Result() {
           <Box justify='center' align='center' direction='column' >
            <CardContainer>
            <Row>
-                <Col flex="60%">{isGoalMsg} 
+                <Col flex="60%">{dataCard?.goal} 
                 <Row>
-                    <Rate disabled defaultValue={isRateStar} />
+                    <Rate disabled defaultValue={dataCard?.rating} />
                 </Row>
             </Col>
-                <Col flex="auto">{isGoalType}</Col>
+                <Col flex="auto">{dataCard?.type}</Col>
             </Row>
             <Row>
             <Box justify='center' align='center' direction='column' >
-                    <ImageContainer> EMOji: {isEmoji}, MSG: {isMsgBot}, COLOR: {isColorBg} </ImageContainer>
+                    <ImageContainer> EMOji: {dataCard?.nft_card.emoji}, MSG: {dataCard?.nft_card.caption}, COLOR: {dataCard?.nft_card.bg_color} 
+                    <Image
+                    width={50}
+                    src={dataCard?.qoutes.img}
+                    preview={false}
+                />
+                    </ImageContainer>
                 </Box>
             </Row>
             <Row>
-                <Col flex="auto">{isName}</Col>
-                <Col flex="auto">#00001</Col>
+                <Col flex="auto">{dataCard?.username}</Col>
+                <Col flex="auto">#0000{dataCard?.id}</Col>
             </Row>
             <Box justify='center' align='center' direction='column' >
                 <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{text}</Text>
@@ -127,7 +158,7 @@ function Result() {
          style={{height: 'calc(100vh - 200px)', width: '100%'}}>
          {isOpen ?       
           <Image
-            width={isOpen && isClick ? 100 : 200}
+            width={isOpen && isClick ? 100 : 150}
             src={isOpen && isClick ? Logo : OpenBox}
             preview={false}
             style={{margin: '20px 0'}}
