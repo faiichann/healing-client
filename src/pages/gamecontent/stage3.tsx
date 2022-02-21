@@ -1,6 +1,6 @@
 import { Row, Image, Col, Typography } from "antd";
 import { useAppContext } from "context/appContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, ButtonStyle } from "theme/components";
 import randomSlot from 'api/mocks/RandomSlot.json'
@@ -8,6 +8,7 @@ import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/npc3.png'
 import { ItemContainer, RandomContainer } from "./styles/stage.styles";
+import axios from "axios";
 const { Title, Text } = Typography;
 
 function GameStage3() {
@@ -26,6 +27,11 @@ function GameStage3() {
       const [name, setName] = useState('');
       const [problem, setProblem] = useState('');
       const [power, setPower] = useState('');
+      const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
+        isRateStar, setCardID, cardID, getQuotes, isQuote,
+        author,
+        text,
+        imgQuote } = useAppContext();
 
       const random = () => {
         let randomItem1 = Math.floor(Math.random() * items1.length);
@@ -54,9 +60,46 @@ function GameStage3() {
         cardRandomInfo({emoji, msgbot, colorbg})
         setIsCutScene(true)
       }
+      const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get('http://localhost:5000/results');
+            await setCardID(response.result.length + 1)
+          } catch (error) {
+            console.error(error);
+          } 
+    };
+      useEffect(() => {
+        fetchData()
+        getQuotes()
+    }, []);
 
-      const sentData = () =>{
-        console.log('fetch API')
+      const data = {
+        card_id: cardID,
+        username: isName,
+        rating: isRateStar,
+        type: isGoalType,
+        goal: isGoalMsg,
+        nft_card: {
+            emoji: isEmoji,
+            bg_color: isColorBg,
+            caption: isMsgBot
+        },
+        qoutes: {
+            aurthur: author,
+            qoute: text,
+            img: imgQuote
+        }
+      }
+      const sentData = async () =>{
+        try {
+          await axios.post('http://localhost:5000/results',data,).then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+        } catch (error) {
+          console.error(error);
+        } 
         nextStage()
       }
 

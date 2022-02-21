@@ -11,14 +11,15 @@ import cloud from 'assets/images/bgHome/cloud.png'
 import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
+import { useAppContext } from 'context/appContext';
 
 const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
-    let numShow = '001'
     const [visible, setVisibleModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const { cardNum } = useAppContext();
 
     const handleButton = () => {
      setVisibleModal(!visible)
@@ -101,7 +102,7 @@ function Home() {
             <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
                 <Box justify='center' align='center' direction='row'>
-                {numShow.split("").map((text :string, i:number) => {
+                {cardNum.split("").map((text :string, i:number) => {
                 return (
                    
                     <div key={i}>

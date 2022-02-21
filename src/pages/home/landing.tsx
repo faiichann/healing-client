@@ -6,19 +6,35 @@ import { Box } from 'theme/components';
 import Logo  from 'assets/animation/logo.gif';
 import Healing  from 'assets/animation/healing.gif';
 import { Shadow } from './styles/home.styles';
+import { useAppContext } from 'context/appContext';
+import axios from 'axios';
+
 
 function Landing() {
     const history = useHistory();
     const [isLoading, setLoading] = useState(false);
+    const { setCardNum } = useAppContext();
+ 
+    const formatCardNumber = async(response : any) => {
+        const number = await response.result.length
+        let formatNum = number.toString();
+        while (formatNum.length < 3) formatNum = "0" + formatNum;
+        await setCardNum(formatNum)
+        console.log('Card Amount ------>', formatNum)
+    }
 
-    const fetchData = () => {
-        setLoading(true);
-        setTimeout( () => {
-            sessionStorage.setItem('token','true')
-            history.push('/')
-        }, 4000);
-        console.log(isLoading)
+    const fetchData = async () => {
+        setLoading(true)
+        try {
+            const {data: response} = await axios.get('http://localhost:5000/results');
+            await formatCardNumber(response);
+          } catch (error) {
+            console.error(error);
+          }
+          sessionStorage.setItem('token','true')
+          setTimeout( () => { history.push('/')},3000)
     };
+
     useEffect(() => {
         fetchData()
     })

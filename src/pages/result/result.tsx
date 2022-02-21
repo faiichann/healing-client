@@ -17,14 +17,10 @@ import { ApiGetCardData } from 'api/ApiCard/card.api';
 const { Text } = Typography;
 function Result() {
     const history = useHistory();
-    const { stage, setStage, isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, isRateStar } = useAppContext();
+    const { stage, setStage, setCardNum, cardID } = useAppContext();
     const [isLoading, setLoading] = useState(false);
-    const [isClick, setIsClick] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
-    const [text, setText] = useState();
     const [currentYear, setCurrentYear] = useState('');
-    const [author, setAuthor] = useState();
-    const [data, setData] = useState<any>();
     const [dataCard, setDataCard] = useState<any>();
     const key = 'updatable';
 
@@ -36,70 +32,58 @@ function Result() {
         }, 1000);
     }
 
-    const goHome = () => {
+    const formatCardNumber = async(response : any) => {
+        const number = await response.result.length
+        let formatNum = number.toString();
+        while (formatNum.length < 3) formatNum = "0" + formatNum;
+        await setCardNum(formatNum)
+        console.log('Card Amount ------>', formatNum)
+    }
+
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get('http://localhost:5000/results');
+            await formatCardNumber(response);
+            return response.result.length + 1
+          } catch (error) {
+            console.error(error);
+          } 
+    };
+    const goHome = async() => {
         setStage(0)
+        await fetchData()
         history.push('/')
     }
 
-    const getResult = async() =>{
-        try {
-            await axios.get('https://type.fit/api/quotes').then((response) => {
-                setData(response.data);
-                console.log(response.data)
-              });
-              
-        } catch (err) {
-            console.error(err);
-        }
-    }
     const getYear = () => {
         var d = new Date(); 
         var year = d.getFullYear();
         setCurrentYear(year.toString()) 
     }
     useEffect(() => {
-        getResult()
         getYear()
     }, []);
     
-    // const card = ApiGetCardData()
-
     const openBox = async() =>{
             setIsOpen(true)
         try {
-            await axios.get('http://localhost:5000/results/1').then(async (response) => {
-                const card = await response.data;
-                setDataCard(card)
+            await axios.get(`http://localhost:5000/results/${cardID}`).then((response) => {
+                setDataCard(response.data)
               });
         } catch (error) {
             console.log(error);
             return error;
         }
-       
-        // setTimeout( () => {
-           
-        // }, 1000);
-       if(data) {
-        console.log('------------Data----------', data)
-           let random = Math.floor(Math.random() * data.length)
-           setText(data[random].text);
-           setAuthor(data[random].author);
-           
-        //    setTimeout( () => {
-           
-        // }, 3000);
-       }else{
-            console.error('fetch error');
-       }
     }
+    
     useEffect(() => {
         if(dataCard){
-            setTimeout( () => {
-                setIsClick(true)   
-        }, 1000);
+        //     setTimeout( () => {
+        //         setIsClick(true)   
+        // }, 1000);
         setTimeout( () => {
                 setLoading(true)     
-        }, 2000);
+        }, 1500);
         }
     }, [dataCard]);
 
@@ -133,11 +117,11 @@ function Result() {
                 <Col flex="auto">#0000{dataCard?.id}</Col>
             </Row>
             <Box justify='center' align='center' direction='column' >
-                <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{text}</Text>
-                <Text strong>{author}</Text>
+                <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{dataCard?.qoutes.qoute}</Text>
+                <Text strong>{dataCard?.qoutes.aurthur}</Text>
                 <Image
                     width={30}
-                    src={logo}
+                    src={dataCard?.qoutes.img}
                     preview={false}
                 />
              <Text italic style={{fontSize: '10px'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
@@ -158,8 +142,10 @@ function Result() {
          style={{height: 'calc(100vh - 200px)', width: '100%'}}>
          {isOpen ?       
           <Image
-            width={isOpen && isClick ? 100 : 150}
-            src={isOpen && isClick ? Logo : OpenBox}
+            // width={isOpen && isClick ? 100 : 150}
+            // src={isOpen && isClick ? Logo : OpenBox}
+            width={150}
+            src={OpenBox}
             preview={false}
             style={{margin: '20px 0'}}
             /> 

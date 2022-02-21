@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useEffect, useState, useContext } from "react"
 
 interface IContextProps {
@@ -29,6 +30,7 @@ const AppProvider = (({children}: IContextProps) =>{
     const [isLose,setIsLose] = useState(false)
     const [isReset,setIsReset] = useState(false)
 
+    const [cardNum,setCardNum] = useState<number>(0)
     //------------Data 1------------------------//
     const [isName,setIsName] = useState('USER001')
     const [isAvatar,setIsAvartar] = useState('')
@@ -40,6 +42,12 @@ const AppProvider = (({children}: IContextProps) =>{
     const [isEmoji,setIsEmoji] = useState('')
     const [isMsgBot,setIsMsgBot] = useState('')
     const [isColorBg,setIsColorBg] = useState('')
+    //------------Quote------------------------//
+    const [isQuote, setQuote] = useState<any>();
+    const [author, setAuthor] = useState();
+    const [text, setText] = useState();
+    const [imgQuote, setImgQuote] = useState('');
+    const [cardID, setCardID] = useState('');
 
     const nextStage = () => {
             setStage(stage+1)
@@ -66,6 +74,22 @@ const AppProvider = (({children}: IContextProps) =>{
             setIsColorBg(colorbg)
         };
 
+    const getQuotes = async() =>{
+            try {
+                await axios.get('https://type.fit/api/quotes').then(async (response) => {
+                    if(response) {
+                        await setQuote(response.data);
+                        let random = await Math.floor(Math.random() * response.data.length)
+                        await setText(response.data[random].text);
+                        await setAuthor(response.data[random].author);
+                        setImgQuote("https://api.thecatapi.com/v1/images/search")
+                    }
+                  });
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
     const value ={
         nextStage,
         stage,
@@ -84,7 +108,16 @@ const AppProvider = (({children}: IContextProps) =>{
         isRateStar,
         isEmoji,
         isMsgBot,
-        isColorBg
+        isColorBg,
+        cardNum,
+        setCardNum,
+        getQuotes,
+        isQuote,
+        author,
+        text,
+        imgQuote,
+        setCardID,
+        cardID
     }
 
     useEffect(() => {
