@@ -13,6 +13,7 @@ import OpenBox from 'assets/animation/BoxOpen.gif'
 import { CardContainer, ImageContainer } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
 import { ApiGetCardData } from 'api/ApiCard/card.api';
+import formatNumber from 'utils/formatNumber';
 
 const { Text } = Typography;
 function Result() {
@@ -67,8 +68,10 @@ function Result() {
     const openBox = async() =>{
             setIsOpen(true)
         try {
-            await axios.get(`http://localhost:5000/results/${cardID}`).then((response) => {
-                setDataCard(response.data)
+            await axios.get(`http://localhost:5000/results/${cardID}`).then(async (response) => {
+                const card = await response.data;
+                console.log(card)
+                setDataCard(card)
               });
         } catch (error) {
             console.log(error);
@@ -91,37 +94,49 @@ function Result() {
        <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={goHome} />) }}>
           {isLoading ? 
           <>
+          {/* {dataCard?.cardReult.goal}
+          {dataCard?.cardReult.rating}
+          {dataCard?.cardReult.type}
+          {dataCard?.cardReult.nft_card.emoji}
+          {dataCard?.cardReult.nft_card.caption}
+          {dataCard?.cardReult.nft_card.bg_color}
+          {dataCard?.cardReult.username} */}
+          {/* {formatNumber(dataCard.cardReult.card_id)} */}
+          {/* {dataCard?.cardReult.qoutes.qoute}
+          {dataCard?.cardReult.qoutes.aurthur}
+          {dataCard?.cardReult.qoutes.img} */}
           <Box justify='center' align='center' direction='column' >
            <CardContainer>
            <Row>
-                <Col flex="60%">{dataCard?.goal} 
+                <Col flex="60%">{dataCard?.cardReult.goal} 
                 <Row>
-                    <Rate disabled defaultValue={dataCard?.rating} />
+                    <Rate disabled defaultValue={dataCard?.cardReult.rating} />
                 </Row>
             </Col>
-                <Col flex="auto">{dataCard?.type}</Col>
+                <Col flex="auto">{dataCard?.cardReult.type}</Col>
             </Row>
             <Row>
             <Box justify='center' align='center' direction='column' >
-                    <ImageContainer> EMOji: {dataCard?.nft_card.emoji}, MSG: {dataCard?.nft_card.caption}, COLOR: {dataCard?.nft_card.bg_color} 
+                    <ImageContainer>
+                         EMOji: {dataCard?.cardReult.nft_card.emoji}, MSG: {dataCard?.cardReult.nft_card.caption}, COLOR: {dataCard?.cardReult.nft_card.bg_color} 
                     <Image
                     width={50}
-                    src={dataCard?.qoutes.img}
+                    src={dataCard?.cardReult.qoutes.img}
                     preview={false}
                 />
                     </ImageContainer>
                 </Box>
             </Row>
             <Row>
-                <Col flex="auto">{dataCard?.username}</Col>
-                <Col flex="auto">#0000{dataCard?.id}</Col>
+                <Col flex="auto">{dataCard?.cardReult.username}</Col>
+                <Col flex="auto">{formatNumber(dataCard.cardReult.card_id)}</Col>
             </Row>
             <Box justify='center' align='center' direction='column' >
-                <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{dataCard?.qoutes.qoute}</Text>
-                <Text strong>{dataCard?.qoutes.aurthur}</Text>
+                <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{dataCard?.cardReult.qoutes.qoute}</Text>
+                <Text strong>{dataCard?.cardReult.qoutes.aurthur}</Text>
                 <Image
                     width={30}
-                    src={dataCard?.qoutes.img}
+                    src={logo}
                     preview={false}
                 />
              <Text italic style={{fontSize: '10px'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
