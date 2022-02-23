@@ -26,7 +26,7 @@ const AppContext = createContext<any>(null);
 
 const AppProvider = (({children}: IContextProps) =>{
 
-    const [stage,setStage] = useState<number>(0)
+    const [stage,setStage] = useState<number>(4)
     const [isLose,setIsLose] = useState(false)
     const [isReset,setIsReset] = useState(false)
 
@@ -47,7 +47,7 @@ const AppProvider = (({children}: IContextProps) =>{
     const [author, setAuthor] = useState();
     const [text, setText] = useState();
     const [imgQuote, setImgQuote] = useState('');
-    const [cardID, setCardID] = useState('');
+    const [cardID, setCardID] = useState(7);
 
     const nextStage = () => {
             setStage(stage+1)

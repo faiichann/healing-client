@@ -69,6 +69,7 @@ function Result() {
             setIsOpen(true)
         try {
             await axios.get(`http://localhost:5000/results/${cardID}`).then(async (response) => {
+            // await axios.get(`http://localhost:5000/results/5`).then(async (response) => {
                 const card = await response.data;
                 console.log(card)
                 setDataCard(card)
@@ -106,7 +107,7 @@ function Result() {
           {dataCard?.cardReult.qoutes.aurthur}
           {dataCard?.cardReult.qoutes.img} */}
           <Box justify='center' align='center' direction='column' >
-           <CardContainer>
+           <CardContainer rank={dataCard?.cardReult.nft_card.bg_color}>
            <Row>
                 <Col flex="60%">{dataCard?.cardReult.goal} 
                 <Row>

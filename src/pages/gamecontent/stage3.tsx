@@ -14,9 +14,9 @@ const { Title, Text } = Typography;
 function GameStage3() {
     const { nextStage, cardRandomInfo } = useAppContext();
     const history = useHistory();
-    const items1 = randomSlot.avatar
-    const items2 = randomSlot.problem
-    const items3 = randomSlot.power
+    const items1 = randomSlot.Emoji
+    const items2 = randomSlot.Caption
+    const items3 = randomSlot.Rank
 
       const [item1, setItem1] = useState('❓');
       const [item2, setItem2] = useState('❓');
@@ -24,14 +24,12 @@ function GameStage3() {
       const [isSkip, setIsSkip] = useState(false)
       const [isRandom, setIsRandom] = useState(false)
       const [indexCut, setIndexCut] = useState(0);
-      const [name, setName] = useState('');
-      const [problem, setProblem] = useState('');
-      const [power, setPower] = useState('');
+      const [emoji, setEmoji] = useState('');
+      const [caption, setCaption] = useState('');
+      const [rank, setRank] = useState('');
+      const [rankDes, setRankDes] = useState('');
       const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
-        isRateStar, setCardID, cardID, getQuotes, isQuote,
-        author,
-        text,
-        imgQuote } = useAppContext();
+        isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote } = useAppContext();
 
       const random = () => {
         let randomItem1 = Math.floor(Math.random() * items1.length);
@@ -40,15 +38,16 @@ function GameStage3() {
         setItem1(items1[randomItem1].img)
         setItem2(items2[randomItem2].img)
         setItem3(items3[randomItem3].img)
-        setName(items1[randomItem1].name)
-        setProblem(items2[randomItem2].name)
-        setPower(items3[randomItem3].name)
+        setEmoji(items1[randomItem1].name)
+        setCaption(items2[randomItem2].name)
+        setRank(items3[randomItem3].type)
+        setRankDes(items3[randomItem3].name)
         setIsRandom(true)
       }
 
       const message = [
         `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
-        `${item1} หมายความว่า "${name}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${problem}" ดวงคุณมัน ${item3} "${power}" เลยละ` ,
+        `${item1} หมายความว่า "${emoji}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${caption}" ดวงคุณมัน ${item3} "${rankDes}" เลยละ` ,
         'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
@@ -203,7 +202,7 @@ function GameStage3() {
         <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'Random again' : 'Tap Card to Random' } </Title>
         </Box>
         { isRandom && <Box justify='center' align='center' direction='column'>
-            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(item1,item2,item3)}>CONFIRM</ButtonStyle>
+            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(emoji,caption,rank)}>CONFIRM</ButtonStyle>
         </Box>}
         </Box>
          </>
