@@ -47,7 +47,7 @@ function GameStage3() {
 
       const message = [
         `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
-        `${item1} หมายความว่า "${emoji}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${caption}" ดวงคุณมัน ${item3} "${rankDes}" เลยละ` ,
+        `${item1} ดูเหมือนว่าคุณ "${emoji}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${caption}" เอาละช่วงนี้ ${item3} "${rankDes}"` ,
         'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
@@ -202,7 +202,7 @@ function GameStage3() {
         <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'Random again' : 'Tap Card to Random' } </Title>
         </Box>
         { isRandom && <Box justify='center' align='center' direction='column'>
-            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(emoji,caption,rank)}>CONFIRM</ButtonStyle>
+            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(item1,caption,rank)}>CONFIRM</ButtonStyle>
         </Box>}
         </Box>
          </>
