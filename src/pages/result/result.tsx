@@ -3,19 +3,21 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Rate, Card, message, Image, Row, Col, Typography } from 'antd';
+import { Card, message, Image, Row, Col, Typography } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
 import Logo  from 'assets/animation/logo.gif';
 import CloseBox from 'assets/animation/Box.gif'
 import OpenBox from 'assets/animation/BoxOpen.gif'
-import { CardContainer, ImageContainer } from './result.styles';
+import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
 import { ApiGetCardData } from 'api/ApiCard/card.api';
 import formatNumber from 'utils/formatNumber';
+import formatGoal from 'utils/formatGoal';
+import { goalItem }from 'api/mocks/selcetItems'
 
-const { Text } = Typography;
+const { Text, Title} = Typography;
 function Result() {
     const history = useHistory();
     const { stage, setStage, setCardNum, cardID } = useAppContext();
@@ -43,7 +45,7 @@ function Result() {
 
     const fetchData = async () => {
         try {
-            const {data: response} = await axios.get('http://localhost:5000/results');
+            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await formatCardNumber(response);
             return response.result.length + 1
           } catch (error) {
@@ -68,7 +70,7 @@ function Result() {
     const openBox = async() =>{
             setIsOpen(true)
         try {
-            await axios.get(`http://localhost:5000/results/${cardID}`).then(async (response) => {
+            await axios.get(`https://healing-project.herokuapp.com/results/${cardID}`).then(async (response) => {
             // await axios.get(`http://localhost:5000/results/5`).then(async (response) => {
                 const card = await response.data;
                 console.log(card)
@@ -108,40 +110,67 @@ function Result() {
           {dataCard?.cardReult.qoutes.img} */}
           <Box justify='center' align='center' direction='column' >
            <CardContainer rank={dataCard?.cardReult.nft_card.bg_color}>
-           <Row>
-                <Col flex="60%">{dataCard?.cardReult.goal} 
-                <Row>
-                    <Rate disabled defaultValue={dataCard?.cardReult.rating} />
-                </Row>
-            </Col>
-                <Col flex="auto">{dataCard?.cardReult.type}</Col>
+           <Row style={{justifyContent: 'center' }} >
+                    <HeaderCard>
+                    <Title level={5} style={{color: '#737373', marginBottom: '-0.5em'}} >"{dataCard?.cardReult.goal}"</Title>
+                    <RateStyle disabled defaultValue={dataCard?.cardReult.rating} />
+                    </HeaderCard>
             </Row>
             <Row>
             <Box justify='center' align='center' direction='column' >
                     <ImageContainer>
-                         EMOji: {dataCard?.cardReult.nft_card.emoji}, MSG: {dataCard?.cardReult.nft_card.caption}, COLOR: {dataCard?.cardReult.nft_card.bg_color} 
-                    <Image
+                         EMOji: {dataCard?.cardReult.nft_card.emoji}, MSG: {dataCard?.cardReult.nft_card.caption}
+                         <Image 
+                        width={90}
+                        preview={false}
+                        src={formatGoal(dataCard.cardReult.type)} 
+                        />
+                    {/* <Image
                     width={50}
                     src={dataCard?.cardReult.qoutes.img}
                     preview={false}
-                />
+                /> */}
                     </ImageContainer>
                 </Box>
             </Row>
+            {/* ์ Name img CardNO */}
             <Row>
-                <Col flex="auto">{dataCard?.cardReult.username}</Col>
-                <Col flex="auto">{formatNumber(dataCard.cardReult.card_id)}</Col>
+                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                    <TextName>{dataCard?.cardReult.username}</TextName>
+                </Col>
+                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <GoalCircle>             
+                <Image 
+                        width={60}
+                        preview={false}
+                        src={formatGoal(dataCard.cardReult.type)} 
+                        />
+                </GoalCircle>    
+                </Col>
+                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                    <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
+                </Col>
             </Row>
+            {/* Quote */}
+            <Row>
             <Box justify='center' align='center' direction='column' >
-                <Text type="secondary" style={{height: '50px', overflow: 'hidden'}} >{dataCard?.cardReult.qoutes.qoute}</Text>
-                <Text strong>{dataCard?.cardReult.qoutes.aurthur}</Text>
+                <QuoteBox>
+                <Text type="secondary"  style={{ fontWeight: '600'}}>"{dataCard?.cardReult.qoutes.qoute}"</Text>
+                </QuoteBox>
+                <Text strong style={{ marginBottom: '4px'}}>{dataCard?.cardReult.qoutes.aurthur}</Text>
+            </Box>
+            </Row>
+            <Row>
+                <Col flex="80%" style={{justifyContent: 'center', padding: '0px 10px 0 40px' , lineHeight: '10px' }}> 
+                <Text italic style={{fontSize: '8px', fontWeight: '400', color: '#989898'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
+                </Col>
+                <Col style={{justifyContent: 'center' }}>
                 <Image
                     width={30}
                     src={logo}
                     preview={false}
-                />
-             <Text italic style={{fontSize: '10px'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
-            </Box>
+                /></Col>
+            </Row>
            </CardContainer>
         <Box justify='center' align='center' direction='row'>
         <ButtonStyle typebutton='Medium' sizebutton={30} onClick={saveResult}>

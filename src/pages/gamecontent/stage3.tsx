@@ -61,7 +61,7 @@ function GameStage3() {
       }
       const fetchData = async () => {
         try {
-            const {data: response} = await axios.get('http://localhost:5000/results');
+            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await setCardID(response.result.length + 1)
           } catch (error) {
             console.error(error);
@@ -91,7 +91,7 @@ function GameStage3() {
       }
       const sentData = async () =>{
         try {
-          await axios.post('http://localhost:5000/results',data,).then((response) => {
+          await axios.post('https://healing-project.herokuapp.com/results',data,).then((response) => {
             console.log(response);
           }, (error) => {
             console.log(error);
@@ -231,7 +231,7 @@ function GameStage3() {
               </Row>
               </Box>
               <ButtonStyle typebutton="Medium" backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={45} onClick={nextIndexCut}>YES</ButtonStyle>
-              <ButtonStyle typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
+              <ButtonStyle disabled typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
             </Box>
             </>
           :

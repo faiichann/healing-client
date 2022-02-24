@@ -26,7 +26,7 @@ function Landing() {
     const fetchData = async () => {
         setLoading(true)
         try {
-            const {data: response} = await axios.get('http://localhost:5000/results');
+            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await formatCardNumber(response);
           } catch (error) {
             console.error(error);
