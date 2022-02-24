@@ -1,7 +1,7 @@
 import { Col } from 'antd';
 import Container from 'components/container/container'
 import { useAppContext } from 'context/appContext';
-import { useEffect} from 'react';
+import { useState, useEffect} from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { Box, ButtonStyle } from 'theme/components';
