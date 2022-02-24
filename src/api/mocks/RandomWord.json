@@ -1,0 +1,20 @@
+[
+    { "text":"Smile", "value": 1 },
+    { "text":"Pain", "value": 0 },
+    { "text":"Thanks", "value": 1 },
+    { "text":"Great", "value": 1 },
+    { "text":"Sadness", "value": 0 },
+    { "text":"Love", "value": 1 },
+    { "text":"Terrible", "value": 0 },
+    { "text":"Wrong", "value": 0 },
+    { "text":"Kindle", "value": 1 },
+    { "text":"Angry", "value": 0 },
+    { "text":"Nice","value": 1 },
+    { "text":"Confused", "value": 0 },
+    { "text":"Smart", "value": 1 },
+    { "text":"Easy", "value": 1 },
+    { "text":"First", "value": 1 },
+    { "text":"Lazy", "value": 0 },
+    { "text":"Insane", "value": 0 },
+    { "text":"Nature", "value": 1 }
+]
