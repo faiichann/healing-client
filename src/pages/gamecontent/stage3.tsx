@@ -70,6 +70,7 @@ function GameStage3() {
       useEffect(() => {
         fetchData()
         getQuotes()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
       const data = {

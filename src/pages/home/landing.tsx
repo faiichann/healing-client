@@ -12,6 +12,7 @@ import axios from 'axios';
 
 function Landing() {
     const history = useHistory();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setLoading] = useState(false);
     const { setCardNum } = useAppContext();
  

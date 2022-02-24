@@ -33,6 +33,7 @@ useEffect(() => {
         setUserAvatar(userAvatar?.img)
     }
     fetchMyAPI()
+// eslint-disable-next-line react-hooks/exhaustive-deps
 }, [index, message.length])
    
 

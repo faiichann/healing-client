@@ -3,7 +3,7 @@ import { Carousel } from "antd";
 import { Image, Typography } from 'antd';
 import  logo  from 'assets/tests/healing_logo.png'
 import styled from "styled-components";
-const { Title, Text } = Typography;
+const { Title } = Typography;
 
 const ContentSlide = styled.div`
     height: max-content;

@@ -1,6 +1,6 @@
 import Container from 'components/container/container'
 import { useHistory } from 'react-router-dom';
-import { Button, Select, Image, Row, Col, Typography } from 'antd';
+import { Image, Row, Col, Typography } from 'antd';
 import { Box, ButtonStyle } from 'theme/components';
 import { useState } from 'react';
 import { useAppContext } from 'context/appContext';

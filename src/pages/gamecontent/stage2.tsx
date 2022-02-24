@@ -1,4 +1,4 @@
-import { Row, Col, Typography, Image, Modal, Button} from "antd";
+import { Row, Col, Typography, Image } from "antd";
 import { useAppContext } from "context/appContext";
 import { useState } from "react";
 import { Box, ButtonStyle } from "theme/components";

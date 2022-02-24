@@ -1,4 +1,4 @@
-import { Col, Modal, Progress } from 'antd';
+import { Col } from 'antd';
 import Container from 'components/container/container'
 import { useAppContext } from 'context/appContext';
 import { useState , useEffect} from 'react';

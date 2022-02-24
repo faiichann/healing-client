@@ -1,5 +1,5 @@
 import { Rate } from 'antd';
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 // import Common from 'assets/images/cards/Common.png'
 // import Rare from 'assets/images/cards/Rare.png'
 // import Epic from 'assets/images/cards/Epic.png'

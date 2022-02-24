@@ -3,19 +3,16 @@ import { useAppContext } from 'context/appContext';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { Card, message, Image, Row, Col, Typography } from 'antd';
+import { message, Image, Row, Col, Typography } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
-import Logo  from 'assets/animation/logo.gif';
 import CloseBox from 'assets/animation/Box.gif'
 import OpenBox from 'assets/animation/BoxOpen.gif'
 import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
-import { ApiGetCardData } from 'api/ApiCard/card.api';
 import formatNumber from 'utils/formatNumber';
 import formatGoal from 'utils/formatGoal';
-import { goalItem }from 'api/mocks/selcetItems'
 
 const { Text, Title} = Typography;
 function Result() {
