@@ -232,7 +232,7 @@ function GameStage3() {
               </Row>
               </Box>
               <ButtonStyle typebutton="Medium" backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={45} onClick={nextIndexCut}>YES</ButtonStyle>
-              <ButtonStyle disabled typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
+              <ButtonStyle typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
             </Box>
             </>
           :

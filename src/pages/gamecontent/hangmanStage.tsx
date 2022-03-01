@@ -8,6 +8,8 @@ import Container from "components/container/container";
 import "./styles/hangman.css"
 import { Box } from "theme/components";
 import { GameContainer } from "./styles/hangman.styles";
+import axios from "axios";
+import { useAppContext } from "context/appContext";
 
 const words = [
     'think',
@@ -24,7 +26,22 @@ const words = [
     const [correctLetters, setCorrectLetters] = useState([String]);
     const [wrongLetters, setWrongLetters] = useState([String]);
     const [loseTime, setLoseTime] = useState(0);
+    const { setCardID, getQuotes } = useAppContext();
 
+    const fetchData = async () => {
+      try {
+          const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
+          await setCardID(response.result.length + 1)
+        } catch (error) {
+          console.error(error);
+        } 
+  };
+    useEffect(() => {
+      fetchData()
+      getQuotes()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  
     useEffect(() => {
     const handleKeydown = (event: { key: any; keyCode: any; }) => {
       const { key, keyCode } = event;

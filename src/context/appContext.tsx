@@ -1,5 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useContext } from "react"
+import randomSlot from 'api/mocks/RandomSlot.json'
 
 interface IContextProps {
     children: any 
@@ -24,7 +25,14 @@ interface userData {
   }
 const AppContext = createContext<any>(null);
 
+const items1 = randomSlot.Emoji
+const items2 = randomSlot.Caption
+const items3 = randomSlot.Rank
+
 const AppProvider = (({children}: IContextProps) =>{
+    let randomItem1 = Math.floor(Math.random() * items1.length);
+    let randomItem2 = Math.floor(Math.random() * items2.length);
+    let randomItem3 = Math.floor(Math.random() * items3.length);
 
     const [stage,setStage] = useState<number>(0)
     const [isLose,setIsLose] = useState(false)
@@ -39,16 +47,16 @@ const AppProvider = (({children}: IContextProps) =>{
     const [isGoalMsg,setIsGoalMsg] = useState('')
     const [isRateStar,setRateStar] = useState(0)
     //------------DAta 3------------------------//
-    const [isEmoji,setIsEmoji] = useState('')
-    const [isMsgBot,setIsMsgBot] = useState('')
-    const [isColorBg,setIsColorBg] = useState('')
+    const [isEmoji,setIsEmoji] = useState(items1[randomItem1].img)
+    const [isMsgBot,setIsMsgBot] = useState(items2[randomItem2].name)
+    const [isColorBg,setIsColorBg] = useState(items3[randomItem3].type)
     //------------Quote------------------------//
     const [isQuote, setQuote] = useState<any>();
     const [author, setAuthor] = useState();
     const [text, setText] = useState();
     const [imgQuote, setImgQuote] = useState('');
     const [cardID, setCardID] = useState('');
-
+ 
     const nextStage = () => {
             setStage(stage+1)
         }
