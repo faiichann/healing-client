@@ -114,6 +114,12 @@ function Home() {
                     );
                 })}
                  </Box>
+                 <ButtonStyle  
+                  typebutton='Medium'  
+                  pattern='Text'
+                  sizebutton={50} 
+                  style={{margin: '10px 0px', cursor: 'pointer'}}
+                  onClick={() => history.push('/gallery')}>Gallery</ButtonStyle>
             </Box>
             </NumberDisplay>
            {/* ----Section3---- */}
