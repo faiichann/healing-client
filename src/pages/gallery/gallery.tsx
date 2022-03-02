@@ -1,9 +1,9 @@
 import Container from "components/container/container";
-import { List, Image, Spin, Row, Typography, Col } from 'antd';
+import { Image, Spin, Row, Typography, Col } from 'antd';
 import { useEffect, useState } from "react";
 import { useAppContext } from "context/appContext";
 import formatNumber from "utils/formatNumber";
-import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox, TabsStyle } from "pages/result/result.styles";
+import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from "pages/result/result.styles";
 import { Box } from "theme/components";
 import formatGoal from "utils/formatGoal";
 import formatMonster from "utils/formatMonster";
@@ -14,7 +14,7 @@ function Gallery() {
   const [isLoading, setIsLoading] = useState(true)
   const { cardInfo } = useAppContext();
   const [currentYear, setCurrentYear] = useState('');
-  const [data, setData] = useState(cardInfo);
+  const [ data ] = useState(cardInfo);
 
   const getYear = () => {
     var d = new Date(); 
@@ -29,6 +29,7 @@ function Gallery() {
         setIsLoading(false)
       },1000)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
     return (
