@@ -6,7 +6,7 @@ import { MessageCutScene, TextCutScene } from "./styles/cutScene.styles";
 import { Avatar } from 'api/mocks/Avatars'
 import { Shadow } from "pages/home/styles/home.styles";
 import Logo  from 'assets/animation/logo.gif';
-import NPC from 'assets/images/Avatars/npc3.png'
+import NPC from 'assets/images/Avatars/monster.png'
 import Animation from 'theme/animations'
 
 function Cutscene() {
@@ -64,7 +64,7 @@ useEffect(() => {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />

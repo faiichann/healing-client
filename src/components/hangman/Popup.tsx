@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { ButtonStyle } from "theme/components";
 import { checkWin } from "utils/hangmanHelper";
 import { Typography } from "antd";
+import axios from "axios";
 const { Title } = Typography;
 
 const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime } : any) => {
@@ -11,7 +12,8 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
   let finalMessage = "";
   let finalMessageRevealWord = "";
   let countTime = "";
-  const { setStage } = useAppContext();
+  const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
+    isRateStar, cardID, setStage, author, text, imgQuote } = useAppContext();
   
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     finalMessage = "ํYOU PASS!!";
@@ -27,9 +29,40 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
       countTime = `เหลือโอกาสอีก ${ 3 - (loseTime)} ครั้ง`
     }
   }
-   const endStage = async() => {
+
+  const data = {
+    card_id: cardID,
+    username: isName,
+    rating: isRateStar,
+    type: isGoalType,
+    goal: isGoalMsg,
+    nft_card: {
+        emoji: isEmoji,
+        bg_color: isColorBg,
+        caption: isMsgBot
+    },
+    qoutes: {
+        aurthur: author,
+        qoute: text,
+        img: imgQuote
+    }
+  }
+  const sentData = async () =>{
+    try {
+      await axios.post('https://healing-project.herokuapp.com/results',data,).then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+    } catch (error) {
+      console.error(error);
+    } 
     await setStage(4)
-    history.push('/Gamecontent')
+  }
+
+   const endStage = async() => {
+     await sentData()
+     history.push('/Gamecontent')
    }
 
   return (

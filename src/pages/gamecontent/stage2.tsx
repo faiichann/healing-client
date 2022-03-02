@@ -7,7 +7,7 @@ import { ButtonFace, ColSpeedgame, ConfirmModal, PointDiv, ProgressStyle, RowSpe
 import randomWord from 'api/mocks/RandomWord.json'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
-import NPC from 'assets/images/Avatars/npc3.png'
+import NPC from 'assets/images/Avatars/monster.png'
 import Mad from 'assets/images/stage/Mad.png'
 import Smile from 'assets/images/stage/Smile.png'
 const { Title } = Typography;
@@ -193,7 +193,7 @@ function GameStage2() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />

@@ -1,4 +1,4 @@
-import { Rate } from 'antd';
+import { Rate, Tabs } from 'antd';
 import styled from 'styled-components'
 // import Common from 'assets/images/cards/Common.png'
 // import Rare from 'assets/images/cards/Rare.png'
@@ -78,4 +78,9 @@ export const QuoteBox = styled.div`
     justify-content: center;
     align-self: center;
     flex-direction: column;
+`
+export const TabsStyle = styled(Tabs)`
+    & .ant-tabs-nav .ant-tabs-nav-wrap{
+        justify-content: center;
+}
 `

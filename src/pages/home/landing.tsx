@@ -14,7 +14,7 @@ function Landing() {
     const history = useHistory();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [isLoading, setLoading] = useState(false);
-    const { setCardNum } = useAppContext();
+    const { setCardNum, setCardInfo } = useAppContext();
  
     const formatCardNumber = async(response : any) => {
         const number = await response.result.length
@@ -29,6 +29,7 @@ function Landing() {
         try {
             const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await formatCardNumber(response);
+            await setCardInfo(response.result)
           } catch (error) {
             console.error(error);
           }

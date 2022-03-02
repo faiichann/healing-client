@@ -1,35 +1,39 @@
 import Container from 'components/container/container'
 import { useAppContext } from 'context/appContext';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
-import { message, Image, Row, Col, Typography } from 'antd';
+import { Image, Row, Col, Typography, Tabs } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
 import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
 import CloseBox from 'assets/animation/Box.gif'
 import OpenBox from 'assets/animation/BoxOpen.gif'
-import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from './result.styles';
+import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox, TabsStyle } from './result.styles';
 import  logo  from 'assets/tests/healing_logo.png'
 import formatNumber from 'utils/formatNumber';
 import formatGoal from 'utils/formatGoal';
+import exportAsImage from 'utils/saveImage';
+import formatMonster from 'utils/formatMonster';
 
 const { Text, Title} = Typography;
+const { TabPane } = Tabs;
+
 function Result() {
     const history = useHistory();
-    const { stage, setStage, setCardNum, cardID } = useAppContext();
+    const { stage, setStage, setCardNum, cardID, setCardInfo } = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [currentYear, setCurrentYear] = useState('');
     const [dataCard, setDataCard] = useState<any>();
-    const key = 'updatable';
+    const exportRef = useRef<any>();
+    const exportNFTRef = useRef<any>();
 
     const saveResult = () =>{
-        setStage(0)
-        message.loading({ content: 'Loading...', key });
-        setTimeout(() => {
-          message.success({ content: 'Loaded!', key, duration: 2 });
-        }, 1000);
+        exportAsImage(exportRef.current, "healingCard")
+    }
+    const saveNFTResult = () =>{
+        exportAsImage(exportNFTRef.current, "healingNFTCard")
     }
 
     const formatCardNumber = async(response : any) => {
@@ -44,6 +48,7 @@ function Result() {
         try {
             const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await formatCardNumber(response);
+            await setCardInfo(response.result)
             return response.result.length + 1
           } catch (error) {
             console.error(error);
@@ -90,8 +95,11 @@ function Result() {
         }
     }, [dataCard]);
 
+    function callback(key: any) {
+        console.log(key);
+      }
     return (
-       <Container header={{ title: 'Result', left: 'back' , right: (<HomeFilled onClick={goHome} />) }}>
+       <Container header={{ title: 'Result', right: (<HomeFilled onClick={goHome} />) }}>
           {isLoading ? 
           <>
           {/* {dataCard?.cardReult.goal}
@@ -106,7 +114,9 @@ function Result() {
           {dataCard?.cardReult.qoutes.aurthur}
           {dataCard?.cardReult.qoutes.img} */}
           <Box justify='center' align='center' direction='column' >
-           <CardContainer rank={dataCard?.cardReult.nft_card.bg_color}>
+          <TabsStyle defaultActiveKey="1" onChange={callback}>
+    <TabPane tab="Healing Card" key="1">
+    <CardContainer ref={exportRef} rank={dataCard?.cardReult.nft_card.bg_color}>
            <Row style={{justifyContent: 'center' }} >
                     <HeaderCard>
                     <Title level={5} style={{color: '#737373', marginBottom: '-0.5em'}} >"{dataCard?.cardReult.goal}"</Title>
@@ -116,11 +126,11 @@ function Result() {
             <Row>
             <Box justify='center' align='center' direction='column' >
                     <ImageContainer>
-                         EMOji: {dataCard?.cardReult.nft_card.emoji}, MSG: {dataCard?.cardReult.nft_card.caption}
+                         {dataCard?.cardReult.nft_card.emoji}
                          <Image 
-                        width={90}
+                        width={130}
                         preview={false}
-                        src={formatGoal(dataCard.cardReult.type)} 
+                        src={formatMonster(dataCard.cardReult.type)} 
                         />
                     {/* <Image
                     width={50}
@@ -169,11 +179,84 @@ function Result() {
                 /></Col>
             </Row>
            </CardContainer>
-        <Box justify='center' align='center' direction='row'>
+        <Box justify='center' align='center' direction='row'  style={{marginBottom: '30px'}}>
         <ButtonStyle typebutton='Medium' sizebutton={30} onClick={saveResult}>
             Save
         </ButtonStyle>
         </Box>
+    </TabPane>
+    <TabPane tab="Healing Card As NFT" key="2">
+    <CardContainer ref={exportNFTRef} rank={dataCard?.cardReult.nft_card.bg_color}>
+           <Row style={{justifyContent: 'center' }} >
+                    <HeaderCard>
+                    <Title level={5} style={{color: '#737373', marginBottom: '-0.5em'}} >"{dataCard?.cardReult.goal}"</Title>
+                    <RateStyle disabled defaultValue={dataCard?.cardReult.rating} />
+                    </HeaderCard>
+            </Row>
+            <Row>
+            <Box justify='center' align='center' direction='column' >
+                    <ImageContainer>
+                         {dataCard?.cardReult.nft_card.emoji}
+                         <Image 
+                        width={130}
+                        preview={false}
+                        src={formatMonster(dataCard.cardReult.type)} 
+                        />
+                    {/* <Image
+                    width={50}
+                    src={dataCard?.cardReult.qoutes.img}
+                    preview={false}
+                /> */}
+                    </ImageContainer>
+                </Box>
+            </Row>
+            {/* ์ Name img CardNO */}
+            <Row>
+                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                    <TextName>{dataCard?.cardReult.username}</TextName>
+                </Col>
+                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <GoalCircle>             
+                <Image 
+                        width={60}
+                        preview={false}
+                        src={formatGoal(dataCard.cardReult.type)} 
+                        />
+                </GoalCircle>    
+                </Col>
+                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                    <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
+                </Col>
+            </Row>
+            {/* Quote */}
+            <Row>
+            <Box justify='center' align='center' direction='column' >
+                <QuoteBox>
+                <Text type="secondary"  style={{ fontWeight: '600'}}>"{dataCard?.cardReult.nft_card.caption}"</Text>
+                </QuoteBox>
+                <Text strong style={{ marginBottom: '4px'}}> Healing </Text>
+            </Box>
+            </Row>
+            <Row>
+                <Col flex="80%" style={{justifyContent: 'center', padding: '0px 10px 0 40px' , lineHeight: '10px' }}> 
+                <Text italic style={{fontSize: '8px', fontWeight: '400', color: '#989898'}}>&copy; Copyright {currentYear} Healing.com All Rights Reserved </Text>
+                </Col>
+                <Col style={{justifyContent: 'center' }}>
+                <Image
+                    width={30}
+                    src={logo}
+                    preview={false}
+                /></Col>
+            </Row>
+           </CardContainer>
+        <Box justify='center' align='center' direction='row' style={{marginBottom: '30px'}}>
+        <ButtonStyle typebutton='Medium' sizebutton={30} onClick={saveNFTResult} >
+            Save As NFT
+        </ButtonStyle>
+        </Box>
+    </TabPane>
+  </TabsStyle>
+         
         </Box>
           </>
          : 
