@@ -6,7 +6,7 @@ import { Box, ButtonStyle } from "theme/components";
 import randomSlot from 'api/mocks/RandomSlot.json'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
-import NPC from 'assets/images/Avatars/npc3.png'
+import NPC from 'assets/images/Avatars/monster.png'
 import { ItemContainer, RandomContainer } from "./styles/stage.styles";
 import axios from "axios";
 const { Title, Text } = Typography;
@@ -148,7 +148,7 @@ function GameStage3() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />
@@ -175,7 +175,7 @@ function GameStage3() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />
@@ -224,7 +224,7 @@ function GameStage3() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />
@@ -252,7 +252,7 @@ function GameStage3() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />

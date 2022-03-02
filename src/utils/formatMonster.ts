@@ -7,6 +7,6 @@ function ensure<T>(argument: T | undefined | null, message: string = 'This value
     return argument;
   }
 
-const formatGoal = (type : string) => ensure(goalItem.find(item => type === item.goal)).img
+const formatMonster = (type : string) => ensure(goalItem.find(item => type === item.goal)).character
 
-export default formatGoal
+export default formatMonster

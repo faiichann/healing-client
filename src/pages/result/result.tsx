@@ -14,13 +14,14 @@ import  logo  from 'assets/tests/healing_logo.png'
 import formatNumber from 'utils/formatNumber';
 import formatGoal from 'utils/formatGoal';
 import exportAsImage from 'utils/saveImage';
+import formatMonster from 'utils/formatMonster';
 
 const { Text, Title} = Typography;
 const { TabPane } = Tabs;
 
 function Result() {
     const history = useHistory();
-    const { stage, setStage, setCardNum, cardID } = useAppContext();
+    const { stage, setStage, setCardNum, cardID, setCardInfo } = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [currentYear, setCurrentYear] = useState('');
@@ -47,6 +48,7 @@ function Result() {
         try {
             const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
             await formatCardNumber(response);
+            await setCardInfo(response.result)
             return response.result.length + 1
           } catch (error) {
             console.error(error);
@@ -124,11 +126,11 @@ function Result() {
             <Row>
             <Box justify='center' align='center' direction='column' >
                     <ImageContainer>
-                         EMOji: {dataCard?.cardReult.nft_card.emoji}
+                         {dataCard?.cardReult.nft_card.emoji}
                          <Image 
-                        width={90}
+                        width={130}
                         preview={false}
-                        src={formatGoal(dataCard.cardReult.type)} 
+                        src={formatMonster(dataCard.cardReult.type)} 
                         />
                     {/* <Image
                     width={50}
@@ -194,11 +196,11 @@ function Result() {
             <Row>
             <Box justify='center' align='center' direction='column' >
                     <ImageContainer>
-                         EMOji: {dataCard?.cardReult.nft_card.emoji}
+                         {dataCard?.cardReult.nft_card.emoji}
                          <Image 
-                        width={90}
+                        width={130}
                         preview={false}
-                        src={formatGoal(dataCard.cardReult.type)} 
+                        src={formatMonster(dataCard.cardReult.type)} 
                         />
                     {/* <Image
                     width={50}

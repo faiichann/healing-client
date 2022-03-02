@@ -55,7 +55,26 @@ const AppProvider = (({children}: IContextProps) =>{
     const [author, setAuthor] = useState();
     const [text, setText] = useState();
     const [imgQuote, setImgQuote] = useState('');
+
     const [cardID, setCardID] = useState('');
+    const [cardInfo, setCardInfo] = useState(
+        {card_id: Number,
+        goal: String,
+        id: String,
+        rating: String,
+        type: String,
+        nft_card: {
+            bg_color: String,
+            caption: String,
+            emoji: String
+        },
+        qoutes: {
+            aurthur: String,
+            img: String,
+            qoute: String
+        }
+        }
+        );
  
     const nextStage = () => {
             setStage(stage+1)
@@ -125,7 +144,9 @@ const AppProvider = (({children}: IContextProps) =>{
         text,
         imgQuote,
         setCardID,
-        cardID
+        cardID,
+        cardInfo,
+        setCardInfo
     }
 
     useEffect(() => {
