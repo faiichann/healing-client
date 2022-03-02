@@ -5,7 +5,7 @@ import { Box, ButtonStyle } from "theme/components";
 import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
-import NPC from 'assets/images/Avatars/npc3.png'
+import NPC from 'assets/images/Avatars/monster.png'
 import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, StarGoalText, VsContainer, VsText } from "./styles/stage.styles";
 
 const { Title, Text } = Typography;
@@ -195,7 +195,7 @@ function GameStage1() {
               <Row>
                   <Col span={8}>
                   <Image 
-                width={75}
+                width={120}
                 preview={false}
                 src={NPC}
                 />
