@@ -36,28 +36,9 @@ function Result() {
         exportAsImage(exportNFTRef.current, "healingNFTCard")
     }
 
-    const formatCardNumber = async(response : any) => {
-        const number = await response.result.length
-        let formatNum = number.toString();
-        while (formatNum.length < 3) formatNum = "0" + formatNum;
-        await setCardNum(formatNum)
-        console.log('Card Amount ------>', formatNum)
-    }
-
-    const fetchData = async () => {
-        try {
-            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
-            await formatCardNumber(response);
-            await setCardInfo(response.result)
-            return response.result.length + 1
-          } catch (error) {
-            console.error(error);
-          } 
-    };
     const goHome = async() => {
-        setStage(0)
-        await fetchData()
-        history.push('/')
+        await sessionStorage.removeItem('token')
+        window.location.href = './'
     }
 
     const getYear = () => {

@@ -119,8 +119,8 @@ function GameStage1() {
                         />
                     </GoalContainer>
                 <InputGoalStyle>
-                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`}
-                 onChange={({ target: { value } }) => { setUserGoal(value) }} />
+                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} maxLength={30}
+                 onChange={({ target: { value } }) => { setUserGoal(value) }} /> /30
                 </InputGoalStyle>
                 <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>
                 </>

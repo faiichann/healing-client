@@ -3,7 +3,7 @@ import Header from "components/hangman/Header";
 import Popup from "components/hangman/Popup";
 import Word from "components/hangman/Word";
 import WrongLetters from "components/hangman/WrongLetters";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Container from "components/container/container";
 import "./styles/hangman.css"
 import { Box } from "theme/components";
@@ -27,7 +27,7 @@ const words = [
     const [wrongLetters, setWrongLetters] = useState([String]);
     const [loseTime, setLoseTime] = useState(0);
     const { setCardID, getQuotes } = useAppContext();
-
+    
     const fetchData = async () => {
       try {
           const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
@@ -76,7 +76,7 @@ const words = [
 
   return (
     <>
-      <Container header={{ title: 'Special Game', left: 'back' }}>
+      <Container header={{ title: 'Special Game' }}>
       <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 100px)', marginTop: '60px'}}>
       <Header />
       <GameContainer>
