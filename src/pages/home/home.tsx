@@ -28,6 +28,7 @@ function Home() {
     const onClose = () => {
       setVisibleModal( false)
     };
+
     useEffect(() => {
         setTimeout( () => {
             setIsLoading(true)

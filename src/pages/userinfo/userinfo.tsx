@@ -66,8 +66,9 @@ function UserInfo() {
         <InputStyle>
             <InputName placeholder="type your name"
              name="userName" 
+             maxLength={10}
              onChange={({ target: { value } }) => { setUsername(value) }}
-             />
+             /> /10
         </InputStyle>
         <BoxSlide>
             <Row>

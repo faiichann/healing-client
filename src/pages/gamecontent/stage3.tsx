@@ -191,7 +191,7 @@ function GameStage3() {
          <>
           <Box justify='center' align='center' direction='column' style={{marginTop: '20%' }}>
           <Title level={2} style={{fontSize: '36px', fontWeight: '700', color: 'var(--Green-300)' }}>Good Luck!</Title> 
-          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random NPC power and problem.</Text>
+          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random Fortune Card</Text>
           <RandomContainer onClick={random}>
           <Row gutter={[32, 16]} style={{width: '100%'}}>
             <Col span={8}> <ItemContainer > {item1} </ItemContainer> </Col>

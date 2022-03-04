@@ -105,7 +105,9 @@ function GameStage1() {
                       {starRate > 0 ? <span className="ant-rate-text">{meaning[starRate - 1]}</span> : 'How You Need it!'}
                     </Box>
                     </StarCard>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
+                    {starRate > 0 && 
+                     <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
+                    }
                 </>
                 :
                 <>
@@ -122,7 +124,7 @@ function GameStage1() {
                 <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} maxLength={30}
                  onChange={({ target: { value } }) => { setUserGoal(value) }} /> /30
                 </InputGoalStyle>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>
+                {userGoal &&  <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>}
                 </>
                 }
             </Box>

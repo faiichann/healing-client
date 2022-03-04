@@ -123,10 +123,10 @@ function Result() {
             </Row>
             {/* ์ Name img CardNO */}
             <Row>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                <Col span={8} style={{padding: '50px 0 0 0 '}} >
                     <TextName>{dataCard?.cardReult.username}</TextName>
                 </Col>
-                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <Col span={8} style={{justifyContent: 'center', display: 'flex'}} >  
                 <GoalCircle>             
                 <Image 
                         width={60}
@@ -135,7 +135,7 @@ function Result() {
                         />
                 </GoalCircle>    
                 </Col>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                <Col span={8} style={{padding: '50px 0 0 0 '}}>
                     <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
                 </Col>
             </Row>
@@ -193,10 +193,10 @@ function Result() {
             </Row>
             {/* ์ Name img CardNO */}
             <Row>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                <Col span={8} style={{padding: '50px 0 0 0 '}} >
                     <TextName>{dataCard?.cardReult.username}</TextName>
                 </Col>
-                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <Col span={8} style={{justifyContent: 'center', display: 'flex'}} >  
                 <GoalCircle>             
                 <Image 
                         width={60}
@@ -205,7 +205,7 @@ function Result() {
                         />
                 </GoalCircle>    
                 </Col>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                <Col span={8} style={{padding: '50px 0 0 0 '}}>
                     <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
                 </Col>
             </Row>

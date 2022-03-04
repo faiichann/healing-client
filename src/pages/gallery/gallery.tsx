@@ -62,10 +62,10 @@ function Gallery() {
 </Box>
 </Row>
 <Row>
-<Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+<Col span={8} style={{padding: '50px 0 0 0 '}} >
 <TextName>{item.username}</TextName>
 </Col>
-<Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >
+<Col span={8} style={{justifyContent: 'center', display: 'flex'}} >
 <GoalCircle>
 <Image
   width={60}
@@ -74,7 +74,7 @@ function Gallery() {
   />
 </GoalCircle>
 </Col>
-<Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+<Col span={8} style={{padding: '50px 0 0 0 '}}>
 <TextName>#{formatNumber(item.card_id)}</TextName>
 </Col>
 </Row>

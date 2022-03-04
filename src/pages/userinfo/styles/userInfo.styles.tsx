@@ -18,6 +18,7 @@ export const InputStyle = styled(Input.Group)`
     margin-bottom: 10px;
     width: 60%;
     text-align: center;
+    color: #A6CD9C;
 `
 export const BoxSlide = styled.div`
     display: block;
