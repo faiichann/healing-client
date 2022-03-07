@@ -54,7 +54,7 @@ function Gallery() {
 <ImageContainer>
    {item.nft_card.emoji}
    <Image
-  width={130}
+  height={110}
   preview={false}
   src={formatMonster(item.type)}
   />
@@ -83,7 +83,7 @@ function Gallery() {
 <QuoteBox>
 <Text type="secondary"  style={{ fontWeight: '600'}}>"{item.qoutes.qoute}"</Text>
 </QuoteBox>
-<Text strong style={{ marginBottom: '4px'}}>{item.qoutes.aurthur}</Text>
+<Text strong style={{ marginBottom: '10px'}}>{item.qoutes.aurthur}</Text>
 </Box>
 </Row>
 <Row>
