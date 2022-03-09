@@ -10,6 +10,7 @@ import { Box } from "theme/components";
 import { GameContainer } from "./styles/hangman.styles";
 import axios from "axios";
 import { useAppContext } from "context/appContext";
+import Keyboard from "components/hangman/Keyboard";
 
 const words = [
     'think',
@@ -77,12 +78,13 @@ const words = [
   return (
     <>
       <Container header={{ title: 'Special Game' }}>
-      <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 100px)', marginTop: '60px'}}>
+      <Box justify='center' align='center' direction='column' style={{ marginTop: '60px', overflowY: 'scroll'}}>
       <Header />
       <GameContainer>
         <Figure wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
         <WrongLetters wrongLetters={wrongLetters} />
+        <Keyboard/>
       </GameContainer>
       <Popup 
       correctLetters={correctLetters} 
