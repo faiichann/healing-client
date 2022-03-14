@@ -21,8 +21,17 @@ const words = [
     'game',
   ];
   
-  const KeyButton = styled(Button)`
-  background-color: #bfbfbf;
+  interface KeyProps {
+    colorBg?: string
+  }
+
+  const KeyButton = styled(Button)<KeyProps>`
+  &:disabled{
+    background-color: ${(props: KeyProps) => props.colorBg? props.colorBg  : '#818384' } !important;
+    background:  ${(props: KeyProps) => props.colorBg? props.colorBg  : '#818384' }!important;
+    color: #f5f5f5 !important;
+  }
+  background-color:#818384 ;
   color: white;
   margin: 0 3px;
   width: 25px;
@@ -91,91 +100,115 @@ const words = [
       <GameContainer>
         <Figure wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
-        <WrongLetters wrongLetters={wrongLetters} />
-
-        <div style={{display: 'flex', position: 'relative'}}>
+      <div style={{display: 'flex', position: 'relative',margin: '10px'}}>
     <Box justify="center" align="center" direction="column">
     <KeyRow gutter={{ xs: 24, sm: 24, md: 24, lg: 32 }}>
       <KeyButton size={"small"} 
       disabled={wrongLetters.includes("q") || correctLetters.includes("q") ? true : false}
+      colorBg={wrongLetters.includes("q")? "#3A3A3C" : correctLetters.includes("q") ? "#538D4E" : "#818384" }
       onClick={()=> handleKeydown("Q")}>Q</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("w")? "#3A3A3C" : correctLetters.includes("w") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("w") || correctLetters.includes("w") ? true : false}
       onClick={()=> handleKeydown("W")}>W</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("e")? "#3A3A3C" : correctLetters.includes("e") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("e") || correctLetters.includes("e") ? true : false}
       onClick={()=> handleKeydown("E")}>E</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("r")? "#3A3A3C" : correctLetters.includes("r") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("r") || correctLetters.includes("r") ? true : false}
       onClick={()=> handleKeydown("R")}>R</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("t")? "#3A3A3C" : correctLetters.includes("t") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("t") || correctLetters.includes("t") ? true : false}
       onClick={()=> handleKeydown("T")}>T</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("t")? "#3A3A3C" : correctLetters.includes("t") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("y") || correctLetters.includes("y") ? true : false}
       onClick={()=> handleKeydown("Y")}>Y</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("u")? "#3A3A3C" : correctLetters.includes("u") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("u") || correctLetters.includes("u") ? true : false}
       onClick={()=> handleKeydown("U")}>U</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("i")? "#3A3A3C" : correctLetters.includes("i") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("i") || correctLetters.includes("i") ? true : false}
       onClick={()=> handleKeydown("I")}>I</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("o")? "#3A3A3C" : correctLetters.includes("o") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("o") || correctLetters.includes("o") ? true : false}
       onClick={()=> handleKeydown("O")}>O</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("p")? "#3A3A3C" : correctLetters.includes("p") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("p") || correctLetters.includes("p") ? true : false}
       onClick={()=> handleKeydown("P")}>P</KeyButton>
     </KeyRow>
     <KeyRow gutter={{ xs: 24, sm: 24, md: 24, lg: 32 }}> 
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("a")? "#3A3A3C" : correctLetters.includes("a") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("a") || correctLetters.includes("a") ? true : false}
       onClick={()=> handleKeydown("A")}>A</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("s")? "#3A3A3C" : correctLetters.includes("s") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("s") || correctLetters.includes("s") ? true : false}
       onClick={()=> handleKeydown("S")}>S</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("d")? "#3A3A3C" : correctLetters.includes("d") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("d") || correctLetters.includes("d") ? true : false}
       onClick={()=> handleKeydown("D")}>D</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("f")? "#3A3A3C" : correctLetters.includes("f") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("f") || correctLetters.includes("f") ? true : false}
       onClick={()=> handleKeydown("F")}>F</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("g")? "#3A3A3C" : correctLetters.includes("g") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("g") || correctLetters.includes("g") ? true : false}
       onClick={()=> handleKeydown("G")}>G</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("h")? "#3A3A3C" : correctLetters.includes("h") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("h") || correctLetters.includes("h") ? true : false}
       onClick={()=> handleKeydown("H")}>H</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("j")? "#3A3A3C" : correctLetters.includes("j") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("j") || correctLetters.includes("j") ? true : false}
       onClick={()=> handleKeydown("J")}>J</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("k")? "#3A3A3C" : correctLetters.includes("k") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("k") || correctLetters.includes("k") ? true : false}
       onClick={()=> handleKeydown("K")}>K</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("l")? "#3A3A3C" : correctLetters.includes("l") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("l") || correctLetters.includes("l") ? true : false}
       onClick={()=> handleKeydown("L")}>L</KeyButton>
     </KeyRow>
     <KeyRow gutter={{ xs: 24, sm: 24, md: 24, lg: 32 }}>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("z")? "#3A3A3C" : correctLetters.includes("z") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("z") || correctLetters.includes("z") ? true : false}
       onClick={()=> handleKeydown("Z")}>Z</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("x")? "#3A3A3C" : correctLetters.includes("x") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("x") || correctLetters.includes("x") ? true : false}
       onClick={()=> handleKeydown("X")}>X</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("c")? "#3A3A3C" : correctLetters.includes("c") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("c") || correctLetters.includes("c") ? true : false}
       onClick={()=> handleKeydown("C")}>C</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("v")? "#3A3A3C" : correctLetters.includes("v") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("v") || correctLetters.includes("v") ? true : false}
       onClick={()=> handleKeydown("V")}>V</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("b")? "#3A3A3C" : correctLetters.includes("b") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("b") || correctLetters.includes("b") ? true : false}
       onClick={()=> handleKeydown("B")}>B</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("n")? "#3A3A3C" : correctLetters.includes("n") ? "right" : "#818384" }
       disabled={wrongLetters.includes("n") || correctLetters.includes("n") ? true : false}
       onClick={()=> handleKeydown("N")}>N</KeyButton>
       <KeyButton size={"small"} 
+      colorBg={wrongLetters.includes("m")? "#3A3A3C" : correctLetters.includes("m") ? "right" : "#818384" }
       disabled={wrongLetters.includes("m") || correctLetters.includes("m") ? true : false}
       onClick={()=> handleKeydown("M")}>M</KeyButton>
     </KeyRow>

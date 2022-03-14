@@ -42,8 +42,9 @@ const Header = () => {
            style={{justifyContent: 'center', alignContent: 'center', textAlign: 'center', fontSize: '18px'}}
            >ทายคำให้ถูกเพื่อรักษาต้นไม้ของคุณไว้<br/>
                   หากคุณทายผิด หนอนยักา์จะกินต้นไม้คุณ<br/>
-                  ดูแลต้นไม้ของคุฯให้ดี มีโอกาสเพียง 3 ครั้ง<br/>
-                  มาพยายามให้เต็มที่กันเถอะ!!
+                  ดูแลต้นไม้ของคุณให้ดี มีโอกาสเพียง 3 ครั้ง<br/>
+                  มาพยายามให้เต็มที่กันเถอะ!!<br/>
+                  Hint: Words are only on the WEB!
            </Text>
              </Box>
         </DrawerStyle>
