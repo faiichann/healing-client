@@ -12,6 +12,7 @@ export const LayoutHome = styled(Layout)`
     height: 100vh;
     overflow-x: hidden;
 `
+
 export const ContainerHome = styled(Content)`
     width: 100%;
     height: 100vh;
@@ -31,6 +32,7 @@ export const SectionFirst = styled.div`
     align-items: center ;
     flex-direction: column;
 `
+
 export const ImgContainer = styled.div`
     width: 100%;
     overflow: hidden;
@@ -80,6 +82,7 @@ export const SectionSecond = styled.div`
     z-index: 100;
     position: relative;
 `
+
 export const ImageContent = styled.div`
     width: 70%;
     height: 400px;
@@ -90,6 +93,7 @@ export const ImageContent = styled.div`
     justify-content: center;
     align-items: center;
 `
+
 export const FooterHome = styled.div`
     width: 100%;
     height: 80px;
@@ -150,11 +154,41 @@ export const NumBox = styled.div`
     font-weight: 600;
     color:#8FB486;
 `
+
 export const HomeDrawer = styled(Drawer)`
+.ant-drawer-header {
+    padding: 0;
+    display: flex;
+    background: var(--Green-500);
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+}
 .ant-drawer-mask{
     width: 50% !important;
 }
 & .ant-drawer-content-wrapper{
     width: 50% !important;
 }
+`
+export const TextLink = styled.a`
+&:hover{
+    background-color: var(--Green-500);
+    color: white;
+}
+height: 50px;
+width: 100% ;
+font-size: 18px;
+color: var(--Green-500);
+font-weight: 600 ;
+`
+
+export const TextTitle = styled.h1`
+background-color: var(--Green-500);
+color: white;
+width: 100% ;
+font-size: 24px;
+font-weight: 700 ;
 `
