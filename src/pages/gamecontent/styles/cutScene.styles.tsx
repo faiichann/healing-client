@@ -12,7 +12,8 @@ export const TextCutScene = styled.div`
 export const MessageCutScene = styled.div`
     min-width: 50%;
     width: 70%;
-    max-height: 100px;
+    height: fit-content;
+    max-height: 200px;
     background-color: var(--White);
     border-radius: var(--Radius-20);
     box-shadow:  0px 0px 83px -23px rgba(0, 0, 0, 0.25);

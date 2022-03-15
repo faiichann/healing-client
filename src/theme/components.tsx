@@ -27,8 +27,7 @@ interface ButtonProps {
     backgroundbutton?: string
     colorbutton?: any
     typebutton ?: Sizebutton
-    pattern?: Typebutton
-    
+    pattern?: Typebutton    
   }
  
 export const ButtonStyle = styled(Button)<ButtonProps>`

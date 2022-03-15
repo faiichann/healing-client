@@ -143,6 +143,7 @@ export const InputGoalStyle = styled(Input.Group)`
     margin: 20px;
     width: 80%;
     text-align: center;
+    color: #A6CD9C;
 `
 export const StarCard = styled.div`
     width: 70%;

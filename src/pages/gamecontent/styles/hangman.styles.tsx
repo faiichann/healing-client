@@ -28,6 +28,7 @@ export const LetterBox = styled.div<LetterProps>`
 export const GameContainer = styled.div`
     padding: 20px 30px;
     position: relative;
+    display: contents ;
     margin: 10px;
     width: 100%;
     justify-content: center;

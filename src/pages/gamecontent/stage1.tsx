@@ -54,7 +54,7 @@ function GameStage1() {
 
     const message = [
         'เอาละในขั้นแรกคุณจำเป็นต้องมีเป้าหมายที่ชัดเจนก่อน', 
-        'กถ้ายังไม่แน่ใจเรามีตัวช่วยให้คุณ', 
+        'คุณสามารถกด Skip ได้หากคุณเคยเล่นมาแล้ว', 
         'เลือกสิ่งที่คุณชอบมากที่สุดจากไอเทมที่ปรากฎ', 
         'มีโอกาสเลือกครั้งเดียวนะ',
         'ถ้าพร้อมแล้วไปเริ่มกันเลย'
@@ -105,7 +105,9 @@ function GameStage1() {
                       {starRate > 0 ? <span className="ant-rate-text">{meaning[starRate - 1]}</span> : 'How You Need it!'}
                     </Box>
                     </StarCard>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
+                    {starRate > 0 && 
+                     <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
+                    }
                 </>
                 :
                 <>
@@ -119,10 +121,10 @@ function GameStage1() {
                         />
                     </GoalContainer>
                 <InputGoalStyle>
-                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`}
-                 onChange={({ target: { value } }) => { setUserGoal(value) }} />
+                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} maxLength={30}
+                 onChange={({ target: { value } }) => { setUserGoal(value) }} /> /30
                 </InputGoalStyle>
-                <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>
+                {userGoal &&  <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>}
                 </>
                 }
             </Box>

@@ -1,7 +1,6 @@
 import Container from 'components/container/container'
 import { useAppContext } from 'context/appContext';
 import { useEffect, useState, useRef } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Image, Row, Col, Typography, Tabs } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
@@ -20,8 +19,7 @@ const { Text, Title} = Typography;
 const { TabPane } = Tabs;
 
 function Result() {
-    const history = useHistory();
-    const { stage, setStage, setCardNum, cardID, setCardInfo } = useAppContext();
+    const { stage, cardID} = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [currentYear, setCurrentYear] = useState('');
@@ -36,28 +34,9 @@ function Result() {
         exportAsImage(exportNFTRef.current, "healingNFTCard")
     }
 
-    const formatCardNumber = async(response : any) => {
-        const number = await response.result.length
-        let formatNum = number.toString();
-        while (formatNum.length < 3) formatNum = "0" + formatNum;
-        await setCardNum(formatNum)
-        console.log('Card Amount ------>', formatNum)
-    }
-
-    const fetchData = async () => {
-        try {
-            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
-            await formatCardNumber(response);
-            await setCardInfo(response.result)
-            return response.result.length + 1
-          } catch (error) {
-            console.error(error);
-          } 
-    };
     const goHome = async() => {
-        setStage(0)
-        await fetchData()
-        history.push('/')
+        await sessionStorage.removeItem('token')
+        window.location.href = './'
     }
 
     const getYear = () => {
@@ -102,17 +81,6 @@ function Result() {
        <Container header={{ title: 'Result', right: (<HomeFilled onClick={goHome} />) }}>
           {isLoading ? 
           <>
-          {/* {dataCard?.cardReult.goal}
-          {dataCard?.cardReult.rating}
-          {dataCard?.cardReult.type}
-          {dataCard?.cardReult.nft_card.emoji}
-          {dataCard?.cardReult.nft_card.caption}
-          {dataCard?.cardReult.nft_card.bg_color}
-          {dataCard?.cardReult.username} */}
-          {/* {formatNumber(dataCard.cardReult.card_id)} */}
-          {/* {dataCard?.cardReult.qoutes.qoute}
-          {dataCard?.cardReult.qoutes.aurthur}
-          {dataCard?.cardReult.qoutes.img} */}
           <Box justify='center' align='center' direction='column' >
           <TabsStyle defaultActiveKey="1" onChange={callback}>
     <TabPane tab="Healing Card" key="1">
@@ -128,24 +96,19 @@ function Result() {
                     <ImageContainer>
                          {dataCard?.cardReult.nft_card.emoji}
                          <Image 
-                        width={130}
+                        height={110}
                         preview={false}
                         src={formatMonster(dataCard.cardReult.type)} 
                         />
-                    {/* <Image
-                    width={50}
-                    src={dataCard?.cardReult.qoutes.img}
-                    preview={false}
-                /> */}
                     </ImageContainer>
                 </Box>
             </Row>
             {/* ์ Name img CardNO */}
             <Row>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                <Col span={8} style={{padding: '50px 0 0 0 '}} >
                     <TextName>{dataCard?.cardReult.username}</TextName>
                 </Col>
-                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <Col span={8} style={{justifyContent: 'center', display: 'flex'}} >  
                 <GoalCircle>             
                 <Image 
                         width={60}
@@ -154,7 +117,7 @@ function Result() {
                         />
                 </GoalCircle>    
                 </Col>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                <Col span={8} style={{padding: '50px 0 0 0 '}}>
                     <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
                 </Col>
             </Row>
@@ -164,7 +127,7 @@ function Result() {
                 <QuoteBox>
                 <Text type="secondary"  style={{ fontWeight: '600'}}>"{dataCard?.cardReult.qoutes.qoute}"</Text>
                 </QuoteBox>
-                <Text strong style={{ marginBottom: '4px'}}>{dataCard?.cardReult.qoutes.aurthur}</Text>
+                <Text strong style={{ marginBottom: '10px'}}>{dataCard?.cardReult.qoutes.aurthur}</Text>
             </Box>
             </Row>
             <Row>
@@ -198,24 +161,19 @@ function Result() {
                     <ImageContainer>
                          {dataCard?.cardReult.nft_card.emoji}
                          <Image 
-                        width={130}
+                        height={110}
                         preview={false}
                         src={formatMonster(dataCard.cardReult.type)} 
                         />
-                    {/* <Image
-                    width={50}
-                    src={dataCard?.cardReult.qoutes.img}
-                    preview={false}
-                /> */}
                     </ImageContainer>
                 </Box>
             </Row>
             {/* ์ Name img CardNO */}
             <Row>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+                <Col span={8} style={{padding: '50px 0 0 0 '}} >
                     <TextName>{dataCard?.cardReult.username}</TextName>
                 </Col>
-                <Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >  
+                <Col span={8} style={{justifyContent: 'center', display: 'flex'}} >  
                 <GoalCircle>             
                 <Image 
                         width={60}
@@ -224,7 +182,7 @@ function Result() {
                         />
                 </GoalCircle>    
                 </Col>
-                <Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+                <Col span={8} style={{padding: '50px 0 0 0 '}}>
                     <TextName>#{formatNumber(dataCard.cardReult.card_id)}</TextName>
                 </Col>
             </Row>
@@ -234,7 +192,7 @@ function Result() {
                 <QuoteBox>
                 <Text type="secondary"  style={{ fontWeight: '600'}}>"{dataCard?.cardReult.nft_card.caption}"</Text>
                 </QuoteBox>
-                <Text strong style={{ marginBottom: '4px'}}> Healing </Text>
+                <Text strong style={{ marginBottom: '10px'}}> Healing </Text>
             </Box>
             </Row>
             <Row>
