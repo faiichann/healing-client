@@ -8,7 +8,7 @@ import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer, TextLink, TextTitle } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
@@ -28,6 +28,7 @@ function Home() {
     const onClose = () => {
       setVisibleModal( false)
     };
+
     useEffect(() => {
         setTimeout( () => {
             setIsLoading(true)
@@ -42,15 +43,15 @@ function Home() {
        <LayoutHome>
            <ContainerHome>
            <HomeDrawer
-          title="-ข้อมูลเพิ่มเติม"
+          title={<TextTitle>ข้อมูลเพิ่มเติม</TextTitle>}
           placement="right"
           closable={false}
           onClose={onClose}
           visible={visible}
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <p><TextLink href='https://www.figma.com/proto/8pMn3HEBtFPdjWnMlUKKDX/UI-Project?page-id=1503%3A4450&node-id=1503%3A4451&viewport=241%2C48%2C0.97&scaling=min-zoom'>-การขาย NFT</TextLink></p>
+          <p><TextLink href='https://www.notion.so/Project-Info-850372c08f6a44a793028d1f7fe38905'>-ข้อมูลเพิ่มเติมของโปรเจค</TextLink></p>
+          <p><TextLink href='https://forms.gle/x5FXUiT7BEdeqwVr9'>-แบบประเมินความพึงพอใจ</TextLink></p>
         </HomeDrawer>
             {/* ----Section1---- */}
            <SectionFirst>

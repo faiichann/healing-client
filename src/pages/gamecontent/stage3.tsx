@@ -140,9 +140,10 @@ function GameStage3() {
          <>
          {index === 2 ?
          <>
-         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} onClick={()=>sentData()}>
+         <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} >
             <MessageCutScene>
                 {message[index]}
+                <ButtonStyle typebutton="Small" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={()=>sentData()}>รับของขวัญ</ButtonStyle>
             </MessageCutScene>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
               <Row>
@@ -190,7 +191,7 @@ function GameStage3() {
          <>
           <Box justify='center' align='center' direction='column' style={{marginTop: '20%' }}>
           <Title level={2} style={{fontSize: '36px', fontWeight: '700', color: 'var(--Green-300)' }}>Good Luck!</Title> 
-          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random NPC power and problem.</Text>
+          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random Fortune Card</Text>
           <RandomContainer onClick={random}>
           <Row gutter={[32, 16]} style={{width: '100%'}}>
             <Col span={8}> <ItemContainer > {item1} </ItemContainer> </Col>

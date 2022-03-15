@@ -35,6 +35,7 @@ export const ImageContainer = styled.div`
     padding: 10px;
     display: block;
     position: relative;
+    font-size: 25px ;
 `
 export const HeaderCard = styled.div`
     font-size: 14px;
@@ -70,9 +71,9 @@ export const TextName = styled.div`
     font-weight: 600;
 `
 export const QuoteBox = styled.div`
-    height: 100px;
+    height: 80px;
     overflow: hidden;
-    margin: 0 5px;
+    margin: 0 5px 5px 5px;
     padding: 5px 10px;
     display: flex;
     justify-content: center;

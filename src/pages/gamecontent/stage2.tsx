@@ -1,6 +1,6 @@
 import { Row, Col, Typography, Image } from "antd";
 import { useAppContext } from "context/appContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
 import CountDownTimer from "utils/countdownTimer";
 import { ButtonFace, ColSpeedgame, ConfirmModal, PointDiv, ProgressStyle, RowSpeedgame, TextRandom } from "./styles/stage.styles";
@@ -14,30 +14,31 @@ const { Title } = Typography;
 
 function GameStage2() {
     let info = randomWord
-    const [text, setText] = useState(0)
+    let random = Math.floor(Math.random() * info.length);
+    const [text, setText] = useState(info[random].text)
     const [score, setScore] = useState(0)
     const { nextStage, isLose, setIsLose, isReset, setIsReset } = useAppContext()
     const [isPassVisible, setIsPassVisible] = useState(false);
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
 
-    const goodButton = (text:number) => {
-        setText(prev => (prev + 1 ) % info.length)
-        if (info[text].value === 1){
-            score < 10 ? setScore(score + 1) : score === 10? 
-            setIsPassVisible(!isPassVisible) 
-            : setScore(10);
+    const goodButton = (value:number) => {
+        setText(info[random].text)
+        if (value === 1){
+            if(score < 10){
+                setScore(score + 1)
+            }
         } else {
             setScore(score)
         }
     }
 
-    const badButton = (text:number) => {
-        setText(prev => (prev + 1 ) % info.length)
-        if (info[text].value === 0){
-            score < 10 ? setScore(score + 1) : score === 10? 
-            setIsPassVisible(!isPassVisible) 
-            : setScore(10);
+    const badButton = (value:number) => {
+        setText(info[random].text)
+        if (value === 0){
+            if(score < 10){
+                setScore(score + 1)
+            }
         } else {
             setScore(score)
         }
@@ -56,12 +57,12 @@ function GameStage2() {
     };
 
     const message = [
-        'เป้าหมายคุณยอดเยี่ยมมาก', 
+        'เป้าหมายคุณยอดเยี่ยมมากเลย', 
         'ต่อไปเราจะช่วยให้คุณใกล้ชิดเป้าหมายมากขึ้น..', 
-        'โดยคุณต้องทำคะแนนถึงก่อนหมดเวลา',
-        'จากเลือกฟีลลิ่งของคำที่ปรากฎให้ถูกต้องภายใน 10 วินาที',
-        'ถ้าทำชาเลนจ์นี้ดูกันถ้าคุณทำได้แสดงว่าคุณพร้อมแล้วล่ะ', 
-        'ถ้าพร้อมแล้วไปเริ่มกันเลย'
+        'โดยคุณต้องทำคะแนนให้ถึงก่อนหมดเวลา',
+        'จากการเลือก Feeling ของคำที่ปรากฎให้ถูกต้องภายใน 10 วินาที',
+        'ตั้งสติแล้วเลือกตามความรู้สึกแรกของคำที่เข้ามาในหัวเลยนะ', 
+        'ถ้าพร้อมแล้วไปเริ่มกันเลย!!'
     ] 
 
     const onSkip = () =>{
@@ -75,6 +76,12 @@ function GameStage2() {
         }
       }
       
+    useEffect(() => {
+        console.log('Score',score)
+        if (score === 10){
+            setIsPassVisible(true) 
+        }
+    },[isPassVisible, score])
     return (
        <>
         <ConfirmModal title={<>
@@ -96,7 +103,7 @@ function GameStage2() {
             onClick={handleOk}> CONTINUE </ButtonStyle>
           ]}>
                <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU WIN!</Title>
-                <p>You Pass</p>
+                <p>ยินดีด้วยคุณผ่านแล้วไปด่านต่อไปได้เลย</p>
         </ConfirmModal>
         <ConfirmModal title={<>
             <div style={{zIndex: '100',display: 'flex'}}>
@@ -117,7 +124,7 @@ function GameStage2() {
             style={{fontWeight: '400', fontSize: '18px'}}> PLAY AGAIN </ButtonStyle>
           ]}>
             <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU lOSE!</Title>
-            <p>You fail please try again</p>
+            <p>ไม่เป็นไรนะพยายามเข้าอีกนิดจนกว่าจะผ่านกันเถอะ</p>
         </ConfirmModal>
 
         {isSkip && 
@@ -126,7 +133,7 @@ function GameStage2() {
                 <PointDiv>
                 <Col span={18}>
                     <ProgressStyle 
-                    strokeColor={score * 10 ===100 ? '#A6CD9C' : "#F9A186" }
+                    strokeColor={score * 10 === 100 ? '#A6CD9C' : "#F9A186" }
                     trailColor={"#FDE3DB"}
                     strokeLinecap="square" 
                     percent={score * 10} />
@@ -144,13 +151,13 @@ function GameStage2() {
                 delay={200}
                 style={{width: '100%', display: 'flex', justifyContent: 'center' }}
              >
-           <TextRandom>{info[text].text.toUpperCase()}</TextRandom>
+           <TextRandom>{info[random].text.toUpperCase()}</TextRandom>
         </Animation>
         </Box>
        <Box justify='center' align='center' direction='row'>
         <RowSpeedgame gutter={[24, 8]} justify="space-around">
             <ColSpeedgame span={12} > 
-            <ButtonFace  type='bad' onClick={()=>badButton(text)}>
+            <ButtonFace  type='bad' onClick={()=>badButton(info[random].value)}>
             <Image 
                 width={75}
                 preview={false}
@@ -159,7 +166,7 @@ function GameStage2() {
             </ButtonFace>
             </ColSpeedgame> 
             <ColSpeedgame span={12} >
-            <ButtonFace type='good' onClick={()=>goodButton(text)}>
+            <ButtonFace type='good' onClick={()=>goodButton(info[random].value)}>
             <Image 
                 width={75}
                 preview={false}

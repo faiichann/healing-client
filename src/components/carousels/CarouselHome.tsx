@@ -1,7 +1,10 @@
 import { ImageContent } from "pages/home/styles/home.styles";
 import { Carousel } from "antd";
 import { Image, Typography } from 'antd';
-import  logo  from 'assets/tests/healing_logo.png'
+import Home1 from 'assets/images/stage/Home1.png'
+import Home2 from 'assets/images/stage/Home2.png'
+import Home3 from 'assets/images/stage/Home3.png'
+import Home4 from 'assets/images/stage/Home4.png'
 import styled from "styled-components";
 const { Title } = Typography;
 
@@ -27,9 +30,10 @@ const CarouselStyle = styled(Carousel)`
 `;
 function CarouselHome() {
     const images = [ 
-        {tile: 'Content 1' , img: logo} ,
-        {tile: 'Content 2' , img: logo} , 
-        {tile: 'Content 3' , img: logo} 
+        {tile: 'Healing Project Theme Concept' , img: Home1} ,
+        {tile: 'Finding your Goal!!' , img: Home2} , 
+        {tile: 'Pixel Art Preview' , img: Home3} ,
+        {tile: 'Your NFT Cards ' , img: Home4} ,
     ];
 
     return (
@@ -41,7 +45,7 @@ function CarouselHome() {
             <Title level={5}>{image.tile}</Title>
             <ImageContent> 
             <Image
-            width={100}
+            width={500}
             src={image.img}
             />
             </ImageContent>

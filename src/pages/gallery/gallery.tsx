@@ -54,7 +54,7 @@ function Gallery() {
 <ImageContainer>
    {item.nft_card.emoji}
    <Image
-  width={130}
+  height={110}
   preview={false}
   src={formatMonster(item.type)}
   />
@@ -62,10 +62,10 @@ function Gallery() {
 </Box>
 </Row>
 <Row>
-<Col flex="auto" style={{padding: '50px 0 0 0 '}} >
+<Col span={8} style={{padding: '50px 0 0 0 '}} >
 <TextName>{item.username}</TextName>
 </Col>
-<Col flex="auto" style={{justifyContent: 'center', display: 'flex'}} >
+<Col span={8} style={{justifyContent: 'center', display: 'flex'}} >
 <GoalCircle>
 <Image
   width={60}
@@ -74,7 +74,7 @@ function Gallery() {
   />
 </GoalCircle>
 </Col>
-<Col flex="auto" style={{padding: '50px 0 0 0 '}}>
+<Col span={8} style={{padding: '50px 0 0 0 '}}>
 <TextName>#{formatNumber(item.card_id)}</TextName>
 </Col>
 </Row>
@@ -83,7 +83,7 @@ function Gallery() {
 <QuoteBox>
 <Text type="secondary"  style={{ fontWeight: '600'}}>"{item.qoutes.qoute}"</Text>
 </QuoteBox>
-<Text strong style={{ marginBottom: '4px'}}>{item.qoutes.aurthur}</Text>
+<Text strong style={{ marginBottom: '10px'}}>{item.qoutes.aurthur}</Text>
 </Box>
 </Row>
 <Row>
