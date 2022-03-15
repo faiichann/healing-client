@@ -2,7 +2,6 @@ import Figure from "components/hangman/Figure";
 import Header from "components/hangman/Header";
 import Popup from "components/hangman/Popup";
 import Word from "components/hangman/Word";
-import WrongLetters from "components/hangman/WrongLetters";
 import { useEffect, useState } from "react";
 import Container from "components/container/container";
 import "./styles/hangman.css"
