@@ -29,7 +29,6 @@ export const BoxSlide = styled.div`
 export const BoxContent = styled.div`
   display: flex;
   width: 100%;
-  height: 70vh;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -46,7 +45,7 @@ flex-direction: column;
 export const CarouselStyle = styled(Carousel)`
 & .slick-dots-bottom{
     position: relative;
-    margin-top: 70px;
+    margin-top: 30px;
 }
 & .slick-dots li.slick-active button {
     background: #A6CD9C;

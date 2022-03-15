@@ -16,7 +16,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
     isRateStar, cardID, setStage, author, text, imgQuote } = useAppContext();
   
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
-    finalMessage = "ํYOU PASS!!";
+    finalMessage = "YOU PASS!!";
     finalMessageRevealWord = "ความพยายามไม่เคยทำร้ายใครไปรับรางวัลกัน";
   } else if (checkWin(correctLetters, wrongLetters, selectedWord) === "lose") {
     if ( loseTime > 2 ) {

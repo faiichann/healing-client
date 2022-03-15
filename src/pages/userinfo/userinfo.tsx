@@ -102,7 +102,7 @@ function UserInfo() {
                 // <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
                 // :
                 !avatar || !username ?   
-                <Text type="secondary">Click Image for select </Text>
+                <Text type="secondary">Choose your avatar</Text>
                 :
                 <ButtonStyle typebutton='Medium' sizebutton={30} onClick={()=> onConfirm(username, avatar)}> Confirm </ButtonStyle>
             }

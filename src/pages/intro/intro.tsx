@@ -8,9 +8,10 @@ const { Title, Text } = Typography;
 function Intro() {
     const history = useHistory();
     const data = [ 
-        {title: 'แนะนำเว็บ' , des: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, ', img: '1'} ,
-        {title: 'วิธีเล่น' , des: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, ', img: '2'} , 
-        {title: 'Gamification' , des: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Molestias aut, ', img: '3'} 
+        {title: 'Healing Project' , des: 'เว็บไซต์นี้จัดทำขึ้นมาเพื่อพัฒนารูปแบบการมีส่วนร่วมผ่านเว็บแอปพลิเคชั่นแบบมีปฏิสัมพันธ์ด้วยกลไลเกมมิฟิเคชั่นสำหรับการต่อยอดทางธุรกิจสินทรัพย์ดิจิทัล ด้วยการสร้างเป้าหมายและแรงบันดาลใจในรูปแบบของ NFT card', img: '1'} , 
+        {title: 'Gamification' , des: 'เว็บไซต์นี้นำ game mechanics มาใช้กับสิ่งที่ไม่ใช่เกม เพื่อกระตุ้นให้คนมีพฤติกรรมตามเป้าหมาย ด้วยการจูงใจให้คนเกิดความสนุก ความท้าทาย ความตั้งใจเอาชนะ ด้วยวิธีและความรู้สึกแบบเดียวกับการเล่นเกม เช่นการCountdown จำนวนการ์ด, user level up, collection', img: '2'}, 
+        {title: 'NFT' , des: 'Non-Fungible Token หรือ NFT คือ Token ที่นำเทคโนโลยี Blockchain มาใช้ ทำให้สามารถแสดงความเป็นเจ้าของของสินทรัพย์นั้นๆ ได้ โดยแต่ละ Token จะแตกต่างกัน เช่น การ์ดเกม งานศิลปะ ของสะสม สามารถนำสินทรัพย์ที่มีความ Unique, Rare, Indivisible มาทำ Token ได้', img: '3'},
+        {title: 'How to play' , des: 'เลือกสิ่งที่ใช่สำหรับคุณ พร้อมกับระบุเป้าหมายที่ชัดเจน เพื่อนำไปสร้างรูปแบบการ์ดในแบบเฉพาะของคุณ การ์ดมีจำนวนจำกัดเพียง 200 ใบ รีบมาสร้างการ์ด NFT ที่ช่วยสร้างแรงบันดาลใจให้เป้าหมายของคุณกัน', img: '4'}
     ];
     return (
         <Container header={{ title: 'Introduction', left: 'back' }}>

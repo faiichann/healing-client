@@ -57,12 +57,12 @@ function GameStage2() {
     };
 
     const message = [
-        'เป้าหมายคุณยอดเยี่ยมมาก', 
+        'เป้าหมายคุณยอดเยี่ยมมากเลย', 
         'ต่อไปเราจะช่วยให้คุณใกล้ชิดเป้าหมายมากขึ้น..', 
-        'โดยคุณต้องทำคะแนนถึงก่อนหมดเวลา',
-        'จากเลือกฟีลลิ่งของคำที่ปรากฎให้ถูกต้องภายใน 10 วินาที',
-        'ถ้าทำชาเลนจ์นี้ดูกันถ้าคุณทำได้แสดงว่าคุณพร้อมแล้วล่ะ', 
-        'ถ้าพร้อมแล้วไปเริ่มกันเลย'
+        'โดยคุณต้องทำคะแนนให้ถึงก่อนหมดเวลา',
+        'จากการเลือก Feeling ของคำที่ปรากฎให้ถูกต้องภายใน 10 วินาที',
+        'ตั้งสติแล้วเลือกตามความรู้สึกแรกของคำที่เข้ามาในหัวเลยนะ', 
+        'ถ้าพร้อมแล้วไปเริ่มกันเลย!!'
     ] 
 
     const onSkip = () =>{
@@ -103,7 +103,7 @@ function GameStage2() {
             onClick={handleOk}> CONTINUE </ButtonStyle>
           ]}>
                <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU WIN!</Title>
-                <p>You Pass</p>
+                <p>ยินดีด้วยคุณผ่านแล้วไปด่านต่อไปได้เลย</p>
         </ConfirmModal>
         <ConfirmModal title={<>
             <div style={{zIndex: '100',display: 'flex'}}>
@@ -124,7 +124,7 @@ function GameStage2() {
             style={{fontWeight: '400', fontSize: '18px'}}> PLAY AGAIN </ButtonStyle>
           ]}>
             <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU lOSE!</Title>
-            <p>You fail please try again</p>
+            <p>ไม่เป็นไรนะพยายามเข้าอีกนิดจนกว่าจะผ่านกันเถอะ</p>
         </ConfirmModal>
 
         {isSkip && 

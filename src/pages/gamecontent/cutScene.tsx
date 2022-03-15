@@ -18,12 +18,12 @@ function Cutscene() {
 
     
     const message = [
-        `HI  ${isName}`,
-        `you so cute  ${isAvatar}`,
-        'Welcome to Healing',
-        'Let us make you happy', 
-        'ARE YOU READY!', 
-        'TAB and Let go'
+        `สวัสดีตรับ คุณ"${isName}"`,
+        `ผมชื่อบอทเขียวครับ`,
+        'ยินดีต้อนรับเข้าสู่ Healing World',
+        'บอทเขียวจะพาคุณไปหาแรงบันดาลใจให้เป้าหมายของคุณ', 
+        'คุณพร้อมหรือยัง!', 
+        'แตะหน้าจอเพื่อเริ่มกันเลย'
         ] 
 useEffect(() => {
     console.log('message -->', message.length)

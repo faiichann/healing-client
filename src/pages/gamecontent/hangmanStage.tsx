@@ -14,11 +14,14 @@ import styled from "styled-components";
 import { Button, Row } from "antd";
 
 const words = [
-    'think',
-    'blink',
-    'work',
-    'money',
+    'heal',
     'game',
+    'goal',
+    'card',
+    'token',
+    'happy',
+    'plant',
+    'gift',
   ];
   
   interface KeyProps {
@@ -100,7 +103,7 @@ const words = [
       <GameContainer>
         <Figure wrongLetters={wrongLetters} />
         <Word selectedWord={selectedWord} correctLetters={correctLetters} />
-      <div style={{display: 'flex', position: 'relative',margin: '10px'}}>
+      <div style={{display: 'flex', position: 'relative',margin: '10px', zIndex: '1001'}}>
     <Box justify="center" align="center" direction="column">
     <KeyRow gutter={{ xs: 24, sm: 24, md: 24, lg: 32 }}>
       <KeyButton size={"small"} 
