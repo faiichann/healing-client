@@ -14,6 +14,7 @@ import formatNumber from 'utils/formatNumber';
 import formatGoal from 'utils/formatGoal';
 import exportAsImage from 'utils/saveImage';
 import formatMonster from 'utils/formatMonster';
+import openSound from 'assets/sounds/open.mp3'
 
 const { Text, Title} = Typography;
 const { TabPane } = Tabs;
@@ -26,6 +27,7 @@ function Result() {
     const [dataCard, setDataCard] = useState<any>();
     const exportRef = useRef<any>();
     const exportNFTRef = useRef<any>();
+    const openAudio = new Audio(openSound)
 
     const saveResult = () =>{
         exportAsImage(exportRef.current, "healingCard")
@@ -49,6 +51,8 @@ function Result() {
     }, []);
     
     const openBox = async() =>{
+        openAudio.play();
+        openAudio.volume = 0.8
             setIsOpen(true)
         try {
             await axios.get(`https://healing-project.herokuapp.com/results/${cardID}`).then(async (response) => {

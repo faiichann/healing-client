@@ -10,6 +10,10 @@ import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/monster.png'
 import Mad from 'assets/images/stage/Mad.png'
 import Smile from 'assets/images/stage/Smile.png'
+import SoundWrong from 'assets/sounds/wrongAns.mp3'
+import SoundRight from 'assets/sounds/rightAns.mp3'
+import SoundClick from 'assets/sounds/read.mp3'
+
 const { Title } = Typography;
 
 function GameStage2() {
@@ -21,14 +25,21 @@ function GameStage2() {
     const [isPassVisible, setIsPassVisible] = useState(false);
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
+    const wrongAudio = new Audio(SoundWrong)
+    const rightAudio = new Audio(SoundRight)
+    const clickAudio = new Audio(SoundClick)
 
     const goodButton = (value:number) => {
         setText(info[random].text)
         if (value === 1){
             if(score < 10){
+                rightAudio.play();
+                rightAudio.volume = 0.8
                 setScore(score + 1)
             }
         } else {
+            wrongAudio.play();
+            wrongAudio.volume = 0.8
             setScore(score)
         }
     }
@@ -37,9 +48,13 @@ function GameStage2() {
         setText(info[random].text)
         if (value === 0){
             if(score < 10){
+                rightAudio.play();
+                rightAudio.volume = 0.8
                 setScore(score + 1)
             }
         } else {
+            wrongAudio.play();
+            wrongAudio.volume = 0.8
             setScore(score)
         }
     }
@@ -69,6 +84,8 @@ function GameStage2() {
         setIsSkip(true)
     }
     const nextIndex = () =>{
+        clickAudio.play();
+        clickAudio.volume = 0.8
         if (index + 1 <= message.length - 1){
             setIndex(index + 1 )
         }else{

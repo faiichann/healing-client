@@ -7,6 +7,9 @@ import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/monster.png'
 import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, StarGoalText, VsContainer, VsText } from "./styles/stage.styles";
+import SoundSelect from 'assets/sounds/select.mp3'
+import SoundClick from 'assets/sounds/read.mp3'
+import SoundRate from 'assets/sounds/rate.mp3'
 
 const { Title, Text } = Typography;
 
@@ -24,9 +27,15 @@ function GameStage1() {
     const [index, setIndex] = useState(0);
     const [animation1, setAnimation1] = useState(0);
     const [animation2, setAnimation2] = useState(0);
+    const audio = new Audio(SoundSelect)
+    const clickAudio = new Audio(SoundClick)
+    const rateAudio = new Audio(SoundRate)
+
     console.log('-----------item----------',items[items.length-1].goal)
 
     const selectItem1 = async() => {
+        audio.play();
+        audio.volume = 0.8
         if (select.length <= 2 ){
             await setGoal( select[select.length - 1]);
             setFinish(true);
@@ -40,6 +49,8 @@ function GameStage1() {
     }
 
     const selectItem2 = async() => {
+        audio.play();
+        audio.volume = 0.8
         if (select.length <= 2){
             await setGoal( select[select.length - 2]);
             setFinish(true);
@@ -64,6 +75,8 @@ function GameStage1() {
         setIsSkip(true)
     }
     const nextIndex = () =>{
+        clickAudio.play();
+        clickAudio.volume = 0.8
         if (index + 1 <= message.length - 1){
             setIndex(index + 1 )
         }else{
@@ -78,6 +91,8 @@ function GameStage1() {
         nextStage()
     }
     const handleChangeRate = ( value:number) =>{
+        rateAudio.play();
+        rateAudio.volume = 0.8
         setStarRate(value)
     }
     const desc = ['ระดับ1', 'ระดับ2', 'ระดับ3', 'ระดับ4', 'ระดับ5'];

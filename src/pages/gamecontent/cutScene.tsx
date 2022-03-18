@@ -8,17 +8,20 @@ import { Shadow } from "pages/home/styles/home.styles";
 import Logo  from 'assets/animation/logo.gif';
 import NPC from 'assets/images/Avatars/monster.png'
 import Animation from 'theme/animations'
+import SoundClick from 'assets/sounds/read.mp3'
+import SoundStart from 'assets/sounds/start.mp3'
 
 function Cutscene() {
     
     const [isTab, setIsTab] = useState(false)
     const { nextStage , isName, isAvatar } = useAppContext();
     const [index, setIndex] = useState(0);
-    const [isUserAvatar, setUserAvatar] = useState<string>()
+    const [isUserAvatar, setUserAvatar] = useState<string>();
+    const clickAudio = new Audio(SoundClick)
+    const startAudio = new Audio(SoundStart)
 
-    
     const message = [
-        `สวัสดีตรับ คุณ"${isName}"`,
+        `สวัสดีครับ คุณ"${isName}"`,
         `ผมชื่อบอทเขียวครับ`,
         'ยินดีต้อนรับเข้าสู่ Healing World',
         'บอทเขียวจะพาคุณไปหาแรงบันดาลใจให้เป้าหมายของคุณ', 
@@ -37,13 +40,21 @@ useEffect(() => {
 }, [index, message.length])
    
 
-    const nextIndex = () =>{
+    const nextIndex = () => {
+        clickAudio.play();
+        clickAudio.volume = 0.8
         if (index + 1 <= message.length - 1){
             setIndex(index + 1 )
         }else{
             nextStage()
         }
       }
+
+    const tabStart = () => {
+        startAudio.play();
+        startAudio.volume = 0.8
+        setIsTab(true)
+    }
     return (
        <>
             {isTab && 
@@ -86,7 +97,7 @@ useEffect(() => {
             }
             {!isTab && 
             <>
-             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 10vh)'}} onClick={()=>setIsTab(true)}>
+             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 10vh)'}} onClick={tabStart}>
              <Image
             width={100}
             src={Logo}

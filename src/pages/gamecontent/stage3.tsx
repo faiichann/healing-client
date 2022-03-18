@@ -9,6 +9,9 @@ import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/monster.png'
 import { ItemContainer, RandomContainer } from "./styles/stage.styles";
 import axios from "axios";
+import SoundRandom from 'assets/sounds/random.mp3'
+import SoundClick from 'assets/sounds/read.mp3'
+
 const { Title, Text } = Typography;
 
 function GameStage3() {
@@ -30,8 +33,12 @@ function GameStage3() {
       const [rankDes, setRankDes] = useState('');
       const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
         isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote } = useAppContext();
+      const randomAudio = new Audio(SoundRandom)
+      const clickAudio = new Audio(SoundClick)
 
       const random = () => {
+        randomAudio.play();
+        randomAudio.volume = 0.8
         let randomItem1 = Math.floor(Math.random() * items1.length);
         let randomItem2 = Math.floor(Math.random() * items2.length);
         let randomItem3 = Math.floor(Math.random() * items3.length);
@@ -104,6 +111,8 @@ function GameStage3() {
       }
 
       const nextIndex = () =>{
+        clickAudio.play();
+      clickAudio.volume = 0.8
         setIndex(index + 1 )
       }
 
@@ -120,6 +129,8 @@ function GameStage3() {
       }
 
     const nextIndexCut = () =>{
+      clickAudio.play();
+      clickAudio.volume = 0.8
         if (indexCut + 1 <= messageCut.length - 1){
           setIndexCut(indexCut + 1 )
         }else{

@@ -70,17 +70,16 @@ export const ImgSection = styled(Image)`
         position: relative;
     }
 `
-export const SectionSecond = styled.div`
-    width: 100%;
-    padding: 30px 0px;
-    height: max-content;    
-    background: var(--Green-500);
-    display: flex;
-    justify-content: center;
-    align-items: center ;
-    flex-direction: column;
-    z-index: 100;
-    position: relative;
+export const BoxThird = styled.div`
+ max-width: calc(80% - 50px);
+  margin: 50px auto ;
+  padding: 50px;
+  background-color: #fff;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 200;
 `
 
 export const ImageContent = styled.div`
@@ -191,4 +190,18 @@ color: white;
 width: 100% ;
 font-size: 24px;
 font-weight: 700 ;
+`
+export const ContentSection = styled.div`
+    width: 100%;
+    padding: 30px 0px;  
+    height: max-content;
+    background: var(--Green-500);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #ffc85a,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #ffc85a,#badeb3); 
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
 `

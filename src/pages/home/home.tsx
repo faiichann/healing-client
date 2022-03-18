@@ -1,14 +1,14 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
 import { Image, Typography } from 'antd';
-import { useEffect, useState } from 'react';
+import {  useRef, useEffect, useState } from 'react';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
 import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, SectionSecond, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer, TextLink, TextTitle } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumberDisplay, NumBox, HomeDrawer, TextLink, TextTitle,  BoxThird, ContentSection } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
@@ -20,6 +20,8 @@ function Home() {
     const [visible, setVisibleModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { cardNum } = useAppContext();
+    const revealRefs = useRef([]);
+    revealRefs.current = [];
 
     const handleButton = () => {
      setVisibleModal(!visible)
@@ -39,6 +41,21 @@ function Home() {
         alignItem:'center',
         display: 'flex'
     }
+    const sections = [
+        {
+          title: 'Architecto aliquam', 
+          subtitle: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. At, ea.'
+        },
+        {
+          title: 'Ceritatis placeat', 
+          subtitle: 'Dignissimos placeat cupiditate perferendis eaque praesentium similique officia dolore?'
+        },
+        {
+          title: 'Vitae voluptates', 
+          subtitle: 'In ullam et nulla repudiandae praesentium, laboriosam quas tempore fuga asperiores eveniet amet.'
+        }
+      ];
+  
     return (
        <LayoutHome>
            <ContainerHome>
@@ -99,7 +116,7 @@ function Home() {
 
            </SectionFirst>
             {/* ----Section2---- */}
-            <NumberDisplay>
+            <ContentSection>
             <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
                 <Box justify='center' align='center' direction='row'>
@@ -122,12 +139,16 @@ function Home() {
                   style={{margin: '10px 0px', cursor: 'pointer'}}
                   onClick={() => history.push('/gallery')}>Gallery</ButtonStyle>
             </Box>
-            </NumberDisplay>
-           {/* ----Section3---- */}
-           <SectionSecond>
             <CarouselHome/>
-           </SectionSecond>
-
+            {
+          sections.map(({title, subtitle}) => (
+            <BoxThird key={title}>
+              <h2>{title}</h2>
+              <p>{subtitle}</p>
+            </BoxThird>
+          ))
+        }
+            </ContentSection>
            {/* ----footer---- */}
            <FooterHome>
            <Title level={5}>Develop by</Title>
