@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useEffect, useState, useContext } from "react"
-import randomSlot from 'api/mocks/RandomSlot.json'
+import randomSlot from 'api/mocks/RandomSlot.json';
 
 interface IContextProps {
     children: any 
@@ -55,6 +55,9 @@ const AppProvider = (({children}: IContextProps) =>{
     const [author, setAuthor] = useState();
     const [text, setText] = useState();
     const [imgQuote, setImgQuote] = useState('');
+
+    //------------Sound------------------------//
+    const [isHangman, setHangman] = useState(false);
 
     const [cardID, setCardID] = useState('');
     const [cardInfo, setCardInfo] = useState(
@@ -146,7 +149,9 @@ const AppProvider = (({children}: IContextProps) =>{
         setCardID,
         cardID,
         cardInfo,
-        setCardInfo
+        setCardInfo,
+        isHangman,
+        setHangman
     }
 
     useEffect(() => {

@@ -12,6 +12,8 @@ import GameStage3 from './stage3';
 import { DivProgress, ProgressBar, TextHeadModal, NotiModal } from './styles/stage.styles';
 import { LeftOutlined } from '@ant-design/icons';
 import soundBg from 'assets/sounds/soundBg2.mp3'
+import HangmanStage from './hangmanStage';
+import hangmanSound from "assets/sounds/hangman.mp3";
 
 const ColHeader = styled(Col)`
     width: 100%;
@@ -31,9 +33,10 @@ const ButtonSound = styled(Button)`
 `;
 function GameContent() {
     const history = useHistory();
-    const { stage, setStage } = useAppContext();
+    const { stage, setStage, isHangman, setHangman} = useAppContext();
     const [isShowNotification, setIsShowNotification] = useState(false);
     const [audio, setAudio] = useState(new Audio(soundBg));
+    const HMaudio = new Audio(hangmanSound);
     const [playing, setPlaying] = useState(true);
 
     const showModal = () => {
@@ -48,23 +51,19 @@ function GameContent() {
         setIsShowNotification(false);
     };
 
-    useEffect(() => {
-       if(stage === 4){
-        history.push('/result')
-        setPlaying(false);
-        audio.pause();
-       }
-    }, [history, stage])
-
     const StyleButtonSpecial = {
         boxShadow: 'none',
         margin: '10px 10px' 
       }
 //------------Sound----------------
+const toggle = () => {
+    setPlaying(!playing);
+};
+  
 useEffect(() => {
     if(playing){
         audio.play();
-        audio.volume = 0.6
+        audio.volume = 0.5
         audio.loop = true;
     }else{
         audio.pause();
@@ -73,19 +72,47 @@ useEffect(() => {
   },
   [audio, playing]
 );
-const toggle = () => {
-    setPlaying(!playing);
-};
-    return (
+
+useEffect(() => {
+    if(stage === 4){
+     history.push('/result')
+     setPlaying(false);
+     setHangman(false)
+     audio.pause();
+     HMaudio.pause();
+    }
+ }, [HMaudio, audio, history, setHangman, stage])
+
+ useEffect(() => {
+     if(isHangman){
+        audio.pause();
+        HMaudio.play();
+        HMaudio.volume = 0.2
+        HMaudio.loop = true;
+    }else{
+        HMaudio.pause();
+    }
+  },
+  [playing, HMaudio, isHangman, audio]
+);
+
+useEffect(() => {
+    if(stage === 4){
+     setHangman(false)
+     HMaudio.pause()
+     history.push('/result');
+    }
+ }, [HMaudio, history, setHangman, stage])
+  return (
         <>
-       <Container header={{ title: 'Game Content', 
+       <Container header={{ title: isHangman? 'Special Stage': 'Finding Goal Stage', 
        left: ( 
        <ColHeader>
        <LeftOutlined onClick={showModal}/>
-       </ColHeader>), right: (
-  <div onClick={toggle}>
+       </ColHeader>), right: isHangman? '' : (
+  <div onClick={ toggle}>
   <ButtonSound>
-      {playing? (
+      {playing ? (
           <svg width="16" height="20" viewBox="0 0 16 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                   d="M15.9069 14.8595V6.40947H15.9251V1.34987C15.9259 1.23944 15.9031 1.13011 15.8585 1.02911C15.8138 0.928114 
@@ -95,7 +122,7 @@ const toggle = () => {
 6.83878C12.8686 6.87225 12.9655 6.92769 13.0477 7.00142C13.1299 7.07516 13.1956 7.16551 13.2403 7.26651C13.2849 7.36751 13.3077 7.47684 13.3069 7.58727V12.4142C13.2159 12.4064 13.1262 12.3869 13.0326 12.3869C12.5829 12.3874 12.1393 12.4915 11.7363 12.6913C11.3333 12.891 10.9818 13.181 10.709 13.5386C10.4363 13.8962 
 10.2496 14.3119 10.1636 14.7534C10.0776 15.1948 10.0944 15.6502 10.2129 16.0841C10.3439 16.5731 10.6009 17.0191 10.9584 17.3776C11.316 17.736 11.7613 17.9942 12.25 18.1264C12.6839 18.2449 13.1393 18.2617 13.5807 18.1757C14.0222 18.0897 14.4379 17.903 14.7955 17.6303C15.1531 17.3575 15.4431 17.006 15.6428 16.603C15.8426 
 16.2 15.9467 15.7564 15.9472 15.3067C15.9457 15.1568 15.9322 15.0072 15.9069 14.8595Z"
-                  fill="#3A8CE4"
+                  fill="#5B944D"
               />
           </svg>
       ) : (
@@ -144,12 +171,13 @@ const toggle = () => {
                 <p>หากออกขณะเล่นระบบจะไม่บันทึกข้อมูล</p>
                 </Box>
             </NotiModal>
-       <DivProgress style={{width: '100%'}}><ProgressBar percent={stage * 25} showInfo={false} strokeWidth={10}/></DivProgress>
+       {!isHangman && <DivProgress style={{width: '100%'}}><ProgressBar percent={stage * 25} showInfo={false} strokeWidth={10}/></DivProgress>}
        <Box justify='center' align='center' direction='column'>
            {stage === 0 && <Cutscene/>}
            {stage === 1 && <GameStage1/>} 
            {stage === 2  && <GameStage2/>}
-           {stage === 3 && <GameStage3/>}
+           {stage === 3 && !isHangman && <GameStage3/>}
+           {isHangman && <HangmanStage/>}
        </Box>
        </Container>
        </>

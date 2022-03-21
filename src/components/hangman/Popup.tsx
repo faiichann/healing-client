@@ -8,13 +8,11 @@ import axios from "axios";
 const { Title } = Typography;
 
 const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime } : any) => {
-  const history = useHistory();
   let finalMessage = "";
   let finalMessageRevealWord = "";
   let countTime = "";
   const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
-    isRateStar, cardID, setStage, author, text, imgQuote } = useAppContext();
-  
+    isRateStar, cardID, setStage, author, text, imgQuote, nextStage} = useAppContext();
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     finalMessage = "YOU PASS!!";
     finalMessageRevealWord = "ความพยายามไม่เคยทำร้ายใครไปรับรางวัลกัน";
@@ -62,7 +60,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
 
    const endStage = async() => {
      await sentData()
-     history.push('/Gamecontent')
+     nextStage()
    }
 
   return (

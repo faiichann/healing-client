@@ -16,7 +16,6 @@ const { Title, Text } = Typography;
 
 function GameStage3() {
     const { nextStage, cardRandomInfo } = useAppContext();
-    const history = useHistory();
     const items1 = randomSlot.Emoji
     const items2 = randomSlot.Caption
     const items3 = randomSlot.Rank
@@ -32,7 +31,7 @@ function GameStage3() {
       const [rank, setRank] = useState('');
       const [rankDes, setRankDes] = useState('');
       const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
-        isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote } = useAppContext();
+        isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote, setHangman } = useAppContext();
       const randomAudio = new Audio(SoundRandom)
       const clickAudio = new Audio(SoundClick)
 
@@ -125,7 +124,7 @@ function GameStage3() {
     ] 
 
     const goSpecial = () =>{
-      history.push('/hangman-stage')
+      setHangman(true)
       }
 
     const nextIndexCut = () =>{

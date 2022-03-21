@@ -3,7 +3,6 @@ import Header from "components/hangman/Header";
 import Popup from "components/hangman/Popup";
 import Word from "components/hangman/Word";
 import { useEffect, useState } from "react";
-import Container from "components/container/container";
 import "./styles/hangman.css"
 import { Box } from "theme/components";
 import { GameContainer } from "./styles/hangman.styles";
@@ -11,6 +10,8 @@ import axios from "axios";
 import { useAppContext } from "context/appContext";
 import styled from "styled-components";
 import { Button, Row } from "antd";
+import EatSound from "assets/sounds/eat.mp3";
+import passSound from "assets/sounds/pass.mp3";
 
 const words = [
     'heal',
@@ -46,6 +47,7 @@ const words = [
   const KeyRow = styled(Row)`
   margin: 10px 2px;
   `
+
   let selectedWord = words[Math.floor(Math.random() * words.length)];
 
   function HangmanStage() {
@@ -54,6 +56,9 @@ const words = [
     const [wrongLetters, setWrongLetters] = useState<any>([]);
     const [loseTime, setLoseTime] = useState(0);
     const { setCardID, getQuotes } = useAppContext();
+    const eatAudio = new Audio(EatSound)
+    const passAudio = new Audio(passSound)
+
     const fetchData = async () => {
       try {
           const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
@@ -63,19 +68,26 @@ const words = [
         } 
   };
     useEffect(() => {
+      passAudio.play();
+      passAudio.volume = 0.5;
       fetchData()
       getQuotes()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+ 
   const handleKeydown = (key :any) => {
     if (playable && key) {
       const letter = key.toLowerCase();
       if (selectedWord.includes(letter)) {
         if (!correctLetters.includes(letter)) {
+          passAudio.play();
+          passAudio.volume = 0.8;
           setCorrectLetters((currentLetters: any) => [...currentLetters, letter]);
         } 
       } else {
         if (!wrongLetters.includes(letter)) {
+          eatAudio.play();
+          eatAudio.volume = 0.8
           setWrongLetters((currentLetters: any) => [...currentLetters, letter]);
         }
       }
@@ -96,7 +108,6 @@ const words = [
 
   return (
     <>
-      <Container header={{ title: 'Special Game' }}>
       <Box justify='center' align='center' direction='column' style={{ marginTop: '60px', overflowY: 'scroll'}}>
       <Header />
       <GameContainer>
@@ -224,7 +235,6 @@ const words = [
       playAgain={playAgain}
       loseTime={loseTime} />
       </Box>
-      </Container>
     </>
   );
 }
