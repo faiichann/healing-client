@@ -105,7 +105,7 @@ useEffect(() => {
  }, [HMaudio, history, setHangman, stage])
   return (
         <>
-       <Container header={{ title: isHangman? 'Special Stage': 'Finding Goal Stage', 
+       <Container header={{ title: isHangman? 'จงเชื่อมั่นในตัวเอง': 'ตามหาเป้าหมายของคุณ', 
        left: ( 
        <ColHeader>
        <LeftOutlined onClick={showModal}/>

@@ -72,7 +72,7 @@ useEffect(() => {
                 </MessageCutScene>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row>
+              <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -105,7 +105,7 @@ useEffect(() => {
             style={{margin: '20px 0'}}
             />
             <Shadow />
-                 <TextCutScene> Tab Screen to play ! </TextCutScene>
+                 <TextCutScene> แตะ หน้าจอเริ่มเลย! </TextCutScene>
              </Box>
             </>}
        </>

@@ -28,7 +28,7 @@ const Header = () => {
           title={
             <>
              <Box justify='center' align='center' direction='column' >
-             <Title level={2} style={{color: '#A6CD9C'}}> HOW TO PLAY! </Title>
+             <Title level={2} style={{color: '#A6CD9C'}}> วิธีการเล่น! </Title>
              </Box>
             </>
           }
@@ -44,13 +44,13 @@ const Header = () => {
                   หากคุณทายผิด หนอนยักา์จะกินต้นไม้คุณ<br/>
                   ดูแลต้นไม้ของคุณให้ดี มีโอกาสเพียง 3 ครั้ง<br/>
                   มาพยายามให้เต็มที่กันเถอะ!!<br/>
-                  Hint: Words are only on the WEB!
+                  Hint: Words are about NFT!
            </Text>
              </Box>
         </DrawerStyle>
-      <Title level={2} style={{color: '#A6CD9C'}}>Save your plant!</Title>
-      <p>Try to Find the hidden word!</p>
-      <ButtonStyle pattern="Light" sizebutton={30} typebutton={"Small"} onClick={HandleButton}>Rules</ButtonStyle>
+      <Title level={2} style={{color: '#A6CD9C'}}>รักษาต้นไม้ไว้ให้ได้ !</Title>
+      <p>พยายามหาคำที่ซ่อนอยู่ !</p>
+      <ButtonStyle pattern="Light" sizebutton={30} typebutton={"Small"} onClick={HandleButton}>กติกา</ButtonStyle>
     </>
   );
 };

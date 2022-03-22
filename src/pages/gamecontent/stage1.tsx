@@ -121,7 +121,7 @@ function GameStage1() {
                     </Box>
                     </StarCard>
                     {starRate > 0 && 
-                     <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> CONFIRM </ButtonStyle>
+                     <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> ยืนยัน </ButtonStyle>
                     }
                 </>
                 :
@@ -136,7 +136,7 @@ function GameStage1() {
                         />
                     </GoalContainer>
                 <InputGoalStyle>
-                <InputGoal placeholder= {`พิมพ์สิ่งที่ปราถนาเกี่ยวกับเรื่อง ${goal.goal}`} maxLength={30}
+                <InputGoal placeholder= {`พิมพ์เป้าหมายของคุณในด้าน ${goal.goal}`} maxLength={30}
                  onChange={({ target: { value } }) => { setUserGoal(value) }} /> /30
                 </InputGoalStyle>
                 {userGoal &&  <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>}

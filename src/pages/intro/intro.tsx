@@ -42,7 +42,7 @@ function Intro() {
             </BoxSlide>
             </BoxContent>
         <Box justify='center' align='center' direction='row'>
-           <ButtonStyle typebutton='Medium' pattern='Light' sizebutton={40} onClick={() => history.push('/userinfo')}> NEXT </ButtonStyle>
+           <ButtonStyle typebutton='Medium' pattern='Light' sizebutton={40} onClick={() => history.push('/userinfo')}> ถัดไป </ButtonStyle>
            </Box>
         </Container>
     );

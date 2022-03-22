@@ -152,7 +152,7 @@ function Result() {
         </ButtonStyle>
         </Box>
     </TabPane>
-    <TabPane tab="Healing Card As NFT" key="2">
+    <TabPane tab="Healing NFT Card" key="2">
     <CardContainer ref={exportNFTRef} rank={dataCard?.cardReult.nft_card.bg_color}>
            <Row style={{justifyContent: 'center' }} >
                     <HeaderCard>
@@ -243,7 +243,7 @@ function Result() {
             preview={false}
             style={{margin: '20px 0'}}
             /> 
-                 <Text strong>TAP TO OPEN BOX !!!</Text>
+                 <Text strong>แตะ เพื่อเปิดกล่องรางวัล !!!</Text>
                 </>
             }
          </Box>

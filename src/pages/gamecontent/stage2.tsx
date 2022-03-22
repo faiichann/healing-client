@@ -117,9 +117,9 @@ function GameStage2() {
             <ButtonStyle typebutton='Large' sizebutton={75} 
             backgroundbutton={'var(--Green-300)'} 
             style={{fontWeight: '400', fontSize: '18px'}}
-            onClick={handleOk}> CONTINUE </ButtonStyle>
+            onClick={handleOk}> ตกลง </ButtonStyle>
           ]}>
-               <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU WIN!</Title>
+               <Title level={3} style={{color: '#333333', margin: '5px'}}> ชนะแล้ว !</Title>
                 <p>ยินดีด้วยคุณผ่านแล้วไปด่านต่อไปได้เลย</p>
         </ConfirmModal>
         <ConfirmModal title={<>
@@ -138,9 +138,9 @@ function GameStage2() {
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
             onClick={handleLoseOk} 
-            style={{fontWeight: '400', fontSize: '18px'}}> PLAY AGAIN </ButtonStyle>
+            style={{fontWeight: '400', fontSize: '18px'}}> เล่นอีกครั้ง </ButtonStyle>
           ]}>
-            <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU lOSE!</Title>
+            <Title level={3} style={{color: '#333333', margin: '5px'}}> แพ้แล้ว !</Title>
             <p>ไม่เป็นไรนะพยายามเข้าอีกนิดจนกว่าจะผ่านกันเถอะ</p>
         </ConfirmModal>
 

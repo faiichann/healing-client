@@ -14,15 +14,15 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
   const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
     isRateStar, cardID, setStage, author, text, imgQuote, nextStage} = useAppContext();
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
-    finalMessage = "YOU PASS!!";
-    finalMessageRevealWord = "ความพยายามไม่เคยทำร้ายใครไปรับรางวัลกัน";
+    finalMessage = "เย้!! ผ่านแล้ว";
+    finalMessageRevealWord = "จงเชื่อมั่นในตัวเองไว้ ไปรับรางวัลกัน";
   } else if (checkWin(correctLetters, wrongLetters, selectedWord) === "lose") {
     if ( loseTime > 2 ) {
-      finalMessage = "FAILED!!";
+      finalMessage = "หว่า!! แย่จัง";
       finalMessageRevealWord = `( ${selectedWord})`;
-      countTime = `ไม่เป็นไรนะเรามีของตอบแทนความพยายามให้คุณ`
+      countTime = `ไม่เป็นไรนะเรามีของตอบแทนความพยายามในตัวคุณ`
     }else {
-      finalMessage = "PLAY AGAIN!!";
+      finalMessage = "พยายามอีกครั้ง!!";
       finalMessageRevealWord = `( ${selectedWord} )`;
       countTime = `เหลือโอกาสอีก ${ 3 - (loseTime)} ครั้ง`
     }
@@ -94,20 +94,20 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
             sizebutton={75} 
             onClick={endStage} 
             backgroundbutton={'#A6CD9C'}
-            style={{fontWeight: '400', fontSize: '18px'}}> OK </ButtonStyle>
+            style={{fontWeight: '400', fontSize: '18px'}}> รับรางวัล </ButtonStyle>
           ] :  
           loseTime > 2 ? [
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
             onClick={endStage} 
-            style={{fontWeight: '400', fontSize: '18px'}}> Get it </ButtonStyle>
+            style={{fontWeight: '400', fontSize: '18px'}}> รับรางวัล </ButtonStyle>
           ] 
           : 
           [
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
             onClick={playAgain} 
-            style={{fontWeight: '400', fontSize: '18px'}}> Play again </ButtonStyle>
+            style={{fontWeight: '400', fontSize: '18px'}}> เล่นอีกครั้ง </ButtonStyle>
           ]}>
             <Title level={3} style={{color: '#333333', margin: '5px'}}>{finalMessage}</Title>
             <p>{finalMessageRevealWord}</p>

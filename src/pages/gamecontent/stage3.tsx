@@ -200,8 +200,8 @@ function GameStage3() {
          :
          <>
           <Box justify='center' align='center' direction='column' style={{marginTop: '20%' }}>
-          <Title level={2} style={{fontSize: '36px', fontWeight: '700', color: 'var(--Green-300)' }}>Good Luck!</Title> 
-          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>Random Fortune Card</Text>
+          <Title level={2} style={{fontSize: '36px', fontWeight: '700', color: 'var(--Green-300)' }}>ขอให้โชคดี !</Title> 
+          <Text style={{fontSize: '18px', fontWeight: '400', color: '#868686', marginBottom: '0'  }}>สุ่มการ์ดทำนายดวง</Text>
           <RandomContainer onClick={random}>
           <Row gutter={[32, 16]} style={{width: '100%'}}>
             <Col span={8}> <ItemContainer > {item1} </ItemContainer> </Col>
@@ -211,10 +211,10 @@ function GameStage3() {
           </RandomContainer>
         
         <Box justify='center' align='center' direction='column' style={{marginBottom: '20px'}}>
-        <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'Random again' : 'Tap Card to Random' } </Title>
+        <Title level={2} style={{fontSize: '24px', fontWeight: '700', color: 'var(--Green-300)' }}> {isRandom ? 'สุ่มอีกครั้ง' : 'แตะ การ์ดเพื่อทำนาย' } </Title>
         </Box>
         { isRandom && <Box justify='center' align='center' direction='column'>
-            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(item1,caption,rank)}>CONFIRM</ButtonStyle>
+            <ButtonStyle typebutton="Large" sizebutton={50}  onClick={()=> onConfirm(item1,caption,rank)}>ยืนยัน</ButtonStyle>
         </Box>}
         </Box>
          </>
@@ -229,7 +229,7 @@ function GameStage3() {
             <>
             <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}}>
             <MessageCutScene >
-                   คุณเชื่อในเรื่องดวงชะตาหรือไม่ ตอบ Yes หรือ NO เพื่อไปต่อ
+                   คุณเชื่อในเรื่องดวงชะตาหรือไม่ ตอบคำถามเพื่อไปต่อ
                 </MessageCutScene>
                 <Box justify='center' align='center' direction='row'  style={{margin: '40px 0 20px 0'}}>
               <Row>
@@ -242,8 +242,8 @@ function GameStage3() {
                   </Col>
               </Row>
               </Box>
-              <ButtonStyle typebutton="Medium" backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={45} onClick={nextIndexCut}>YES</ButtonStyle>
-              <ButtonStyle typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>NO</ButtonStyle>
+              <ButtonStyle typebutton="Medium" backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={45} onClick={nextIndexCut}>เชื่อ</ButtonStyle>
+              <ButtonStyle typebutton="Medium" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={goSpecial}>ไม่เชื่อ</ButtonStyle>
             </Box>
             </>
           :

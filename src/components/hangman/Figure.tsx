@@ -23,6 +23,7 @@ const Figure = ({ wrongLetters }:any) => {
       {/* <!-- Legs --> */}
       {errors === 5 && <Image width={200} src={step5} preview={false}/>}
       {errors === 6 && <Image width={200} src={step6} preview={false}/>}
+      {errors === 7 && <Image width={200} src={step6} preview={false}/>}
     </FigureContainer>
   );
 };
