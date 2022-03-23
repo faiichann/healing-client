@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
-import { Image, Typography } from 'antd';
+import { Divider, Image, Typography } from 'antd';
 import {  useRef, useEffect, useState } from 'react';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
@@ -11,7 +11,7 @@ import cloud from 'assets/images/bgHome/cloud.png'
 import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink, TextTitle,  BoxThird, ContentSection } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
-// import { useAppContext } from 'context/appContext';
+import { useAppContext } from 'context/appContext';
 
 const { Title, Text } = Typography;
 
@@ -19,7 +19,7 @@ function Home() {
     const history = useHistory();
     const [visible, setVisibleModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
-    // const { cardNum } = useAppContext();
+    const { cardNum } = useAppContext();
     const revealRefs = useRef([]);
     revealRefs.current = [];
 
@@ -58,18 +58,28 @@ function Home() {
   
     return (
        <LayoutHome>
-           <ContainerHome>
-           <HomeDrawer
-          title={<TextTitle>ข้อมูลเพิ่มเติม</TextTitle>}
+        <HomeDrawer
+          closable={true}
+          getContainer={false}
+          size={'large'}
+          style={{ position: 'absolute' }}
           placement="right"
-          closable={false}
           onClose={onClose}
           visible={visible}
         >
+           <Box justify='flex-end' align='center' direction='column'  style={{margin: '10px 0' }}>
+            <Image
+              width={100}
+              src={logo}
+              preview={false}
+          />
+           <Divider><TextLink style={{color: '#8FB486', fontSize: '30px'}}>HEALING</TextLink></Divider>
+          </Box>
           <p><TextLink href='https://www.figma.com/proto/8pMn3HEBtFPdjWnMlUKKDX/UI-Project?page-id=1503%3A4450&node-id=1503%3A4451&viewport=241%2C48%2C0.97&scaling=min-zoom'>-การขาย NFT</TextLink></p>
           <p><TextLink href='https://www.notion.so/Project-Info-850372c08f6a44a793028d1f7fe38905'>-ข้อมูลเพิ่มเติมของโปรเจค</TextLink></p>
           <p><TextLink href='https://forms.gle/x5FXUiT7BEdeqwVr9'>-แบบประเมินความพึงพอใจ</TextLink></p>
         </HomeDrawer>
+           <ContainerHome>
             {/* ----Section1---- */}
            <SectionFirst>
             <Box justify='flex-end' align='center' direction='row' onClick={handleButton}
@@ -119,7 +129,7 @@ function Home() {
             <ContentSection>
             <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
-                {/* <Box justify='center' align='center' direction='row'>
+                <Box justify='center' align='center' direction='row'>
                 {cardNum.split("").map((text :string, i:number) => {
                 return (
                    
@@ -131,7 +141,7 @@ function Home() {
                    
                     );
                 })}
-                 </Box> */}
+                 </Box>
                  <ButtonStyle  
                   typebutton='Medium'  
                   pattern='Text'

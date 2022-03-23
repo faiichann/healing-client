@@ -11,6 +11,7 @@ export const LayoutHome = styled(Layout)`
     z-index: 0;
     height: 100vh;
     overflow-x: hidden;
+    position: relative;
 `
 
 export const ContainerHome = styled(Content)`
@@ -158,19 +159,25 @@ export const HomeDrawer = styled(Drawer)`
 .ant-drawer-header {
     padding: 0;
     display: flex;
-    background: var(--Green-500);
+    /* background: var(--Green-500);
     height: 50px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    display: flex;
+    display: flex; */
 }
 .ant-drawer-mask{
-    width: 50% !important;
+    width: 0 !important;
 }
 & .ant-drawer-content-wrapper{
-    width: 50% !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 100% !important;
+    opacity: 90%;
 }
+
 `
 export const TextLink = styled.a`
 &:hover{
