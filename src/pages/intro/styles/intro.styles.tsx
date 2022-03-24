@@ -11,9 +11,8 @@ export const ContentStyle = styled.div`
     align-items: center;
   `;
 export const ImageSlide = styled.div`
-    width: 230px;
-    height: 230px;
-    background: var(--White);
+    width: 80%;
+    background: transparent;
     border-radius: var(--Radius-12);
     margin: 40px 16px;
     display: flex;

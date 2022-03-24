@@ -14,6 +14,7 @@ import formatNumber from 'utils/formatNumber';
 import formatGoal from 'utils/formatGoal';
 import exportAsImage from 'utils/saveImage';
 import formatMonster from 'utils/formatMonster';
+import openSound from 'assets/sounds/open.mp3'
 
 const { Text, Title} = Typography;
 const { TabPane } = Tabs;
@@ -26,6 +27,7 @@ function Result() {
     const [dataCard, setDataCard] = useState<any>();
     const exportRef = useRef<any>();
     const exportNFTRef = useRef<any>();
+    const openAudio = new Audio(openSound)
 
     const saveResult = () =>{
         exportAsImage(exportRef.current, "healingCard")
@@ -49,6 +51,8 @@ function Result() {
     }, []);
     
     const openBox = async() =>{
+        openAudio.play();
+        openAudio.volume = 0.8
             setIsOpen(true)
         try {
             await axios.get(`https://healing-project.herokuapp.com/results/${cardID}`).then(async (response) => {
@@ -148,7 +152,7 @@ function Result() {
         </ButtonStyle>
         </Box>
     </TabPane>
-    <TabPane tab="Healing Card As NFT" key="2">
+    <TabPane tab="Healing NFT Card" key="2">
     <CardContainer ref={exportNFTRef} rank={dataCard?.cardReult.nft_card.bg_color}>
            <Row style={{justifyContent: 'center' }} >
                     <HeaderCard>
@@ -239,7 +243,7 @@ function Result() {
             preview={false}
             style={{margin: '20px 0'}}
             /> 
-                 <Text strong>TAP TO OPEN BOX !!!</Text>
+                 <Text strong>แตะ เพื่อเปิดกล่องรางวัล !!!</Text>
                 </>
             }
          </Box>

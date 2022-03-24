@@ -58,13 +58,13 @@ function UserInfo() {
     //   }
 
     return (
-        <Container header={{ title: 'Information', left: 'back' }}>
+        <Container header={{ title: 'ข้อมูลผู้สร้าง', left: 'back' }}>
            <Box justify='center' align='center' direction='column' style={{height: '80vh'}}>
         {/* { isConfirm ? data() :null} */}
 
         <Box justify='center' align='center' direction='column'>
         <InputStyle>
-            <InputName placeholder="type your name"
+            <InputName placeholder="พิมพ์ชื่อของคุณ..."
              name="userName" 
              maxLength={10}
              onChange={({ target: { value } }) => { setUsername(value) }}
@@ -82,7 +82,7 @@ function UserInfo() {
                 <ImageSlide selected={ isSelect === item.value ? true : false}>
             <Image
                     preview={false}
-                    width={item.width}
+                    height={item.width}
                     src={item.img}
                     onClick={()=> handleChange(item.value)}
                 />
@@ -102,9 +102,9 @@ function UserInfo() {
                 // <ButtonStyle typebutton='Medium' sizebutton={30} onClick={() => history.push('/Gamecontent')}> Next </ButtonStyle>
                 // :
                 !avatar || !username ?   
-                <Text type="secondary">Choose your avatar</Text>
+                <Text type="secondary">เลือกตัวละครของคุณ</Text>
                 :
-                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={()=> onConfirm(username, avatar)}> Confirm </ButtonStyle>
+                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={()=> onConfirm(username, avatar)}> ยืนยัน </ButtonStyle>
             }
         </Box>
         </Box>

@@ -10,6 +10,11 @@ import Animation from 'theme/animations'
 import NPC from 'assets/images/Avatars/monster.png'
 import Mad from 'assets/images/stage/Mad.png'
 import Smile from 'assets/images/stage/Smile.png'
+import SoundWrong from 'assets/sounds/wrongAns.mp3'
+import SoundRight from 'assets/sounds/rightAns.mp3'
+import SoundClick from 'assets/sounds/read.mp3'
+import { Avatar } from 'api/mocks/Avatars'
+
 const { Title } = Typography;
 
 function GameStage2() {
@@ -17,18 +22,35 @@ function GameStage2() {
     let random = Math.floor(Math.random() * info.length);
     const [text, setText] = useState(info[random].text)
     const [score, setScore] = useState(0)
-    const { nextStage, isLose, setIsLose, isReset, setIsReset } = useAppContext()
+    const { nextStage, isLose, setIsLose, isReset, setIsReset, isAvatar } = useAppContext()
+    const [isUserAvatar, setUserAvatar] = useState<string>();
     const [isPassVisible, setIsPassVisible] = useState(false);
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
+    const wrongAudio = new Audio(SoundWrong)
+    const rightAudio = new Audio(SoundRight)
+    const clickAudio = new Audio(SoundClick)
+
+    useEffect(() => {
+        async function fetchMyAPI(){
+            let userAvatar = Avatar.find(({ value }) => value === isAvatar)
+            setUserAvatar(userAvatar?.img)
+        }
+        fetchMyAPI()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const goodButton = (value:number) => {
         setText(info[random].text)
         if (value === 1){
             if(score < 10){
+                rightAudio.play();
+                rightAudio.volume = 0.8
                 setScore(score + 1)
             }
         } else {
+            wrongAudio.play();
+            wrongAudio.volume = 0.8
             setScore(score)
         }
     }
@@ -37,9 +59,13 @@ function GameStage2() {
         setText(info[random].text)
         if (value === 0){
             if(score < 10){
+                rightAudio.play();
+                rightAudio.volume = 0.8
                 setScore(score + 1)
             }
         } else {
+            wrongAudio.play();
+            wrongAudio.volume = 0.8
             setScore(score)
         }
     }
@@ -69,6 +95,8 @@ function GameStage2() {
         setIsSkip(true)
     }
     const nextIndex = () =>{
+        clickAudio.play();
+        clickAudio.volume = 0.8
         if (index + 1 <= message.length - 1){
             setIndex(index + 1 )
         }else{
@@ -100,9 +128,9 @@ function GameStage2() {
             <ButtonStyle typebutton='Large' sizebutton={75} 
             backgroundbutton={'var(--Green-300)'} 
             style={{fontWeight: '400', fontSize: '18px'}}
-            onClick={handleOk}> CONTINUE </ButtonStyle>
+            onClick={handleOk}> ตกลง </ButtonStyle>
           ]}>
-               <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU WIN!</Title>
+               <Title level={3} style={{color: '#333333', margin: '5px'}}> ชนะแล้ว !</Title>
                 <p>ยินดีด้วยคุณผ่านแล้วไปด่านต่อไปได้เลย</p>
         </ConfirmModal>
         <ConfirmModal title={<>
@@ -121,9 +149,9 @@ function GameStage2() {
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
             onClick={handleLoseOk} 
-            style={{fontWeight: '400', fontSize: '18px'}}> PLAY AGAIN </ButtonStyle>
+            style={{fontWeight: '400', fontSize: '18px'}}> เล่นอีกครั้ง </ButtonStyle>
           ]}>
-            <Title level={3} style={{color: '#333333', margin: '5px'}}> YOU lOSE!</Title>
+            <Title level={3} style={{color: '#333333', margin: '5px'}}> แพ้แล้ว !</Title>
             <p>ไม่เป็นไรนะพยายามเข้าอีกนิดจนกว่าจะผ่านกันเถอะ</p>
         </ConfirmModal>
 
@@ -197,7 +225,7 @@ function GameStage2() {
                 </MessageCutScene>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row>
+            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -205,6 +233,17 @@ function GameStage2() {
                 src={NPC}
                 />
                   </Col>
+                  {!(index > 1) &&
+                  isUserAvatar && 
+                  <Col span={8} offset={6}>
+                  <Image 
+                width={100}
+                preview={false}
+                src={isUserAvatar}
+                style={{transform: 'scaleX(-1)'}}
+                />
+                  </Col>
+                   }
               </Row>
               </Box>
         </Box>
