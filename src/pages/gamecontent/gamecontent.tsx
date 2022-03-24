@@ -35,7 +35,9 @@ function GameContent() {
     const history = useHistory();
     const { stage, setStage, isHangman, setHangman} = useAppContext();
     const [isShowNotification, setIsShowNotification] = useState(false);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [audio, setAudio] = useState(new Audio(soundBg));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const HMaudio = new Audio(hangmanSound);
     const [playing, setPlaying] = useState(true);
 

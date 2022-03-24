@@ -8,12 +8,11 @@ import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink, TextTitle,  BoxThird, ContentSection, StarCardHome } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
 import SoundRate from 'assets/sounds/rate.mp3'
-import { StarCard } from 'pages/gamecontent/styles/stage.styles';
 
 const { Title, Text } = Typography;
 

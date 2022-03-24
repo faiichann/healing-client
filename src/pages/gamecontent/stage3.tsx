@@ -1,7 +1,6 @@
 import { Row, Image, Col, Typography } from "antd";
 import { useAppContext } from "context/appContext";
 import { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Box, ButtonStyle } from "theme/components";
 import randomSlot from 'api/mocks/RandomSlot.json'
 import { MessageCutScene } from "./styles/cutScene.styles";

@@ -1,6 +1,5 @@
 import { useAppContext } from "context/appContext";
 import { ConfirmModal } from "pages/gamecontent/styles/stage.styles";
-import { useHistory } from "react-router-dom";
 import { ButtonStyle } from "theme/components";
 import { checkWin } from "utils/hangmanHelper";
 import { Typography } from "antd";
