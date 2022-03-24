@@ -1,10 +1,11 @@
 import { Col, Row, Typography, Image, Rate } from "antd";
 import { useAppContext } from "context/appContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box, ButtonStyle } from "theme/components";
 import { goalItem }from 'api/mocks/selcetItems'
 import { MessageCutScene } from "./styles/cutScene.styles";
 import Animation from 'theme/animations'
+import { Avatar } from 'api/mocks/Avatars'
 import NPC from 'assets/images/Avatars/monster.png'
 import { GoalContainer, GoalText, InputGoal, InputGoalStyle, RowVsgame, StarCard, StarGoalText, VsContainer, VsText } from "./styles/stage.styles";
 import SoundSelect from 'assets/sounds/select.mp3'
@@ -20,19 +21,29 @@ function GameStage1() {
     const [finish, setFinish] = useState(false)
     const [goal, setGoal] = useState<any>()
     const [userGoal, setUserGoal]= useState<String |null>(null);
-    const { nextStage, goalInfo } = useAppContext();
+    const { nextStage, goalInfo, isAvatar  } = useAppContext();
     const [isSkip, setIsSkip] = useState(false)
     const [starRate, setStarRate] = useState(0)
     const [isRating, setRating] = useState(false)
     const [index, setIndex] = useState(0);
     const [animation1, setAnimation1] = useState(0);
     const [animation2, setAnimation2] = useState(0);
+    const [isUserAvatar, setUserAvatar] = useState<string>();
     const audio = new Audio(SoundSelect)
     const clickAudio = new Audio(SoundClick)
     const rateAudio = new Audio(SoundRate)
 
-    console.log('-----------item----------',items[items.length-1].goal)
 
+    console.log('-----------item----------',items[items.length-1].goal)
+    useEffect(() => {
+        async function fetchMyAPI(){
+            let userAvatar = Avatar.find(({ value }) => value === isAvatar)
+            setUserAvatar(userAvatar?.img)
+        }
+        fetchMyAPI()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    
     const selectItem1 = async() => {
         audio.play();
         audio.volume = 0.8
@@ -209,7 +220,7 @@ function GameStage1() {
                 </MessageCutScene>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row>
+            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -217,6 +228,17 @@ function GameStage1() {
                 src={NPC}
                 />
                   </Col>
+                  {!(index > 2)&&
+                  isUserAvatar && 
+                  <Col span={8} offset={6}>
+                  <Image 
+                width={100}
+                preview={false}
+                src={isUserAvatar}
+                style={{transform: 'scaleX(-1)'}}
+                />
+                  </Col>
+                   }
               </Row>
               </Box>
         </Box>

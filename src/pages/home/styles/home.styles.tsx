@@ -81,6 +81,8 @@ export const BoxThird = styled.div`
   justify-content: center;
   flex-direction: column;
   z-index: 200;
+  opacity: 60%;
+  border-radius: 25px ;
 `
 
 export const ImageContent = styled.div`
@@ -120,7 +122,7 @@ export const Shadow = styled.div`
 `
 export const MenuIcon = () => {
     return(
-<svg width="24" height="24" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'fixed'}}>
 <line x1="1.5" y1="1.5" x2="16.5" y2="1.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
 <line x1="1.5" y1="7.5" x2="16.5" y2="7.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
 <line x1="7.5" y1="13.5" x2="16.5" y2="13.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
@@ -211,4 +213,19 @@ export const ContentSection = styled.div`
     flex-direction: column;
     z-index: 100;
     position: relative;
+`
+
+export const StarCardHome = styled.div`
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 16px 16px 40px 16px;
+    box-shadow: 0px 0px 83px -23px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: white;
+    flex-direction: column  ;
 `

@@ -11,6 +11,7 @@ import { ItemContainer, RandomContainer } from "./styles/stage.styles";
 import axios from "axios";
 import SoundRandom from 'assets/sounds/random.mp3'
 import SoundClick from 'assets/sounds/read.mp3'
+import { Avatar } from 'api/mocks/Avatars'
 
 const { Title, Text } = Typography;
 
@@ -31,9 +32,19 @@ function GameStage3() {
       const [rank, setRank] = useState('');
       const [rankDes, setRankDes] = useState('');
       const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
-        isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote, setHangman } = useAppContext();
+        isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote, setHangman, isAvatar } = useAppContext();
+      const [isUserAvatar, setUserAvatar] = useState<string>();
       const randomAudio = new Audio(SoundRandom)
       const clickAudio = new Audio(SoundClick)
+
+      useEffect(() => {
+        async function fetchMyAPI(){
+            let userAvatar = Avatar.find(({ value }) => value === isAvatar)
+            setUserAvatar(userAvatar?.img)
+        }
+        fetchMyAPI()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
       const random = () => {
         randomAudio.play();
@@ -260,7 +271,7 @@ function GameStage3() {
                 </MessageCutScene>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row>
+            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -268,6 +279,16 @@ function GameStage3() {
                 src={NPC}
                 />
                   </Col>
+                  {isUserAvatar && 
+                  <Col span={8} offset={6}>
+                  <Image 
+                width={100}
+                preview={false}
+                src={isUserAvatar}
+                style={{transform: 'scaleX(-1)'}}
+                />
+                  </Col>
+                   }
               </Row>
               </Box>
           </Box>

@@ -13,6 +13,7 @@ import Smile from 'assets/images/stage/Smile.png'
 import SoundWrong from 'assets/sounds/wrongAns.mp3'
 import SoundRight from 'assets/sounds/rightAns.mp3'
 import SoundClick from 'assets/sounds/read.mp3'
+import { Avatar } from 'api/mocks/Avatars'
 
 const { Title } = Typography;
 
@@ -21,13 +22,23 @@ function GameStage2() {
     let random = Math.floor(Math.random() * info.length);
     const [text, setText] = useState(info[random].text)
     const [score, setScore] = useState(0)
-    const { nextStage, isLose, setIsLose, isReset, setIsReset } = useAppContext()
+    const { nextStage, isLose, setIsLose, isReset, setIsReset, isAvatar } = useAppContext()
+    const [isUserAvatar, setUserAvatar] = useState<string>();
     const [isPassVisible, setIsPassVisible] = useState(false);
     const [isSkip, setIsSkip] = useState(false)
     const [index, setIndex] = useState(0);
     const wrongAudio = new Audio(SoundWrong)
     const rightAudio = new Audio(SoundRight)
     const clickAudio = new Audio(SoundClick)
+
+    useEffect(() => {
+        async function fetchMyAPI(){
+            let userAvatar = Avatar.find(({ value }) => value === isAvatar)
+            setUserAvatar(userAvatar?.img)
+        }
+        fetchMyAPI()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const goodButton = (value:number) => {
         setText(info[random].text)
@@ -214,7 +225,7 @@ function GameStage2() {
                 </MessageCutScene>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row>
+            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -222,6 +233,17 @@ function GameStage2() {
                 src={NPC}
                 />
                   </Col>
+                  {!(index > 1) &&
+                  isUserAvatar && 
+                  <Col span={8} offset={6}>
+                  <Image 
+                width={100}
+                preview={false}
+                src={isUserAvatar}
+                style={{transform: 'scaleX(-1)'}}
+                />
+                  </Col>
+                   }
               </Row>
               </Box>
         </Box>
