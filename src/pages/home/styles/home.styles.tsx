@@ -11,6 +11,7 @@ export const LayoutHome = styled(Layout)`
     z-index: 0;
     height: 100vh;
     overflow-x: hidden;
+    position: relative;
 `
 
 export const ContainerHome = styled(Content)`
@@ -70,17 +71,18 @@ export const ImgSection = styled(Image)`
         position: relative;
     }
 `
-export const SectionSecond = styled.div`
-    width: 100%;
-    padding: 30px 0px;
-    height: max-content;    
-    background: var(--Green-500);
-    display: flex;
-    justify-content: center;
-    align-items: center ;
-    flex-direction: column;
-    z-index: 100;
-    position: relative;
+export const BoxThird = styled.div`
+ max-width: calc(80% - 50px);
+  margin: 50px auto ;
+  padding: 50px;
+  background-color: #fff;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 200;
+  opacity: 60%;
+  border-radius: 25px ;
 `
 
 export const ImageContent = styled.div`
@@ -120,7 +122,7 @@ export const Shadow = styled.div`
 `
 export const MenuIcon = () => {
     return(
-<svg width="24" height="24" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ position: 'fixed'}}>
 <line x1="1.5" y1="1.5" x2="16.5" y2="1.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
 <line x1="1.5" y1="7.5" x2="16.5" y2="7.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
 <line x1="7.5" y1="13.5" x2="16.5" y2="13.5" stroke="#41653A" strokeWidth="3" strokeLinecap="round"/>
@@ -159,19 +161,25 @@ export const HomeDrawer = styled(Drawer)`
 .ant-drawer-header {
     padding: 0;
     display: flex;
-    background: var(--Green-500);
+    /* background: var(--Green-500);
     height: 50px;
     justify-content: center;
     align-items: center;
     text-align: center;
-    display: flex;
+    display: flex; */
 }
 .ant-drawer-mask{
-    width: 50% !important;
+    width: 0 !important;
 }
 & .ant-drawer-content-wrapper{
-    width: 50% !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    width: 100% !important;
+    opacity: 90%;
 }
+
 `
 export const TextLink = styled.a`
 &:hover{
@@ -191,4 +199,33 @@ color: white;
 width: 100% ;
 font-size: 24px;
 font-weight: 700 ;
+`
+export const ContentSection = styled.div`
+    width: 100%;
+    padding: 30px 0px;  
+    height: max-content;
+    background: var(--Green-500);  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #ffc85a,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #ffc85a,#badeb3); 
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    flex-direction: column;
+    z-index: 100;
+    position: relative;
+`
+
+export const StarCardHome = styled.div`
+    width: 100%;
+    height: 100px;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 16px 16px 40px 16px;
+    box-shadow: 0px 0px 83px -23px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: white;
+    flex-direction: column  ;
 `

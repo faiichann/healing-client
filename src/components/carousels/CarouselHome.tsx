@@ -22,7 +22,12 @@ const BoxSlide = styled.div`
     display: block;
     width: 100%;
 `;
-
+const TitleStyle = styled(Title)`
+&&&{
+    color: #73a253;
+    font-weight: 600 ;
+}
+`;
 const CarouselStyle = styled(Carousel)`
     & .slick-dots-bottom{
     bottom: -30px !important;
@@ -42,13 +47,13 @@ function CarouselHome() {
         {images.map((image,index) => {
         return (
         <ContentSlide  key={index}>
-            <Title level={5}>{image.tile}</Title>
             <ImageContent> 
             <Image
             width={500}
             src={image.img}
             />
             </ImageContent>
+            <TitleStyle level={5}>{image.tile}</TitleStyle>
         </ContentSlide>
          );
         })}

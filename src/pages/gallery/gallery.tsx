@@ -8,6 +8,7 @@ import { Box } from "theme/components";
 import formatGoal from "utils/formatGoal";
 import formatMonster from "utils/formatMonster";
 import  logo  from 'assets/tests/healing_logo.png'
+
 const { Text, Title} = Typography;
 
 function Gallery() {
@@ -36,13 +37,15 @@ function Gallery() {
      <>
       <Container header={{ title: 'Gallery Cards', left: 'back' }}>
          {isLoading ?
-          <Spin size="large" />
+            <Box justify='center' align='center' direction='row' >
+            <Spin size="large" />
+            </Box>
         :
-          <Box justify='center' align='center' direction='column' >
+          <Box justify='center' align='center' direction='column'>
             <Title level={3} style={{marginTop: '5px', color: '#737373'}}>All ({data.length}) </Title>
-          {data.map((item: any, index: any) => {
+            {data.map((item: any, index: any) => {
  return(
-  <CardContainer key={index} rank={item.nft_card.bg_color} style={{marginTop: '10px !important'}}>
+  <CardContainer key={index} rank={item.nft_card.bg_color} style={{ marginTop: '10px !important'}}>
 <Row style={{justifyContent: 'center' }} >
 <HeaderCard>
 <Title level={5} style={{color: '#737373', marginBottom: '-0.5em'}} >"{item.goal}"</Title>
