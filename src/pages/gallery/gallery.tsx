@@ -1,14 +1,15 @@
 import Container from "components/container/container";
 import { Image, Spin, Row, Typography, Col } from 'antd';
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAppContext } from "context/appContext";
 import formatNumber from "utils/formatNumber";
-import { CardContainer, ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from "pages/result/result.styles";
+import { ImageContainer, HeaderCard, RateStyle, GoalCircle, TextName, QuoteBox } from "pages/result/result.styles";
 import { Box } from "theme/components";
 import formatGoal from "utils/formatGoal";
 import formatMonster from "utils/formatMonster";
 import  logo  from 'assets/tests/healing_logo.png'
-
+import { BoxCarousel, BoxGallery, CardGallery, CarouselCard, ContentGallery, InputSearch, SearchInput } from "./style/gallery.styles";
+import { SearchOutlined } from '@ant-design/icons';
 const { Text, Title} = Typography;
 
 function Gallery() {
@@ -16,7 +17,18 @@ function Gallery() {
   const { cardInfo } = useAppContext();
   const [currentYear, setCurrentYear] = useState('');
   const [ data ] = useState(cardInfo);
+  const [slide, setSlide] = useState(0);
+  const slider = useRef<any|undefined>();
 
+  const suffix = (
+    <SearchOutlined
+    onClick={()=> slider.current.goTo(slide - 1)}
+    style={{
+        fontSize: 16,
+        color: '#A6CD9C',
+      }}
+    />
+  );
   const getYear = () => {
     var d = new Date(); 
     var year = d.getFullYear();
@@ -32,20 +44,49 @@ function Gallery() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    console.log(slide)
+  }, [slide]);
 
     return (
      <>
       <Container header={{ title: 'Gallery Cards', left: 'back' }}>
          {isLoading ?
             <Box justify='center' align='center' direction='row' >
-            <Spin size="large" />
+            <Spin size="large"  style={{marginTop: '20%'}} />
             </Box>
         :
-          <Box justify='center' align='center' direction='column'>
-            <Title level={3} style={{marginTop: '5px', color: '#737373'}}>All ({data.length}) </Title>
-            {data.map((item: any, index: any) => {
+        <>
+         <Box justify='center' align='center' direction='column' style={{ marginTop: '10px !important' }} >
+         <SearchInput>
+           <Row>
+             <Col  style={{ paddingTop: '20px', justifyContent: 'center'}}>ค้นหาใบที่ </Col>
+             <Col><InputSearch placeholder="1"
+             min={0}
+             max={3}
+            suffix={suffix}
+            //  value={slide}
+             onChange={(e : any)=> {
+               setSlide(parseInt(e.target.value));
+               console.log(e.target.value)
+             }}
+             /></Col>
+           </Row>
+        </SearchInput>
+        <Text style={{marginTop: '5px', color: '#A6CD9C', fontSize: '18px'}}>ผลิตการ์ดไปแล้ว  <b>{data.length}</b>  ใบ</Text>
+           <BoxGallery>
+             <BoxCarousel>
+               <CarouselCard 
+               slidesToShow={1}
+               dots={false}
+               ref={ref => {
+                 slider.current = ref;
+               }}
+               >
+               {data.map((item: any, index: any) => {
  return(
-  <CardContainer key={index} rank={item.nft_card.bg_color} style={{ marginTop: '10px !important'}}>
+   <ContentGallery  key={index} >
+  <CardGallery rank={item.nft_card.bg_color}>
 <Row style={{justifyContent: 'center' }} >
 <HeaderCard>
 <Title level={5} style={{color: '#737373', marginBottom: '-0.5em'}} >"{item.goal}"</Title>
@@ -100,11 +141,18 @@ src={logo}
 preview={false}
 /></Col>
 </Row>
-</CardContainer>
+</CardGallery>
+<Text style={{marginTop: '5px', color: '#A6CD9C', fontSize: '18px'}}>ใบที่ <b>{index+1}</b> </Text>
+</ContentGallery>
 )
           }
          )}
-          </Box>
+                 
+               </CarouselCard>
+             </BoxCarousel>
+           </BoxGallery>
+           </Box>
+           </>
         }
        </Container>
      </>

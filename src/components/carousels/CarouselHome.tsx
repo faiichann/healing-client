@@ -51,6 +51,7 @@ function CarouselHome() {
             <Image
             width={500}
             src={image.img}
+            preview={false}
             />
             </ImageContent>
             <TitleStyle level={5}>{image.tile}</TitleStyle>
