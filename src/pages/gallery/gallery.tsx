@@ -44,10 +44,6 @@ function Gallery() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    console.log(slide)
-  }, [slide]);
-
     return (
      <>
       <Container header={{ title: 'Gallery Cards', left: 'back' }}>
@@ -68,7 +64,6 @@ function Gallery() {
             //  value={slide}
              onChange={(e : any)=> {
                setSlide(parseInt(e.target.value));
-               console.log(e.target.value)
              }}
              /></Col>
            </Row>
