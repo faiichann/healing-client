@@ -1,6 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { Box, ButtonStyle } from 'theme/components';
-import { Divider, Image, Rate, Typography } from 'antd';
+import { Col, Divider, Image, Rate, Row, Typography } from 'antd';
 import {  useRef, useEffect, useState } from 'react';
 import  logo  from 'assets/tests/healing_logo.png'
 import  healingText  from 'assets/images/healing.png'
@@ -13,6 +13,9 @@ import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
 import SoundRate from 'assets/sounds/rate.mp3'
+import Desc1 from 'assets/images/stage/Desc1.png'
+import Desc2 from 'assets/images/stage/Desc2.png'
+import Desc3 from 'assets/images/stage/Desc3.png'
 
 const { Title, Text } = Typography;
 
@@ -49,15 +52,18 @@ function Home() {
     const sections = [
         {
           title: 'Waiting content1', 
-          subtitle: 'Lorem, ipsum dolor'
+          subtitle: 'Lorem, ipsum dolor',
+          img: Desc1
         },
         {
           title: 'Waiting content2', 
-          subtitle: 'Dignissimos placeat'
+          subtitle: 'Dignissimos placeat',
+          img: Desc2
         },
         {
           title: 'Waiting content2', 
-          subtitle: 'In ullam et nulla '
+          subtitle: 'In ullam et nulla ',
+          img: Desc3
         }
       ];
     const handleChangeRate = ( value:number) =>{
@@ -157,14 +163,50 @@ function Home() {
                  </Box>
             </Box>
             <CarouselHome/>
-            {
-          sections.map(({title, subtitle}) => (
-            <BoxThird key={title}>
-              <h2>{title}</h2>
-              <p>{subtitle}</p>
+            <div>
+            <Row>
+              <Col> 
+              <BoxThird >
+              <Image
+                    width={130}
+                    src={sections[0].img}
+                    preview={false}
+                />
             </BoxThird>
-          ))
-        }
+            </Col>
+              <Col>
+              <h2>{sections[0].title}</h2>
+              <p>{sections[0].subtitle}</p></Col>
+            </Row>
+           <Row>
+           <Col>
+           <h2>{sections[1].title}</h2>
+           <p>{sections[1].subtitle}</p></Col>
+           <Col> 
+           <BoxThird >
+           <Image
+                 width={130}
+                 src={sections[1].img}
+                 preview={false}
+             />
+         </BoxThird>
+         </Col>
+         </Row>
+         <Row>
+              <Col> 
+              <BoxThird >
+              <Image
+                    width={130}
+                    src={sections[2].img}
+                    preview={false}
+                />
+            </BoxThird>
+            </Col>
+              <Col>
+              <h2>{sections[2].title}</h2>
+              <p>{sections[2].subtitle}</p></Col>
+            </Row>
+            </div>
          <div id='rate-web'>
          <Box justify='center' align='center' direction='column'>
          <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ให้คะแนนความพึงพอใจ</Text>

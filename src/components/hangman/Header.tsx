@@ -6,6 +6,7 @@ const { Title, Text } = Typography;
 
 const DrawerStyle = styled(Drawer)`
   height: 330px;
+  z-index: 999;
   &.ant-drawer .ant-drawer-content {
   border-top-left-radius: 28px;
   border-top-right-radius: 28px;

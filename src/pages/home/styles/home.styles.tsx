@@ -72,9 +72,8 @@ export const ImgSection = styled(Image)`
     }
 `
 export const BoxThird = styled.div`
- max-width: calc(80% - 50px);
   margin: 50px auto ;
-  padding: 50px;
+  padding: 10px;
   background-color: #fff;
   display: flex;
   align-content: center;
@@ -205,8 +204,8 @@ export const ContentSection = styled.div`
     padding: 30px 0px;  
     height: max-content;
     background: var(--Green-500);  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #ffc85a,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #ffc85a,#badeb3); 
+    background: -webkit-linear-gradient(to top, #deeb8f,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #deeb8f,#badeb3); 
     display: flex;
     justify-content: center;
     align-items: center ;

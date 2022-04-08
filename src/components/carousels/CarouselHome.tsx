@@ -35,10 +35,10 @@ const CarouselStyle = styled(Carousel)`
 `;
 function CarouselHome() {
     const images = [ 
-        {tile: 'Healing Project Theme Concept' , img: Home1} ,
-        {tile: 'Finding your Goal!!' , img: Home2} , 
-        {tile: 'Pixel Art Preview' , img: Home3} ,
-        {tile: 'Your NFT Cards ' , img: Home4} ,
+        {tile: 'Your Goal x NFT Cards' , img: Home1} ,
+        {tile: 'Gamification Generator' , img: Home2} , 
+        {tile: 'Finding your Goal!!' , img: Home3} ,
+        {tile: 'Healing Project Theme Concept' , img: Home4} ,
     ];
 
     return (
