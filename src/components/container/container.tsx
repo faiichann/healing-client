@@ -53,6 +53,7 @@ const MainContent = styled(Content)<BodyProps>`
     overflow-y: scroll;
     position: relative;
     overflow-x: hidden;
+    scroll-behavior: smooth;
 `;
 const Container = memo(({ children, header, footer }: ContainerProps) => {
     return (

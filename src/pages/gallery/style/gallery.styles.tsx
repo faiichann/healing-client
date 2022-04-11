@@ -61,13 +61,13 @@ export const InputSearch = styled(Input)`
 &.ant-input-affix-wrapper > input.ant-input{
     background: transparent;
 }
-    border-bottom: 2px solid var(--Green-300);
+    border-bottom: 2px solid var(--Green-400);
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
     outline: 0;
     background-color: transparent;
-    color: #5B944D;
+    color: #41653A;
     font-size: 18px;
 `
 

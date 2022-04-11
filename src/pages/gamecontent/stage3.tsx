@@ -265,9 +265,11 @@ function GameStage3() {
                 delay={200}
                 style={{width: '100%', display: 'flex', justifyContent: 'center' }}
              >
+               <Row style={{height: '110px', width: '100%', display: 'flex', justifyContent: 'center'}}>
                 <MessageCutScene >
                     {messageCut[indexCut]}
                 </MessageCutScene>
+                </Row>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
             <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>

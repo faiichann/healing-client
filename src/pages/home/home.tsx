@@ -8,7 +8,7 @@ import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome, ColDes } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
@@ -24,6 +24,7 @@ function Home() {
     const [visible, setVisibleModal] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const { cardNum } = useAppContext();
+    const cardLeft = (200 - cardNum).toString();
     const revealRefs = useRef([]);
     const [starRate, setStarRate] = useState(0)
     const rateAudio = new Audio(SoundRate)
@@ -71,6 +72,7 @@ function Home() {
         rateAudio.volume = 0.8
         setStarRate(value)
     }
+
     return (
        <LayoutHome>
         <HomeDrawer
@@ -151,41 +153,52 @@ function Home() {
                 <Box justify='center' align='center' direction='row'>
                 {cardNum.split("").map((text :string, i:number) => {
                 return (
-                   
                     <div key={i}>
                         <NumBox>
                         {text}
                         </NumBox>
                     </div>
-                   
                     );
-                })}
+                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
+                 </Box>
+                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>เหลือการ์ด</Text>
+                <Box justify='center' align='center' direction='row'>
+                {cardLeft.split("").map((text :string, i:number) => {
+                return (
+                    <div key={i}>
+                        <NumBox>
+                        {text}
+                        </NumBox>
+                    </div>
+                    );
+                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
                  </Box>
             </Box>
             <CarouselHome/>
-            <div>
+            <div style={{marginTop: '60px'}}>
             <Row>
               <Col> 
               <BoxThird >
               <Image
-                    width={130}
+                    width={145}
                     src={sections[0].img}
                     preview={false}
                 />
             </BoxThird>
             </Col>
-              <Col>
+              <ColDes>
               <h2>{sections[0].title}</h2>
-              <p>{sections[0].subtitle}</p></Col>
+              <p>{sections[0].subtitle}</p>
+              </ColDes>
             </Row>
            <Row>
-           <Col>
+           <ColDes>
            <h2>{sections[1].title}</h2>
-           <p>{sections[1].subtitle}</p></Col>
+           <p>{sections[1].subtitle}</p></ColDes>
            <Col> 
            <BoxThird >
            <Image
-                 width={130}
+                 width={145}
                  src={sections[1].img}
                  preview={false}
              />
@@ -196,15 +209,15 @@ function Home() {
               <Col> 
               <BoxThird >
               <Image
-                    width={130}
+                    width={145}
                     src={sections[2].img}
                     preview={false}
                 />
             </BoxThird>
             </Col>
-              <Col>
+              <ColDes>
               <h2>{sections[2].title}</h2>
-              <p>{sections[2].subtitle}</p></Col>
+              <p>{sections[2].subtitle}</p></ColDes>
             </Row>
             </div>
          <div id='rate-web'>

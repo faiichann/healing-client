@@ -24,8 +24,8 @@ function Gallery() {
     <SearchOutlined
     onClick={()=> slider.current.goTo(slide - 1)}
     style={{
-        fontSize: 16,
-        color: '#A6CD9C',
+        fontSize: 22,
+        color: '#41653A',
       }}
     />
   );
@@ -56,7 +56,7 @@ function Gallery() {
          <Box justify='center' align='center' direction='column' style={{ marginTop: '10px !important' }} >
          <SearchInput>
            <Row>
-             <Col  style={{ paddingTop: '20px', justifyContent: 'center'}}>ค้นหาใบที่ </Col>
+             <Col  style={{ color: '#41653A', paddingTop: '20px', justifyContent: 'center'}}>ค้นหาใบที่ </Col>
              <Col><InputSearch placeholder="1"
              min={0}
              max={3}
@@ -68,7 +68,7 @@ function Gallery() {
              /></Col>
            </Row>
         </SearchInput>
-        <Text style={{marginTop: '5px', color: '#A6CD9C', fontSize: '18px'}}>ผลิตการ์ดไปแล้ว  <b>{data.length}</b>  ใบ</Text>
+        <Text style={{marginTop: '5px', color: '#5B944D', fontSize: '18px'}}>ผลิตการ์ดไปแล้ว  <b>{data.length}</b>  ใบ</Text>
            <BoxGallery>
              <BoxCarousel>
                <CarouselCard 
