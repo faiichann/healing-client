@@ -50,6 +50,8 @@ function GameContent() {
     const handleOk = () => {
         history.goBack();
         setStage(0)
+        HMaudio.pause();
+        setHangman(false)
         setIsShowNotification(false);
     };
 
@@ -175,9 +177,9 @@ useEffect(() => {
             </NotiModal>
        {!isHangman && <DivProgress style={{width: '100%'}}><ProgressBar percent={stage * 25} showInfo={false} strokeWidth={10}/></DivProgress>}
        <Box justify='center' align='center' direction='column'>
-           {stage === 0 && <Cutscene/>}
-           {stage === 1 && <GameStage1/>} 
-           {stage === 2  && <GameStage2/>}
+           {stage === 0 && !isHangman && <Cutscene/>}
+           {stage === 1 && !isHangman && <GameStage1/>} 
+           {stage === 2  && !isHangman && <GameStage2/>}
            {stage === 3 && !isHangman && <GameStage3/>}
            {isHangman && <HangmanStage/>}
        </Box>

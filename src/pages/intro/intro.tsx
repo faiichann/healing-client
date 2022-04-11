@@ -29,6 +29,7 @@ function Intro() {
                     <Image
                         width={350}
                         src={item.img}
+                        preview={false}
                     />  
                     </ImageSlide>
                     <BoxText>

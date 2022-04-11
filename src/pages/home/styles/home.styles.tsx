@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Image, Layout, Drawer } from 'antd';
+import { Image, Layout, Drawer, Col } from 'antd';
 
 const { Content } = Layout;
 
@@ -18,6 +18,7 @@ export const ContainerHome = styled(Content)`
     width: 100%;
     height: 100vh;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 `
 export const SectionFirst = styled.div`
     width: 100vw;
@@ -58,38 +59,35 @@ export const ImgSection = styled(Image)`
     }
     &.Green_mountain{
         transform: translateY(-236px);
-        @media only screen and (min-width: 500px) {
+        @media screen and (min-width: 500px) {
             transform: translateY(-306px);
+        }
+        @media screen and (min-width: 1600px) {
+            transform: translateY(190px) translateX(-511px);
         }
         position: relative;
     }
     &.forest{
         transform: translateY(223px);
-        @media only screen and (min-width: 500px) {
+        @media screen and (min-width: 500px) {
             transform: translateY(332px);
         }
         position: relative;
     }
 `
 export const BoxThird = styled.div`
- max-width: calc(80% - 50px);
   margin: 50px auto ;
-  padding: 50px;
   background-color: #fff;
   display: flex;
   align-content: center;
   justify-content: center;
   flex-direction: column;
   z-index: 200;
-  opacity: 60%;
   border-radius: 25px ;
 `
 
 export const ImageContent = styled.div`
     width: 70%;
-    height: 400px;
-    background: var(--White);
-    border-radius: var(--Radius-12);
     margin: 10px 16px;
     display: flex;
     justify-content: center;
@@ -205,8 +203,8 @@ export const ContentSection = styled.div`
     padding: 30px 0px;  
     height: max-content;
     background: var(--Green-500);  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to top, #ffc85a,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to top, #ffc85a,#badeb3); 
+    background: -webkit-linear-gradient(to top, #deeb8f,#badeb3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #deeb8f,#badeb3); 
     display: flex;
     justify-content: center;
     align-items: center ;
@@ -228,4 +226,7 @@ export const StarCardHome = styled.div`
     text-align: center;
     background: white;
     flex-direction: column  ;
+`
+export const ColDes = styled(Col)`
+    margin: 56px 30px ;
 `

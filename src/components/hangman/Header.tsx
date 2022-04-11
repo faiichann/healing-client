@@ -1,16 +1,27 @@
-import { Drawer, Typography } from "antd";
+import { Modal, Typography } from "antd";
 import { useState } from "react";
 import styled from "styled-components";
 import { Box, ButtonStyle } from "theme/components";
 const { Title, Text } = Typography;
 
-const DrawerStyle = styled(Drawer)`
-  height: 330px;
-  &.ant-drawer .ant-drawer-content {
-  border-top-left-radius: 28px;
-  border-top-right-radius: 28px;
-  }
+const DrawerStyle =  styled(Modal)`
+display: flex;
+justify-content: center;
+.ant-modal-header{
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+}
+.ant-modal-content{
+    width: 90%;
+    border-radius: 20px;
+}
+
+.ant-modal-body {
+padding: 5px;
+font-size: 16px;
+}
 `
+
 const Header = () => {
    const [visible, setVisibleModal] = useState(false)
 
@@ -18,9 +29,14 @@ const Header = () => {
    setVisibleModal(!visible)
   };
 
-  const onClose = () => {
+  const handleOk = () => {
     setVisibleModal( false)
-  };
+};
+
+const StyleButtonSpecial = {
+    boxShadow: 'none',
+    margin: '10px 10px' 
+  }
 
   return (
     <>
@@ -32,10 +48,15 @@ const Header = () => {
              </Box>
             </>
           }
-          placement="bottom"
           closable={false}
-          onClose={onClose}
           visible={visible}
+          footer={[
+            <Box justify='center' align='center' direction='row'>
+            <ButtonStyle key="back" typebutton='Medium' backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={50} onClick={handleOk}>
+               ตกลง
+            </ButtonStyle>
+            </Box>
+        ]}
         >
            <Box justify='center' align='center' direction='column' >
            <Text
