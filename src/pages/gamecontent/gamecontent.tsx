@@ -164,7 +164,7 @@ useEffect(() => {
                     <Box justify='center' align='center' direction='row'>
                     <ButtonStyle key="back" typebutton='Medium' backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={40} onClick={handleOk}>
                         ออก
-                    </ButtonStyle>,
+                    </ButtonStyle>
                     <ButtonStyle key="submit" typebutton='Medium' backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={40} onClick={handleCancel}>
                         เล่นต่อ
                     </ButtonStyle>

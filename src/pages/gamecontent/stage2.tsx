@@ -126,8 +126,8 @@ function GameStage2() {
         closable={false}
         footer={[
             <ButtonStyle typebutton='Large' sizebutton={75} 
-            backgroundbutton={'var(--Green-300)'} 
             style={{fontWeight: '400', fontSize: '18px'}}
+            backgroundbutton={'#A6CD9C'}
             onClick={handleOk}> ตกลง </ButtonStyle>
           ]}>
                <Title level={3} style={{color: '#333333', margin: '5px'}}> ชนะแล้ว !</Title>
@@ -148,6 +148,7 @@ function GameStage2() {
         footer={[
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
+            backgroundbutton={'#F9A186'}
             onClick={handleLoseOk} 
             style={{fontWeight: '400', fontSize: '18px'}}> เล่นอีกครั้ง </ButtonStyle>
           ]}>
@@ -227,7 +228,7 @@ function GameStage2() {
                 </Row>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
+            <Row style={{alignItems: 'flex-end', width: '100%',  justifyContent: 'center', gap: '20px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -237,7 +238,7 @@ function GameStage2() {
                   </Col>
                   {!(index > 1) &&
                   isUserAvatar && 
-                  <Col span={8} offset={6}>
+                  <Col span={8}>
                   <Image 
                 width={100}
                 preview={false}

@@ -63,7 +63,7 @@ function GameStage3() {
 
       const message = [
         `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
-        `${item1} ดูเหมือนว่าคุณ "${emoji}" คุณทำมันได้แน่นอนเพราะงั้น ${item2} "${caption}" เอาละช่วงนี้ ${item3} "${rankDes}"` ,
+        `${item1} + ${item2} + ${item3} คำทำนายจากรูป "${emoji}" เป้าหมายของคุณมีโอกาส "${rankDes}" ดังนั้นจงบอกตัวเองไว้เสมอว่า "${caption}" ` ,
         'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
@@ -127,9 +127,9 @@ function GameStage3() {
 
       const messageCut = [
         'ผ่านแล้ว เก่งมากเลยยยย', 
-        'เรามีคำถามาจะถามด้วยละ', 
+        'เรามีคำถามจะถามด้วยละ', 
         '',
-        'เราลองมาทายชะตาเป้าหมายของคุณกัน',
+        'มาทายชะตาเป้าหมายของคุณกัน',
         'ลองสุ่มดวงของคุณจนกว่าจะพอใจแล้วให้เราทำนายกันเถอะ', 
     ] 
 
@@ -272,7 +272,7 @@ function GameStage3() {
                 </Row>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
+            <Row style={{alignItems: 'flex-end', width: '100%',  justifyContent: 'center', gap: '20px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -281,7 +281,7 @@ function GameStage3() {
                 />
                   </Col>
                   {isUserAvatar && 
-                  <Col span={8} offset={6}>
+                  <Col span={8}>
                   <Image 
                 width={100}
                 preview={false}

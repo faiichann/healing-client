@@ -65,7 +65,7 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
         &:hover{
             border: 2px solid ${props.backgroundbutton};
             color: ${props.backgroundbutton};
-            background-color: transparent !important ;
+            background-color: white !important ;
         }
         `
     }else{
@@ -84,6 +84,7 @@ export const ButtonStyle = styled(Button)<ButtonProps>`
         &:hover{
             color: var(--White);
             background-color: var(--Green-300);
+            border: 3px solid var(--Green-300) !important;
         }
         `
         }else if( props.pattern === "Text"){
