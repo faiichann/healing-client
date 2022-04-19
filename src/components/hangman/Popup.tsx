@@ -100,11 +100,13 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
             onClick={endStage} 
+            backgroundbutton={'#A6CD9C'}
             style={{fontWeight: '400', fontSize: '18px'}}> รับรางวัล </ButtonStyle>
           ] 
           : 
           [
             <ButtonStyle typebutton='Large' 
+            backgroundbutton={'#F9A186'} 
             sizebutton={75} 
             onClick={playAgain} 
             style={{fontWeight: '400', fontSize: '18px'}}> เล่นอีกครั้ง </ButtonStyle>

@@ -47,6 +47,7 @@ function Landing() {
             width={100}
             src={Logo}
             style={{margin: '20px 0'}}
+            preview={false}
             />
             <Shadow />
             <Image

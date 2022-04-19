@@ -74,7 +74,7 @@ useEffect(() => {
                 </Row>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-              <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
+              <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'center', gap: '20px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -83,7 +83,7 @@ useEffect(() => {
                 />
                   </Col>
                   {isUserAvatar && 
-                  <Col span={8} offset={6}>
+                  <Col span={8}>
                   <Image 
                 width={100}
                 preview={false}
