@@ -132,7 +132,7 @@ function GameStage1() {
                     </Box>
                     </StarCard>
                     {starRate > 0 && 
-                     <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> ยืนยัน </ButtonStyle>
+                     <ButtonStyle typebutton='Large'  backgroundbutton={'#F9A186'}  sizebutton={50} onClick={() => submitWish(goal.goal, userGoal, starRate)}> ยืนยัน </ButtonStyle>
                     }
                 </>
                 :
@@ -150,7 +150,7 @@ function GameStage1() {
                 <InputGoal placeholder= {`พิมพ์เป้าหมายของคุณในด้าน ${goal.goal}`} maxLength={30}
                  onChange={({ target: { value } }) => { setUserGoal(value) }} /> /30
                 </InputGoalStyle>
-                {userGoal &&  <ButtonStyle typebutton='Large' sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>}
+                {userGoal &&  <ButtonStyle typebutton='Large' backgroundbutton={'#F9A186'} sizebutton={50} onClick={() => setRating(true)}> ตั้งเป้าหมาย </ButtonStyle>}
                 </>
                 }
             </Box>
@@ -222,7 +222,7 @@ function GameStage1() {
                 </Row>
             </Animation>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
-            <Row style={{alignItems: 'flex-end', width: '100%', justifyContent: 'space-around', margin: '0 60px'}}>
+            <Row style={{alignItems: 'flex-end', width: '100%',  justifyContent: 'center', gap: '20px'}}>
                   <Col span={8}>
                   <Image 
                 width={120}
@@ -232,7 +232,7 @@ function GameStage1() {
                   </Col>
                   {!(index > 2)&&
                   isUserAvatar && 
-                  <Col span={8} offset={6}>
+                  <Col span={8}>
                   <Image 
                 width={100}
                 preview={false}

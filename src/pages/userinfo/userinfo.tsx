@@ -104,7 +104,7 @@ function UserInfo() {
                 !avatar || !username ?   
                 <Text type="secondary">เลือกตัวละครของคุณ</Text>
                 :
-                <ButtonStyle typebutton='Medium' sizebutton={30} onClick={()=> onConfirm(username, avatar)}> ยืนยัน </ButtonStyle>
+                <ButtonStyle typebutton='Medium' backgroundbutton={'#F9A186'}  sizebutton={30} onClick={()=> onConfirm(username, avatar)}> ยืนยัน </ButtonStyle>
             }
         </Box>
         </Box>

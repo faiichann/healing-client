@@ -72,7 +72,18 @@ function Home() {
         rateAudio.volume = 0.8
         setStarRate(value)
     }
-
+    const goToNFT = () => {
+      sessionStorage.removeItem('token')
+      window.location.href = 'https://www.figma.com/proto/8pMn3HEBtFPdjWnMlUKKDX/UI-Project?page-id=1775%3A4714&node-id=1775%3A4717&viewport=241%2C48%2C0.1&scaling=scale-down&starting-point-node-id=1775%3A4717&show-proto-sidebar=1'
+    }
+    const goToTurtorial = () => {
+      sessionStorage.removeItem('token')
+      window.location.href = 'https://www.figma.com/proto/8pMn3HEBtFPdjWnMlUKKDX/UI-Project?page-id=1790%3A7088&node-id=1808%3A5072&viewport=241%2C48%2C0.03&scaling=min-zoom&starting-point-node-id=1808%3A5072'
+    }
+    const goToForm = () => {
+      sessionStorage.removeItem('token')
+      window.location.href = 'https://forms.gle/KHey59mC6QmCxpbc8'
+    }
     return (
        <LayoutHome>
         <HomeDrawer
@@ -94,15 +105,15 @@ function Home() {
           />
            <Divider><TextLink style={{color: '#8FB486', fontSize: '30px'}}  href="#home">HEALING</TextLink></Divider>
           <TextLink onClick={() => history.push('/gallery')}>สมุดภาพ</TextLink>
-          <TextLink href='https://www.figma.com/proto/8pMn3HEBtFPdjWnMlUKKDX/UI-Project?page-id=1503%3A4450&node-id=1503%3A4451&viewport=241%2C48%2C0.97&scaling=min-zoom'>ช่องทางขาย NFT</TextLink>
+          <TextLink onClick={goToNFT}>ช่องทางขาย NFT</TextLink>
           <TextLink href="#about-us">เกี่ยวกับเรา</TextLink>
           <TextLink href="#rate-web">ให้คะแนนเว็บ</TextLink>
-          <TextLink >คู่มือการใช้งานเว็บ</TextLink>
+          <TextLink onClick={goToTurtorial}>คู่มือการใช้งานเว็บ</TextLink>
           </Box>
         </HomeDrawer>
            <ContainerHome>
            <Box justify='flex-end' align='center' direction='row' onClick={handleButton}
-            style={{ padding: '16px',position: 'absolute', zIndex: '999' }}> 
+            style={{ padding: '30px 16px',position: 'absolute', zIndex: '999' }}> 
                 <MenuIcon/>
             </Box>
             {/* ----Section1---- */}
@@ -129,9 +140,10 @@ function Home() {
                 </Animation>
                     }
                   {/* <Title level={2}>Healing</Title> */}
-                  <Text type="secondary" style={{fontWeight: '700'}}>NFT Generation simulator with Gamification</Text>
+                  <Text type="secondary" style={{fontWeight: '800' , textAlign: 'center'}}>Digital Assets Create simulator with Gamification</Text>
                   <ButtonStyle  
-                  typebutton='Medium'  
+                  typebutton='Medium' 
+                  backgroundbutton={'#F9A186'} 
                   sizebutton={50} 
                   style={{margin: '90px 0px'}}
                   onClick={() => history.push('/intro')}>สร้างการ์ด</ButtonStyle>
@@ -235,7 +247,7 @@ function Home() {
                   pattern='Light'
                   sizebutton={60} 
                   style={{margin: '10px 0px 20px 0px', cursor: 'pointer',position: 'absolute'}}
-                  onClick={() => window.location.href ='https://forms.gle/x5FXUiT7BEdeqwVr9'}>ประเมินเพิ่มเพื่อลุ้นของรางวัล</ButtonStyle>
+                  onClick={goToForm}>ประเมินเพิ่มเติมทีนี่</ButtonStyle>
                    : null }
                </Box>
           </Box>
