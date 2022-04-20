@@ -5,7 +5,6 @@ import UserInfo from 'pages/userinfo/userinfo';
 import GameContent from 'pages/gamecontent/gamecontent';
 import Result from 'pages/result/result';
 import PrivateRoute from './privateroute';
-import Landing from 'pages/home/landing';
 import Test from 'pages/test';
 import HangmanStage from 'pages/gamecontent/hangmanStage';
 import Gallery from 'pages/gallery/gallery';
@@ -13,8 +12,7 @@ import Gallery from 'pages/gallery/gallery';
 function Routing(){
     return(
         <Switch>
-              <Route exact path="/landing" component={Landing}/>
-              <PrivateRoute exact path="/" component={Home}/>
+              <Route exact path="/" component={Home}/>
               <PrivateRoute exact path="/gallery" component={Gallery}/>
               <PrivateRoute exact path="/intro" component={Intro}/>
               <PrivateRoute exact path="/userinfo" component={UserInfo}/>

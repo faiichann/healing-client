@@ -46,7 +46,7 @@ function Gallery() {
   }, []);
     return (
      <>
-      <Container header={{ title: 'Gallery Cards', left: 'back' }}>
+      <Container header={{ title: 'สมุดภาพ', left: 'back' }}>
          {isLoading ?
             <Box justify='center' align='center' direction='row' >
             <Spin size="large"  style={{marginTop: '20%'}} />

@@ -11,7 +11,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
   let finalMessageRevealWord = "";
   let countTime = "";
   const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
-    isRateStar, cardID, setStage, author, text, imgQuote, nextStage, setHangman} = useAppContext();
+    isRateStar, cardID, setStage, author, text, imgQuote, nextStage, setHangman, setResult} = useAppContext();
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     finalMessage = "เย้!! ผ่านแล้ว";
     finalMessageRevealWord = "จงเชื่อมั่นในตัวเองไว้ ไปรับรางวัลกัน";
@@ -60,6 +60,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
    const endStage = async() => {
      await sentData()
      setHangman(false)
+     setResult(true)
      nextStage()
    }
 

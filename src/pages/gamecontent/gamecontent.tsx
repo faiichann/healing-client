@@ -14,6 +14,8 @@ import { LeftOutlined } from '@ant-design/icons';
 import soundBg from 'assets/sounds/soundBg2.mp3'
 import HangmanStage from './hangmanStage';
 import hangmanSound from "assets/sounds/hangman.mp3";
+import Result from 'pages/result/result';
+import { HomeFilled } from '@ant-design/icons';
 
 const ColHeader = styled(Col)`
     width: 100%;
@@ -33,12 +35,12 @@ const ButtonSound = styled(Button)`
 `;
 function GameContent() {
     const history = useHistory();
-    const { stage, setStage, isHangman, setHangman} = useAppContext();
+    const { stage, setStage, isHangman, setHangman, setResult , isResult} = useAppContext();
     const [isShowNotification, setIsShowNotification] = useState(false);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [audio, setAudio] = useState(new Audio(soundBg));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    const HMaudio = new Audio(hangmanSound);
+    const [HMaudio, setHMaudio]  = useState(new Audio(hangmanSound));
     const [playing, setPlaying] = useState(true);
 
     const showModal = () => {
@@ -67,6 +69,7 @@ const toggle = () => {
 useEffect(() => {
     if(playing){
         audio.play();
+        HMaudio.pause();
         audio.volume = 0.5
         audio.loop = true;
     }else{
@@ -74,24 +77,14 @@ useEffect(() => {
     }
     console.log(playing)
   },
-  [audio, playing]
+  [HMaudio, audio, playing]
 );
-
-useEffect(() => {
-    if(stage === 4){
-     history.push('/result')
-     setPlaying(false);
-     setHangman(false)
-     audio.pause();
-     HMaudio.pause();
-    }
- }, [HMaudio, audio, history, setHangman, stage])
 
  useEffect(() => {
      if(isHangman){
         audio.pause();
         HMaudio.play();
-        HMaudio.volume = 0.2
+        HMaudio.volume = 0.1
         HMaudio.loop = true;
     }else{
         HMaudio.pause();
@@ -102,18 +95,33 @@ useEffect(() => {
 
 useEffect(() => {
     if(stage === 4){
-     setHangman(false)
-     HMaudio.pause()
-     history.push('/result');
+        setPlaying(false);
+        audio.pause();
+        setHangman(false)
+        setResult(true)
     }
- }, [HMaudio, history, setHangman, stage])
+ }, [HMaudio, audio, history, setHangman, setResult, stage])
+ 
+useEffect(() => {
+    console.log('---------------------',isResult)
+    if(isResult){
+        HMaudio.pause()
+    }
+ }, [HMaudio, isResult])
+
+    const goHome = async() => {
+        await sessionStorage.removeItem('token')
+        window.location.href = './'
+    }
   return (
         <>
-       <Container header={{ title: isHangman? 'จงเชื่อมั่นในตัวเอง': 'ตามหาเป้าหมายของคุณ', 
+       <Container header={{ title: isResult ? 'รับรางวัล': isHangman? 'จงเชื่อมั่นในตัวเอง':  'ตามหาเป้าหมายของคุณ', 
        left: ( 
+        isResult ? null :
        <ColHeader>
        <LeftOutlined onClick={showModal}/>
-       </ColHeader>), right: isHangman? '' : (
+       </ColHeader>),
+        right: isHangman? '' : isResult ? (<HomeFilled style={{fontSize: '20px' , color: '#41653A'}}onClick={goHome} />) : (
   <div onClick={ toggle}>
   <ButtonSound>
       {playing ? (
@@ -175,13 +183,15 @@ useEffect(() => {
                 <p>หากออกขณะเล่นระบบจะไม่บันทึกข้อมูล</p>
                 </Box>
             </NotiModal>
-       {!isHangman && <DivProgress style={{width: '100%'}}><ProgressBar percent={stage * 25} showInfo={false} strokeWidth={10}/></DivProgress>}
+       
        <Box justify='center' align='center' direction='column'>
+       {!(isHangman || isResult) && <DivProgress><ProgressBar percent={stage * 25} showInfo={false} strokeWidth={10}/></DivProgress>}
            {stage === 0 && !isHangman && <Cutscene/>}
            {stage === 1 && !isHangman && <GameStage1/>} 
            {stage === 2  && !isHangman && <GameStage2/>}
            {stage === 3 && !isHangman && <GameStage3/>}
            {isHangman && <HangmanStage/>}
+           {isResult && <Result/>}
        </Box>
        </Container>
        </>

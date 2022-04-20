@@ -69,7 +69,7 @@ const words = [
   };
     useEffect(() => {
       passAudio.play();
-      passAudio.volume = 0.5;
+      passAudio.volume = 0.8;
       fetchData()
       getQuotes()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,7 +137,7 @@ const words = [
       disabled={wrongLetters.includes("t") || correctLetters.includes("t") ? true : false}
       onClick={()=> handleKeydown("T")}>T</KeyButton>
       <KeyButton size={"small"} 
-      colorBg={wrongLetters.includes("t")? "#3A3A3C" : correctLetters.includes("t") ? "#538D4E" : "#818384" }
+      colorBg={wrongLetters.includes("y")? "#3A3A3C" : correctLetters.includes("y") ? "#538D4E" : "#818384" }
       disabled={wrongLetters.includes("y") || correctLetters.includes("y") ? true : false}
       onClick={()=> handleKeydown("Y")}>Y</KeyButton>
       <KeyButton size={"small"} 

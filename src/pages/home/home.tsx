@@ -16,19 +16,47 @@ import SoundRate from 'assets/sounds/rate.mp3'
 import Desc1 from 'assets/images/stage/Desc1.png'
 import Desc2 from 'assets/images/stage/Desc2.png'
 import Desc3 from 'assets/images/stage/Desc3.png'
+import axios from 'axios';
+import Landing from './landing';
 
 const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
     const [visible, setVisibleModal] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const { cardNum } = useAppContext();
+    const [isAnimate, setIsAnimate] = useState(false)
+    const { cardNum, setCardNum, setCardInfo } = useAppContext();
     const cardLeft = (200 - cardNum).toString();
     const revealRefs = useRef([]);
     const [starRate, setStarRate] = useState(0)
     const rateAudio = new Audio(SoundRate)
     revealRefs.current = [];
+
+    const [isLoading, setLoading] = useState(true);
+ 
+    const formatCardNumber = async(response : any) => {
+        const number = await response.result.length
+        let formatNum = number.toString();
+        while (formatNum.length < 3) formatNum = "0" + formatNum;
+        await setCardNum(formatNum)
+        console.log('Card Amount ------>', formatNum)
+    }
+
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
+            await formatCardNumber(response);
+            await setCardInfo(response.result)
+          } catch (error) {
+            console.error(error);
+          }
+          sessionStorage.setItem('token','true')
+          setTimeout( () => { setLoading(false)},3000)
+    };
+
+    useEffect(() => {
+        fetchData()
+    },[cardNum, setCardNum, setCardInfo])
 
     const desc = ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4', 'ระดับ 5'];
     const meaning = ['อืม รู้สึกยังไม่ชอบแหะ', 'อะ ไม่ได้รู้สึกอะไรนะเฉยๆ', 'ว้าว ก็พอใช้ได้อยู่นะเนี่ย', 'เริ่ด ค่อนข้างดีมากเลยแหะชอบๆ', 'สุดปัง ชอบมากเลยสนุกสุดๆ'];
@@ -42,7 +70,7 @@ function Home() {
 
     useEffect(() => {
         setTimeout( () => {
-            setIsLoading(true)
+          setIsAnimate(true)
         }, 500);
     }, [])
     const flexStyle = {
@@ -85,6 +113,7 @@ function Home() {
       window.location.href = 'https://forms.gle/KHey59mC6QmCxpbc8'
     }
     return (
+       isLoading ? <Landing/> :
        <LayoutHome>
         <HomeDrawer
           closable={true}
@@ -120,7 +149,7 @@ function Home() {
            <SectionFirst id='home'>
             <Box justify='center' align='center' direction='column'
             style={{margin: '80px 0 95px 0',position: 'absolute', zIndex: '1'}}>
-              {isLoading && 
+              {isAnimate && 
               <Animation type='bounceUp' duration={1000} delay={200}>
               <Image
               width={100}
@@ -130,7 +159,7 @@ function Home() {
               </Animation>
              
               }
-                   {isLoading && 
+                   {isAnimate && 
                 <Animation type='slideFromBottom' duration={1000} delay={200} style={flexStyle}>
                 <Image
                     width={120}
