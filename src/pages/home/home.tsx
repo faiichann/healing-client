@@ -8,7 +8,7 @@ import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome, ColDes } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
@@ -80,18 +80,18 @@ function Home() {
     }
     const sections = [
         {
-          title: 'Waiting content1', 
-          subtitle: 'Lorem, ipsum dolor',
+          title: 'มาตั้งเป้าหมายในชีวิตกันเถอะ', 
+          subtitle: 'ใช้ชีวิตอย่างสนุกโดย เริ่มต้นตั้งเป้าหมายที่อยากทำวันละเรื่องแล้วทำให้สำเร็จกันเถอะ ',
           img: Desc1
         },
         {
-          title: 'Waiting content2', 
-          subtitle: 'Dignissimos placeat',
+          title: 'เพลิดเพลินกับการตอบคำถามในรูปแบบใหม่', 
+          subtitle: 'เราจะช่วยให้การค้นหาเป้าหมายของคุณตื่นเต้น และท้าทายมากขึ้นด้วยกลไกเกมมิฟิเคชัน',
           img: Desc2
         },
         {
-          title: 'Waiting content2', 
-          subtitle: 'In ullam et nulla ',
+          title: 'เก็บเป้าหมายในรูปแบบ Digital Asset', 
+          subtitle: 'แปลงเป้าหมายของคุณสะสมเก็บไว้ในรูปแบบ Digital Asset เพื่อเตือนตัวเองเสมอให้ทำให้สำเร็จ',
           img: Desc3
         }
       ];
@@ -111,6 +111,11 @@ function Home() {
     const goToForm = () => {
       sessionStorage.removeItem('token')
       window.location.href = 'https://forms.gle/KHey59mC6QmCxpbc8'
+    }
+
+    const RowStyle ={
+      rowGap: "5px",
+      margin: "20px 15px",
     }
     return (
        isLoading ? <Landing/> :
@@ -189,7 +194,7 @@ function Home() {
            </SectionFirst>
             {/* ----Section2---- */}
             <ContentSection id='about-us'>
-            <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
+            <Box justify='center' align='center' direction='column' style={{margin: '30px'}}>
                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
                 <Box justify='center' align='center' direction='row'>
                 {cardNum.split("").map((text :string, i:number) => {
@@ -200,25 +205,18 @@ function Home() {
                         </NumBox>
                     </div>
                     );
-                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
+                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}></Text>
                  </Box>
-                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>เหลือการ์ด</Text>
-                <Box justify='center' align='center' direction='row'>
-                {cardLeft.split("").map((text :string, i:number) => {
-                return (
-                    <div key={i}>
-                        <NumBox>
-                        {text}
-                        </NumBox>
-                    </div>
-                    );
-                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
+                <Box justify='center' align='center' direction='row' style={{marginTop: '10px'}}>
+                  <div style={{backgroundColor: '#AED1A7', padding: '0px 20px', fontSize: '18px', borderRadius: '20px'}}>
+                  <Text style={{color: 'white',margin: '0', fontSize: '18px'}}>เหลือการ์ด {cardLeft} ใบ</Text>
+                  </div>
                  </Box>
             </Box>
             <CarouselHome/>
             <div style={{marginTop: '60px'}}>
-            <Row>
-              <Col> 
+            <Row style={RowStyle}>
+              <Col span={10}> 
               <BoxThird >
               <Image
                     width={145}
@@ -227,16 +225,17 @@ function Home() {
                 />
             </BoxThird>
             </Col>
-              <ColDes>
-              <h2>{sections[0].title}</h2>
-              <p>{sections[0].subtitle}</p>
-              </ColDes>
-            </Row>
-           <Row>
-           <ColDes>
-           <h2>{sections[1].title}</h2>
-           <p>{sections[1].subtitle}</p></ColDes>
-           <Col> 
+              <Col span={14}>
+              <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
+              <span style={{fontSize: "12px"}}>{sections[0].subtitle}</span>
+              </Col>
+            </Row> 
+           <Row style={RowStyle}>
+           <Col span={14}>
+           <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
+           <span style={{fontSize: "12px"}}>{sections[1].subtitle}</span>
+           </Col>
+           <Col span={10}> 
            <BoxThird >
            <Image
                  width={145}
@@ -246,8 +245,8 @@ function Home() {
          </BoxThird>
          </Col>
          </Row>
-         <Row>
-              <Col> 
+         <Row style={RowStyle}>
+              <Col span={10}> 
               <BoxThird >
               <Image
                     width={145}
@@ -256,9 +255,9 @@ function Home() {
                 />
             </BoxThird>
             </Col>
-              <ColDes>
-              <h2>{sections[2].title}</h2>
-              <p>{sections[2].subtitle}</p></ColDes>
+              <Col span={14}>
+              <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
+              <span style={{fontSize: "12px"}}>{sections[2].subtitle}</span></Col>
             </Row>
             </div>
          <div id='rate-web'>

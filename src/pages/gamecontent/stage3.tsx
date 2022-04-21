@@ -63,7 +63,7 @@ function GameStage3() {
 
       const message = [
         `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
-        `${item1} + ${item2} + ${item3} คำทำนายจากรูป "${emoji}" เป้าหมายของคุณมีโอกาส "${rankDes}" ดังนั้นจงบอกตัวเองไว้เสมอว่า "${caption}" ` ,
+        `${item1} ${item2} ${item3}\n คำทำนายจากรูป "${emoji}" เป้าหมายของคุณมีโอกาส "${rankDes}" ดังนั้นจงบอกตัวเองไว้เสมอว่า "${caption}" ` ,
         'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
