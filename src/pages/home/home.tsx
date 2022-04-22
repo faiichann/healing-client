@@ -33,7 +33,26 @@ function Home() {
     revealRefs.current = [];
 
     const [isLoading, setLoading] = useState(true);
- 
+    const [windowDimenion, detectHW] = useState({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    })
+  
+    const detectSize = () => {
+      detectHW({
+        winWidth: window.innerWidth,
+        winHeight: window.innerHeight,
+      })
+    }
+  
+    useEffect(() => {
+      window.addEventListener('resize', detectSize)
+  
+      return () => {
+        window.removeEventListener('resize', detectSize)
+      }
+    }, [windowDimenion])
+
     const formatCardNumber = async(response : any) => {
         const number = await response.result.length
         let formatNum = number.toString();
@@ -117,6 +136,11 @@ function Home() {
       rowGap: "5px",
       margin: "20px 15px",
     }
+    const ColStyle ={
+      justifyContent: "center",
+      display: "flex",
+      alignItems: "center"
+    }
     return (
        isLoading ? <Landing/> :
        <LayoutHome>
@@ -185,8 +209,8 @@ function Home() {
            <ImgContainer>
            <ImgSection  className="cloud"  width={730} src={cloud} preview={false} />
            <div style={{position: 'fixed'}}>
-           <ImgSection  className="mountain"  src={mountain} preview={false}/>
-           <ImgSection  className="Green_mountain" src={greenMountain} preview={false}/>
+           <ImgSection  className="mountain"  width={windowDimenion.winWidth < 500 ? windowDimenion.winWidth : 500} src={mountain} preview={false}/>
+           <ImgSection  className="Green_mountain"  width={windowDimenion.winWidth < 500 ? windowDimenion.winWidth : 500} src={greenMountain} preview={false}/>
            </div>
            <ImgSection  className="forest"  src={forest} preview={false}/>           
            </ImgContainer>
@@ -214,52 +238,104 @@ function Home() {
                  </Box>
             </Box>
             <CarouselHome/>
-            <div style={{marginTop: '60px'}}>
+            {windowDimenion.winWidth < 370 ? 
+             <div style={{marginTop: '60px'}}>
+             <Row style={RowStyle}>
+             <Box justify='center' align='center' direction='column'>
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[0].img}
+                     preview={false}
+                 />
+             </BoxThird>
+               <Col  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
+               <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[0].subtitle}</span>
+               </Col>
+               </Box>
+             </Row> 
+
             <Row style={RowStyle}>
-              <Col span={10}> 
-              <BoxThird >
-              <Image
-                    width={145}
-                    src={sections[0].img}
-                    preview={false}
-                />
-            </BoxThird>
+            <Box justify='center' align='center' direction='column'>
+            <BoxThird >
+            <Image
+                  width={130}
+                  src={sections[1].img}
+                  preview={false}
+              />
+          </BoxThird>
+            <Col style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+            <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
+            <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[1].subtitle}</span>
             </Col>
-              <Col span={14}>
-              <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
-              <span style={{fontSize: "12px"}}>{sections[0].subtitle}</span>
-              </Col>
-            </Row> 
-           <Row style={RowStyle}>
-           <Col span={14}>
-           <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
-           <span style={{fontSize: "12px"}}>{sections[1].subtitle}</span>
-           </Col>
-           <Col span={10}> 
-           <BoxThird >
-           <Image
-                 width={145}
-                 src={sections[1].img}
-                 preview={false}
-             />
-         </BoxThird>
-         </Col>
-         </Row>
-         <Row style={RowStyle}>
-              <Col span={10}> 
-              <BoxThird >
-              <Image
-                    width={145}
-                    src={sections[2].img}
-                    preview={false}
-                />
-            </BoxThird>
+          </Box>
+          </Row>
+          <Row style={RowStyle}>
+          <Box justify='center' align='center' direction='column'>
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[2].img}
+                     preview={false}
+                 />
+             </BoxThird>
+               <Col style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
+               <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[2].subtitle}</span>
+               </Col>
+               </Box>
+             </Row>
+             </div>
+            : 
+             <div style={{marginTop: '60px'}}>
+             <Row style={RowStyle}>
+               <Col span={10} style={ColStyle}> 
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[0].img}
+                     preview={false}
+                 />
+             </BoxThird>
+             </Col>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
+               <span style={{fontSize: "12px"}}>{sections[0].subtitle}</span>
+               </Col>
+             </Row> 
+            <Row style={RowStyle}>
+            <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+            <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
+            <span style={{fontSize: "12px"}}>{sections[1].subtitle}</span>
             </Col>
-              <Col span={14}>
-              <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
-              <span style={{fontSize: "12px"}}>{sections[2].subtitle}</span></Col>
-            </Row>
-            </div>
+            <Col span={10}  style={ColStyle}> 
+            <BoxThird >
+            <Image
+                  width={130}
+                  src={sections[1].img}
+                  preview={false}
+              />
+          </BoxThird>
+          </Col>
+          </Row>
+          <Row style={RowStyle}>
+               <Col span={10}  style={ColStyle}> 
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[2].img}
+                     preview={false}
+                 />
+             </BoxThird>
+             </Col>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
+               <span style={{fontSize: "12px"}}>{sections[2].subtitle}</span></Col>
+             </Row>
+             </div>
+            }
+           
          <div id='rate-web'>
          <Box justify='center' align='center' direction='column'>
          <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ให้คะแนนความพึงพอใจ</Text>

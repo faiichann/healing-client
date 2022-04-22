@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Image, Layout, Drawer, Col } from 'antd';
+import { Image, Layout, Drawer } from 'antd';
 
 const { Content } = Layout;
 
