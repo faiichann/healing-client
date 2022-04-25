@@ -82,7 +82,8 @@ function UserInfo() {
                 <ImageSlide selected={ isSelect === item.value ? true : false}>
             <Image
                     preview={false}
-                    height={item.width}
+                    height={item.height}
+                    width={item.width}
                     src={item.img}
                     onClick={()=> handleChange(item.value)}
                 />

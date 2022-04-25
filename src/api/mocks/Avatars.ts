@@ -4,8 +4,8 @@ import Avatar3 from 'assets/images/Avatars/user3.png'
 import Avatar4 from 'assets/images/Avatars/user4.png'
 
 export const Avatar = [
-        {  value: '1', img: Avatar1, width: 200 },
-        { value: '2',  img: Avatar2, width: 200 },
-        { value: '3',  img: Avatar3, width: 200 },
-        { value: '4',  img: Avatar4, width: 200 }
+        {  value: '1', img: Avatar1, width: 136, height: 200 },
+        { value: '2',  img: Avatar2, width: 157, height: 200  },
+        { value: '3',  img: Avatar3, width: 142, height: 200  },
+        { value: '4',  img: Avatar4, width: 173, height: 200  }
     ]

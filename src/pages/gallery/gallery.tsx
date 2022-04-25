@@ -10,6 +10,7 @@ import formatMonster from "utils/formatMonster";
 import  logo  from 'assets/tests/healing_logo.png'
 import { BoxCarousel, BoxGallery, CardGallery, CarouselCard, ContentGallery, InputSearch, SearchInput } from "./style/gallery.styles";
 import { LeftOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
+import formatWidthMonster from "utils/formatWidthMonster";
 const { Text, Title} = Typography;
 
 function Gallery() {
@@ -100,6 +101,7 @@ function Gallery() {
    {item.nft_card.emoji}
    <Image
   height={110}
+  width={formatWidthMonster(item.type)}
   preview={false}
   src={formatMonster(item.type)}
   />

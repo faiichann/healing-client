@@ -15,6 +15,7 @@ import formatGoal from 'utils/formatGoal';
 import exportAsImage from 'utils/saveImage';
 import formatMonster from 'utils/formatMonster';
 import openSound from 'assets/sounds/open.mp3'
+import formatWidthMonster from 'utils/formatWidthMonster';
 
 const { Text, Title} = Typography;
 const { TabPane } = Tabs;
@@ -101,6 +102,7 @@ function Result() {
                          {dataCard?.cardReult.nft_card.emoji}
                          <Image 
                         height={110}
+                        width={formatWidthMonster(dataCard.cardReult.type)}
                         preview={false}
                         src={formatMonster(dataCard.cardReult.type)} 
                         />
@@ -166,6 +168,7 @@ function Result() {
                          {dataCard?.cardReult.nft_card.emoji}
                          <Image 
                         height={110}
+                        width={formatWidthMonster(dataCard.cardReult.type)}
                         preview={false}
                         src={formatMonster(dataCard.cardReult.type)} 
                         />

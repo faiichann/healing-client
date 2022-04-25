@@ -17,12 +17,12 @@ import Monster1 from 'assets/images/Avatars/monster1.png'
 import Monster3 from 'assets/images/Avatars/monster3.png'
 
 export const goalItem = [
-    {index: "1", goal: "จิตวิญญาณ", img: Items1, character: Monster1, des: "การเชื่อมั่นจะทำให้ทุกอย่าง ต่างไปจากเดิม" }, 
-    {index: "2", goal: "การเงิน", img: Items2, character: Monster2, des: "เงินคือเจ้านายที่เลวร้าย แต่เป็นคนรับใช้ชั้นเลิศ" }, 
-    {index: "3", goal: "การงาน", img: Items3, character: Monster3, des: "ความฝันจะไม่มีทางเป็นจริง หากคุณไม่ลงมือทำ" }, 
-    {index: "4", goal: "สุขภาพ", img: Items4, character: Monster4, des: "ความมั่งคั่งอย่างแรกในชีวิตที่ควรมีคือสุขภาพ" }, 
-    {index: "5", goal: "ความรู้", img: Items5, character: Monster5, des: "จงกระหาย และ ทำตัวให้โง่ตลอดเวลา" }, 
-    {index: "6", goal: "ครอบครัว", img: Items6, character: Monster6, des: "บ้านคือที่ที่เรื่องราวของคุณเริ่มต้นขึ้น" }, 
-    {index: "7", goal: "ความสัมพันธ์", img: Items7, character: Monster7, des: "เมื่อคุณรักสิ่งที่คุณมี คุณก็มีทุกสิ่งที่คุณต้องการ" }, 
-    {index: "8", goal: "ช่วยเหลือสังคม", img: Items8, character: Monster8, des: "โอกาสเกิดขึ้นเองไม่ได้ คุณต่างหากที่ต้องสร้างมันขึ้นมา" }
+    {index: "1", goal: "จิตวิญญาณ", img: Items1, character: Monster1, des: "การเชื่อมั่นจะทำให้ทุกอย่าง ต่างไปจากเดิม", width: 136 }, 
+    {index: "2", goal: "การเงิน", img: Items2, character: Monster2, des: "เงินคือเจ้านายที่เลวร้าย แต่เป็นคนรับใช้ชั้นเลิศ", width: 84 }, 
+    {index: "3", goal: "การงาน", img: Items3, character: Monster3, des: "ความฝันจะไม่มีทางเป็นจริง หากคุณไม่ลงมือทำ", width: 98 }, 
+    {index: "4", goal: "สุขภาพ", img: Items4, character: Monster4, des: "ความมั่งคั่งอย่างแรกในชีวิตที่ควรมีคือสุขภาพ", width: 98 }, 
+    {index: "5", goal: "ความรู้", img: Items5, character: Monster5, des: "จงกระหาย และ ทำตัวให้โง่ตลอดเวลา", width: 98 }, 
+    {index: "6", goal: "ครอบครัว", img: Items6, character: Monster6, des: "บ้านคือที่ที่เรื่องราวของคุณเริ่มต้นขึ้น", width: 98 }, 
+    {index: "7", goal: "ความสัมพันธ์", img: Items7, character: Monster7, des: "เมื่อคุณรักสิ่งที่คุณมี คุณก็มีทุกสิ่งที่คุณต้องการ", width: 98 }, 
+    {index: "8", goal: "ช่วยเหลือสังคม", img: Items8, character: Monster8, des: "โอกาสเกิดขึ้นเองไม่ได้ คุณต่างหากที่ต้องสร้างมันขึ้นมา", width: 98 }
 ]
