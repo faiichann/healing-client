@@ -15,13 +15,16 @@ import passSound from "assets/sounds/pass.mp3";
 
 const words = [
     'heal',
-    'game',
+    'real',
     'goal',
-    'card',
+    'sure',
     'token',
     'happy',
-    'plant',
-    'gift',
+    'alive',
+    'best',
+    'love',
+    'dream',
+    'mind',
   ];
   
   interface KeyProps {
