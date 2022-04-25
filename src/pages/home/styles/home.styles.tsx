@@ -23,9 +23,15 @@ export const ContainerHome = styled(Content)`
 export const SectionFirst = styled.div`
     width: 100vw;
     height: max-content;
-    max-height: 750px;
-    @media (min-width: 768px) {
-        max-height: 1000px;
+    max-height: 1000px;
+    @media (max-width: 500px) {
+        max-height: 750px;
+  }
+  @media (max-width: 390px) {
+        max-height: 655px;
+  }
+  @media (max-width: 280px) {
+        max-height: 600px;
   }
     max-width: 500px;
     background: linear-gradient(180deg,#BADEB3 0%,rgb(253 232 118 / 39%) 84.37%);

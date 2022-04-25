@@ -360,7 +360,7 @@ function Home() {
         </ContentSection>
            {/* ----footer---- */}
            <FooterHome>
-           <Title level={5}>Develop by</Title>
+           <Title level={5}>Developed by</Title>
            <Text type="secondary">Nichkamon Promputta</Text>
            <Text type="secondary">Peerapat Kaewmanee</Text>
            </FooterHome>
