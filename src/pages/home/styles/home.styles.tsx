@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Image, Layout, Drawer, Col } from 'antd';
+import { Image, Layout, Drawer } from 'antd';
 
 const { Content } = Layout;
 
@@ -76,8 +76,6 @@ export const ImgSection = styled(Image)`
     }
 `
 export const BoxThird = styled.div`
-  margin: 50px auto ;
-  background-color: #fff;
   display: flex;
   align-content: center;
   justify-content: center;
@@ -226,7 +224,4 @@ export const StarCardHome = styled.div`
     text-align: center;
     background: white;
     flex-direction: column  ;
-`
-export const ColDes = styled(Col)`
-    margin: 56px 30px ;
 `

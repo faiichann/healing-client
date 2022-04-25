@@ -65,7 +65,7 @@ const StyleButtonSpecial = {
                   หากคุณทายผิด หนอนยักษ์จะกินต้นไม้คุณ<br/>
                   ดูแลต้นไม้ของคุณให้ดี มีโอกาสเพียง 3 ครั้ง<br/>
                   มาพยายามให้เต็มที่กันเถอะ!!<br/>
-                  Hint: Words are about NFT!
+                  Hint: it's all positive words
            </Text>
              </Box>
         </DrawerStyle>

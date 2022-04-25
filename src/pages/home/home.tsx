@@ -8,7 +8,7 @@ import mountain from 'assets/images/bgHome/mountain.png'
 import greenMountain from 'assets/images/bgHome/green_mountain.png'
 import forest from 'assets/images/bgHome/forest.png'
 import cloud from 'assets/images/bgHome/cloud.png'
-import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome, ColDes } from './styles/home.styles';
+import { ContainerHome, LayoutHome, SectionFirst, FooterHome, MenuIcon, ImgSection, ImgContainer, NumBox, HomeDrawer, TextLink,  BoxThird, ContentSection, StarCardHome } from './styles/home.styles';
 import CarouselHome from 'components/carousels/CarouselHome';
 import Animation from 'theme/animations'
 import { useAppContext } from 'context/appContext';
@@ -16,19 +16,67 @@ import SoundRate from 'assets/sounds/rate.mp3'
 import Desc1 from 'assets/images/stage/Desc1.png'
 import Desc2 from 'assets/images/stage/Desc2.png'
 import Desc3 from 'assets/images/stage/Desc3.png'
+import axios from 'axios';
+import Landing from './landing';
 
 const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
     const [visible, setVisibleModal] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const { cardNum } = useAppContext();
+    const [isAnimate, setIsAnimate] = useState(false)
+    const { cardNum, setCardNum, setCardInfo } = useAppContext();
     const cardLeft = (200 - cardNum).toString();
     const revealRefs = useRef([]);
     const [starRate, setStarRate] = useState(0)
     const rateAudio = new Audio(SoundRate)
     revealRefs.current = [];
+
+    const [isLoading, setLoading] = useState(true);
+    const [windowDimenion, detectHW] = useState({
+      winWidth: window.innerWidth,
+      winHeight: window.innerHeight,
+    })
+  
+    const detectSize = () => {
+      detectHW({
+        winWidth: window.innerWidth,
+        winHeight: window.innerHeight,
+      })
+    }
+  
+    useEffect(() => {
+      window.addEventListener('resize', detectSize)
+  
+      return () => {
+        window.removeEventListener('resize', detectSize)
+      }
+    }, [windowDimenion])
+
+    const formatCardNumber = async(response : any) => {
+        const number = await response.result.length
+        let formatNum = number.toString();
+        while (formatNum.length < 3) formatNum = "0" + formatNum;
+        await setCardNum(formatNum)
+        console.log('Card Amount ------>', formatNum)
+    }
+
+    const fetchData = async () => {
+        try {
+            const {data: response} = await axios.get('https://healing-project.herokuapp.com/results');
+            await formatCardNumber(response);
+            await setCardInfo(response.result)
+          } catch (error) {
+            console.error(error);
+          }
+          sessionStorage.setItem('token','true')
+          setTimeout( () => { setLoading(false)},3000)
+    };
+
+    useEffect(() => {
+        fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[cardNum, setCardNum, setCardInfo])
 
     const desc = ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4', 'ระดับ 5'];
     const meaning = ['อืม รู้สึกยังไม่ชอบแหะ', 'อะ ไม่ได้รู้สึกอะไรนะเฉยๆ', 'ว้าว ก็พอใช้ได้อยู่นะเนี่ย', 'เริ่ด ค่อนข้างดีมากเลยแหะชอบๆ', 'สุดปัง ชอบมากเลยสนุกสุดๆ'];
@@ -42,7 +90,7 @@ function Home() {
 
     useEffect(() => {
         setTimeout( () => {
-            setIsLoading(true)
+          setIsAnimate(true)
         }, 500);
     }, [])
     const flexStyle = {
@@ -52,18 +100,18 @@ function Home() {
     }
     const sections = [
         {
-          title: 'Waiting content1', 
-          subtitle: 'Lorem, ipsum dolor',
+          title: 'มาตั้งเป้าหมายในชีวิตกันเถอะ', 
+          subtitle: 'ใช้ชีวิตอย่างสนุกโดย เริ่มต้นตั้งเป้าหมายที่อยากทำวันละเรื่องแล้วทำให้สำเร็จกันเถอะ ',
           img: Desc1
         },
         {
-          title: 'Waiting content2', 
-          subtitle: 'Dignissimos placeat',
+          title: 'เพลิดเพลินกับการตอบคำถามในรูปแบบใหม่', 
+          subtitle: 'เราจะช่วยให้การค้นหาเป้าหมายของคุณตื่นเต้น และท้าทายมากขึ้นด้วยกลไกเกมมิฟิเคชัน',
           img: Desc2
         },
         {
-          title: 'Waiting content2', 
-          subtitle: 'In ullam et nulla ',
+          title: 'เก็บเป้าหมายในรูปแบบ Digital Asset', 
+          subtitle: 'แปลงเป้าหมายของคุณสะสมเก็บไว้ในรูปแบบ Digital Asset เพื่อเตือนตัวเองเสมอให้ทำให้สำเร็จ',
           img: Desc3
         }
       ];
@@ -84,7 +132,18 @@ function Home() {
       sessionStorage.removeItem('token')
       window.location.href = 'https://forms.gle/KHey59mC6QmCxpbc8'
     }
+
+    const RowStyle ={
+      rowGap: "5px",
+      margin: "20px 15px",
+    }
+    const ColStyle ={
+      justifyContent: "center",
+      display: "flex",
+      alignItems: "center"
+    }
     return (
+       isLoading ? <Landing/> :
        <LayoutHome>
         <HomeDrawer
           closable={true}
@@ -120,7 +179,7 @@ function Home() {
            <SectionFirst id='home'>
             <Box justify='center' align='center' direction='column'
             style={{margin: '80px 0 95px 0',position: 'absolute', zIndex: '1'}}>
-              {isLoading && 
+              {isAnimate && 
               <Animation type='bounceUp' duration={1000} delay={200}>
               <Image
               width={100}
@@ -130,7 +189,7 @@ function Home() {
               </Animation>
              
               }
-                   {isLoading && 
+                   {isAnimate && 
                 <Animation type='slideFromBottom' duration={1000} delay={200} style={flexStyle}>
                 <Image
                     width={120}
@@ -151,8 +210,8 @@ function Home() {
            <ImgContainer>
            <ImgSection  className="cloud"  width={730} src={cloud} preview={false} />
            <div style={{position: 'fixed'}}>
-           <ImgSection  className="mountain"  src={mountain} preview={false}/>
-           <ImgSection  className="Green_mountain" src={greenMountain} preview={false}/>
+           <ImgSection  className="mountain"  width={windowDimenion.winWidth < 500 ? windowDimenion.winWidth : 500} src={mountain} preview={false}/>
+           <ImgSection  className="Green_mountain"  width={windowDimenion.winWidth < 500 ? windowDimenion.winWidth : 500} src={greenMountain} preview={false}/>
            </div>
            <ImgSection  className="forest"  src={forest} preview={false}/>           
            </ImgContainer>
@@ -160,7 +219,7 @@ function Home() {
            </SectionFirst>
             {/* ----Section2---- */}
             <ContentSection id='about-us'>
-            <Box justify='center' align='center' direction='column' style={{margin: '20px'}}>
+            <Box justify='center' align='center' direction='column' style={{margin: '30px'}}>
                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ผลิตการ์ดไปแล้ว</Text>
                 <Box justify='center' align='center' direction='row'>
                 {cardNum.split("").map((text :string, i:number) => {
@@ -171,67 +230,113 @@ function Home() {
                         </NumBox>
                     </div>
                     );
-                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
+                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}></Text>
                  </Box>
-                 <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>เหลือการ์ด</Text>
-                <Box justify='center' align='center' direction='row'>
-                {cardLeft.split("").map((text :string, i:number) => {
-                return (
-                    <div key={i}>
-                        <NumBox>
-                        {text}
-                        </NumBox>
-                    </div>
-                    );
-                })} <Text style={{color: '#73A253',margin: '0', fontSize: '18px'}}>ใบ</Text>
+                <Box justify='center' align='center' direction='row' style={{marginTop: '10px'}}>
+                  <div style={{backgroundColor: '#AED1A7', padding: '0px 20px', fontSize: '18px', borderRadius: '20px'}}>
+                  <Text style={{color: 'white',margin: '0', fontSize: '18px'}}>เหลือการ์ด {cardLeft} ใบ</Text>
+                  </div>
                  </Box>
             </Box>
             <CarouselHome/>
-            <div style={{marginTop: '60px'}}>
-            <Row>
-              <Col> 
-              <BoxThird >
-              <Image
-                    width={145}
-                    src={sections[0].img}
-                    preview={false}
-                />
-            </BoxThird>
+            {windowDimenion.winWidth < 370 ? 
+             <div style={{marginTop: '60px'}}>
+             <Row style={RowStyle}>
+             <Box justify='center' align='center' direction='column'>
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[0].img}
+                     preview={false}
+                 />
+             </BoxThird>
+               <Col  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
+               <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[0].subtitle}</span>
+               </Col>
+               </Box>
+             </Row> 
+
+            <Row style={RowStyle}>
+            <Box justify='center' align='center' direction='column'>
+            <BoxThird >
+            <Image
+                  width={130}
+                  src={sections[1].img}
+                  preview={false}
+              />
+          </BoxThird>
+            <Col style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+            <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
+            <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[1].subtitle}</span>
             </Col>
-              <ColDes>
-              <h2>{sections[0].title}</h2>
-              <p>{sections[0].subtitle}</p>
-              </ColDes>
-            </Row>
-           <Row>
-           <ColDes>
-           <h2>{sections[1].title}</h2>
-           <p>{sections[1].subtitle}</p></ColDes>
-           <Col> 
-           <BoxThird >
-           <Image
-                 width={145}
-                 src={sections[1].img}
-                 preview={false}
-             />
-         </BoxThird>
-         </Col>
-         </Row>
-         <Row>
-              <Col> 
-              <BoxThird >
-              <Image
-                    width={145}
-                    src={sections[2].img}
-                    preview={false}
-                />
-            </BoxThird>
+          </Box>
+          </Row>
+          <Row style={RowStyle}>
+          <Box justify='center' align='center' direction='column'>
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[2].img}
+                     preview={false}
+                 />
+             </BoxThird>
+               <Col style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
+               <span style={{fontSize: "12px",justifyContent: "center",display: "flex",textAlign: "center"}}>{sections[2].subtitle}</span>
+               </Col>
+               </Box>
+             </Row>
+             </div>
+            : 
+             <div style={{marginTop: '60px'}}>
+             <Row style={RowStyle}>
+               <Col span={10} style={ColStyle}> 
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[0].img}
+                     preview={false}
+                 />
+             </BoxThird>
+             </Col>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
+               <span style={{fontSize: "12px"}}>{sections[0].subtitle}</span>
+               </Col>
+             </Row> 
+            <Row style={RowStyle}>
+            <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+            <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
+            <span style={{fontSize: "12px"}}>{sections[1].subtitle}</span>
             </Col>
-              <ColDes>
-              <h2>{sections[2].title}</h2>
-              <p>{sections[2].subtitle}</p></ColDes>
-            </Row>
-            </div>
+            <Col span={10}  style={ColStyle}> 
+            <BoxThird >
+            <Image
+                  width={130}
+                  src={sections[1].img}
+                  preview={false}
+              />
+          </BoxThird>
+          </Col>
+          </Row>
+          <Row style={RowStyle}>
+               <Col span={10}  style={ColStyle}> 
+               <BoxThird >
+               <Image
+                     width={130}
+                     src={sections[2].img}
+                     preview={false}
+                 />
+             </BoxThird>
+             </Col>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
+               <span style={{fontSize: "12px"}}>{sections[2].subtitle}</span></Col>
+             </Row>
+             </div>
+            }
+           
          <div id='rate-web'>
          <Box justify='center' align='center' direction='column'>
          <Text style={{color: '#73A253',margin: '0', fontSize: '24px'}}>ให้คะแนนความพึงพอใจ</Text>

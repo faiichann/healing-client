@@ -1,10 +1,10 @@
-import Container from 'components/container/container'
+// import Container from 'components/container/container'
 import { useAppContext } from 'context/appContext';
 import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Image, Row, Col, Typography, Tabs } from 'antd';
 import { DivProgress, ProgressBar } from 'pages/gamecontent/styles/stage.styles';
-import { HomeFilled } from '@ant-design/icons';
+// import { HomeFilled } from '@ant-design/icons';
 import { Box, ButtonStyle } from 'theme/components';
 import CloseBox from 'assets/animation/Box.gif'
 import OpenBox from 'assets/animation/BoxOpen.gif'
@@ -20,7 +20,7 @@ const { Text, Title} = Typography;
 const { TabPane } = Tabs;
 
 function Result() {
-    const { stage, cardID} = useAppContext();
+    const {stage, cardID} = useAppContext();
     const [isLoading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [currentYear, setCurrentYear] = useState('');
@@ -36,10 +36,10 @@ function Result() {
         exportAsImage(exportNFTRef.current, "healingNFTCard")
     }
 
-    const goHome = async() => {
-        await sessionStorage.removeItem('token')
-        window.location.href = './'
-    }
+    // const goHome = async() => {
+    //     await sessionStorage.removeItem('token')
+    //     window.location.href = './'
+    // }
 
     const getYear = () => {
         var d = new Date(); 
@@ -82,8 +82,8 @@ function Result() {
         console.log(key);
       }
     return (
-       <Container header={{ title: 'Result', right: (<HomeFilled onClick={goHome} />) }}>
-          {isLoading ? 
+    //    <Container header={{ title: 'Result', right: (<HomeFilled onClick={goHome} />) }}>
+          isLoading ? 
           <>
           <Box justify='center' align='center' direction='column' >
           <TabsStyle defaultActiveKey="1" onChange={callback}>
@@ -249,8 +249,7 @@ function Result() {
          </Box>
          </Box>
          </>
-          }
-       </Container>
+    //    </Container>
     );
 }
 
