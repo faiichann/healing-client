@@ -9,7 +9,7 @@ import formatGoal from "utils/formatGoal";
 import formatMonster from "utils/formatMonster";
 import  logo  from 'assets/tests/healing_logo.png'
 import { BoxCarousel, BoxGallery, CardGallery, CarouselCard, ContentGallery, InputSearch, SearchInput } from "./style/gallery.styles";
-import { SearchOutlined } from '@ant-design/icons';
+import { LeftOutlined, RightOutlined, SearchOutlined } from '@ant-design/icons';
 const { Text, Title} = Typography;
 
 function Gallery() {
@@ -44,9 +44,12 @@ function Gallery() {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    console.log('-------->',slider.current)
+  }, [slider]);
     return (
      <>
-      <Container header={{ title: 'Gallery Cards', left: 'back' }}>
+      <Container header={{ title: 'สมุดภาพ', left: 'back' }}>
          {isLoading ?
             <Box justify='center' align='center' direction='row' >
             <Spin size="large"  style={{marginTop: '20%'}} />
@@ -68,12 +71,12 @@ function Gallery() {
              /></Col>
            </Row>
         </SearchInput>
-        <Text style={{marginTop: '5px', color: '#5B944D', fontSize: '18px'}}>ผลิตการ์ดไปแล้ว  <b>{data.length}</b>  ใบ</Text>
            <BoxGallery>
-             <BoxCarousel>
+             <BoxCarousel>             
                <CarouselCard 
                slidesToShow={1}
                dots={false}
+               arrows={true}
                ref={ref => {
                  slider.current = ref;
                }}
@@ -81,6 +84,9 @@ function Gallery() {
                {data.map((item: any, index: any) => {
  return(
    <ContentGallery  key={index} >
+      <div style={{backgroundColor: '#AED1A7', padding: '0px 20px', fontSize: '18px', borderRadius: '20px'}}>
+          <Text style={{color: 'white',margin: '0', fontSize: '18px'}}>ใบที่ <b>{index+1}</b> </Text>
+      </div>
   <CardGallery rank={item.nft_card.bg_color}>
 <Row style={{justifyContent: 'center' }} >
 <HeaderCard>
@@ -137,13 +143,19 @@ preview={false}
 /></Col>
 </Row>
 </CardGallery>
-<Text style={{marginTop: '5px', color: '#A6CD9C', fontSize: '18px'}}>ใบที่ <b>{index+1}</b> </Text>
 </ContentGallery>
 )
           }
          )}
                  
                </CarouselCard>
+               <div style={{ marginTop: '15px' }}>
+               <Box justify='center' align='center' direction='row'>
+               <LeftOutlined style={{zIndex: "2000", color: '#5B944D', fontSize: '18px'}} onClick={()=> slider.current.prev()}/>
+               <Text style={{margin: '0 10px', color: '#A6CD9C', fontSize: '18px'}}>ทั้งหมด <b>{data.length}</b> / 200 ใบ</Text>
+               <RightOutlined style={{zIndex: "2000", color: '#5B944D', fontSize: '18px'}} onClick={()=> slider.current.next()}/>
+               </Box>
+               </div>
              </BoxCarousel>
            </BoxGallery>
            </Box>

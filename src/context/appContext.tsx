@@ -58,6 +58,7 @@ const AppProvider = (({children}: IContextProps) =>{
 
     //------------Sound------------------------//
     const [isHangman, setHangman] = useState(false);
+    const [isResult, setResult] = useState(false);
 
     const [cardID, setCardID] = useState('');
     const [cardInfo, setCardInfo] = useState(
@@ -151,7 +152,9 @@ const AppProvider = (({children}: IContextProps) =>{
         cardInfo,
         setCardInfo,
         isHangman,
-        setHangman
+        setHangman,
+        isResult,
+        setResult
     }
 
     useEffect(() => {

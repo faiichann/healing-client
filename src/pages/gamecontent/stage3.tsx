@@ -63,7 +63,7 @@ function GameStage3() {
 
       const message = [
         `แตะ เพื่อทำนายดวงจากการสุ่ม` ,
-        `${item1} + ${item2} + ${item3} คำทำนายจากรูป "${emoji}" เป้าหมายของคุณมีโอกาส "${rankDes}" ดังนั้นจงบอกตัวเองไว้เสมอว่า "${caption}" ` ,
+        `${item1} ${item2} ${item3}\n คำทำนายจากรูป "${emoji}" เป้าหมายของคุณมีโอกาส "${rankDes}" ดังนั้นจงบอกตัวเองไว้เสมอว่า "${caption}" ` ,
         'ขอบคุณที่ให้ความสนใจ คลิกเพื่อรับรางวัล!!',
       ]
       const [isCutScene, setIsCutScene] = useState(false)
@@ -162,7 +162,7 @@ function GameStage3() {
          <>
          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} >
             <MessageCutScene>
-                {message[index]}
+                {message[index]}<br/>
                 <ButtonStyle typebutton="Small" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={()=>sentData()}>รับของขวัญ</ButtonStyle>
             </MessageCutScene>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>

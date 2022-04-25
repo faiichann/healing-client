@@ -52,7 +52,8 @@ export const SearchInput = styled(Input.Group)`
 display: flex !important;
 justify-content: center !important;
 align-content: center !important;
-margin-bottom: 10px;
+margin-top: 15px;
+margin-bottom: 20px;
 width: 80%;
 text-align: center;
 color: #A6CD9C;
