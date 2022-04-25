@@ -40,6 +40,7 @@ function GameContent() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [audio, setAudio] = useState(new Audio(soundBg));
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [HMaudio, setHMaudio]  = useState(new Audio(hangmanSound));
     const [playing, setPlaying] = useState(true);
 

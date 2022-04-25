@@ -75,6 +75,7 @@ function Home() {
 
     useEffect(() => {
         fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[cardNum, setCardNum, setCardInfo])
 
     const desc = ['ระดับ 1', 'ระดับ 2', 'ระดับ 3', 'ระดับ 4', 'ระดับ 5'];
