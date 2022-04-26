@@ -22,7 +22,7 @@ export const goalItem = [
     {index: "3", goal: "การงาน", img: Items3, character: Monster3, des: "ความฝันจะไม่มีทางเป็นจริง หากคุณไม่ลงมือทำ", width: 98 }, 
     {index: "4", goal: "สุขภาพ", img: Items4, character: Monster4, des: "ความมั่งคั่งอย่างแรกในชีวิตที่ควรมีคือสุขภาพ", width: 98 }, 
     {index: "5", goal: "ความรู้", img: Items5, character: Monster5, des: "จงกระหาย และ ทำตัวให้โง่ตลอดเวลา", width: 98 }, 
-    {index: "6", goal: "ครอบครัว", img: Items6, character: Monster6, des: "บ้านคือที่ที่เรื่องราวของคุณเริ่มต้นขึ้น", width: 98 }, 
+    {index: "6", goal: "ครอบครัว", img: Items6, character: Monster6, des: "บ้านคือที่ที่เรื่องราวของคุณเริ่มต้นขึ้น", width: 140 }, 
     {index: "7", goal: "ความสัมพันธ์", img: Items7, character: Monster7, des: "เมื่อคุณรักสิ่งที่คุณมี คุณก็มีทุกสิ่งที่คุณต้องการ", width: 98 }, 
     {index: "8", goal: "ช่วยเหลือสังคม", img: Items8, character: Monster8, des: "โอกาสเกิดขึ้นเองไม่ได้ คุณต่างหากที่ต้องสร้างมันขึ้นมา", width: 98 }
 ]

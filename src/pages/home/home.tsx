@@ -300,13 +300,13 @@ function Home() {
                  />
              </BoxThird>
              </Col>
-               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "flex-start",flexDirection: "column"}}>
                <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[0].title}</h3>
                <span style={{fontSize: "12px"}}>{sections[0].subtitle}</span>
                </Col>
              </Row> 
             <Row style={RowStyle}>
-            <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+            <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "flex-start",flexDirection: "column"}}>
             <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[1].title}</h3>
             <span style={{fontSize: "12px"}}>{sections[1].subtitle}</span>
             </Col>
@@ -330,7 +330,7 @@ function Home() {
                  />
              </BoxThird>
              </Col>
-               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "center",flexDirection: "column"}}>
+               <Col span={14}  style={{justifyContent: "center",display: "flex",alignItems: "flex-start",flexDirection: "column"}}>
                <h3 style={{ color: "#75a456",fontWeight: "700"}}>{sections[2].title}</h3>
                <span style={{fontSize: "12px"}}>{sections[2].subtitle}</span></Col>
              </Row>
