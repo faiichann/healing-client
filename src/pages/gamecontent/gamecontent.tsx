@@ -53,6 +53,7 @@ function GameContent() {
     const handleOk = () => {
         history.goBack();
         setStage(0)
+        audio.pause();
         HMaudio.pause();
         setHangman(false)
         setIsShowNotification(false);

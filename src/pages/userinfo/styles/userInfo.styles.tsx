@@ -64,18 +64,16 @@ export const ContentAvatar = styled.div`
     selected: boolean
   }
   export const ImageSlide = styled.div<ActiveProps>`
-    width: 230px;
+    width: 205px;
     height: 230px;
-    background: transparent;
-    border-radius: var(--Radius-12);
+    background:  ${(props: ActiveProps) => props.selected === true ? 'linear-gradient(180deg, #F9A186 -33.78%, rgba(251, 180, 158, 0.6) 111.49%)' : 'transparent' };
+    border-radius: 20px;
     margin: 40px 16px;
     display: flex;
     justify-content: center;
     align-items: center;
     object-fit: cover;
-    border-left: ${(props: ActiveProps) => props.selected === true ? '15px solid var(--Pink-300)' : 'none' };
-    /* background-color: ${(props: ActiveProps) => props.selected === true ? 'white' : 'none' }; */
-    border-radius: ${(props: ActiveProps) => props.selected === true ? '15px' : 'none' };
+    border: ${(props: ActiveProps) => props.selected === true ? '10px solid #ffffff94' : 'none' };
 `;
 export const Shadow = styled.div`
     height: 40px;

@@ -20,6 +20,7 @@ function Landing() {
             <Image
             width={180}
             src={Healing}
+            preview={false}
             />
             </Box>
             

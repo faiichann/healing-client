@@ -352,7 +352,7 @@ function Home() {
                   pattern='Light'
                   sizebutton={60} 
                   style={{margin: '10px 0px 20px 0px', cursor: 'pointer',position: 'absolute'}}
-                  onClick={goToForm}>ประเมินเพิ่มเติมทีนี่</ButtonStyle>
+                  onClick={goToForm}>ประเมินเพิ่มเติมที่นี่</ButtonStyle>
                    : null }
                </Box>
           </Box>
