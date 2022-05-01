@@ -30,6 +30,7 @@ function GameStage3() {
       const [caption, setCaption] = useState('');
       const [rank, setRank] = useState('');
       const [rankDes, setRankDes] = useState('');
+      const [isDisabled, setIsDisabled] = useState(false)
       const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
         isRateStar, setCardID, cardID, getQuotes, author, text, imgQuote, setHangman, isAvatar } = useAppContext();
       const [isUserAvatar, setUserAvatar] = useState<string>();
@@ -107,6 +108,7 @@ function GameStage3() {
         }
       }
       const sentData = async () =>{
+        setIsDisabled(true)
         try {
           await axios.post('https://healing-project.herokuapp.com/results',data,).then((response) => {
             console.log(response);
@@ -163,7 +165,7 @@ function GameStage3() {
          <Box justify='center' align='center' direction='column' style={{height: 'calc(100vh - 200px)'}} >
             <MessageCutScene>
                 {message[index]}<br/>
-                <ButtonStyle typebutton="Small" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={()=>sentData()}>รับของขวัญ</ButtonStyle>
+                <ButtonStyle disabled={isDisabled} typebutton="Small" backgroundbutton={'#F9A186'} style={StyleButtonSpecial} sizebutton={45} onClick={()=>sentData()}>รับของขวัญ</ButtonStyle>
             </MessageCutScene>
             <Box justify='center' align='center' direction='row'  style={{marginTop: '40px'}}>
               <Row>

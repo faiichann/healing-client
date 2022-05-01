@@ -4,6 +4,7 @@ import { ButtonStyle } from "theme/components";
 import { checkWin } from "utils/hangmanHelper";
 import { Typography } from "antd";
 import axios from "axios";
+import { useState } from "react";
 const { Title } = Typography;
 
 const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime } : any) => {
@@ -12,6 +13,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
   let countTime = "";
   const { isName, isGoalType, isGoalMsg, isEmoji, isMsgBot, isColorBg, 
     isRateStar, cardID, setStage, author, text, imgQuote, nextStage, setHangman, setResult} = useAppContext();
+  const [isDisabled, setIsDisabled] = useState(false)  
   if (checkWin(correctLetters, wrongLetters, selectedWord) === "win") {
     finalMessage = "เย้!! ผ่านแล้ว";
     finalMessageRevealWord = "จงเชื่อมั่นในตัวเองไว้ ไปรับรางวัลกัน";
@@ -45,6 +47,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
     }
   }
   const sentData = async () =>{
+    setIsDisabled(true)
     try {
       await axios.post('https://healing-project.herokuapp.com/results',data,).then((response) => {
         console.log(response);
@@ -93,6 +96,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
         footer={ checkWin(correctLetters, wrongLetters, selectedWord) === "win" ?[
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
+            disabled={isDisabled}
             onClick={endStage} 
             backgroundbutton={'#A6CD9C'}
             style={{fontWeight: '400', fontSize: '18px'}}> รับรางวัล </ButtonStyle>
@@ -100,6 +104,7 @@ const Popup = ({ correctLetters, wrongLetters, selectedWord, playAgain, loseTime
           loseTime > 2 ? [
             <ButtonStyle typebutton='Large' 
             sizebutton={75} 
+            disabled={isDisabled}
             onClick={endStage} 
             backgroundbutton={'#A6CD9C'}
             style={{fontWeight: '400', fontSize: '18px'}}> รับรางวัล </ButtonStyle>

@@ -13,7 +13,7 @@ function Routing(){
     return(
         <Switch>
               <Route exact path="/" component={Home}/>
-              <PrivateRoute exact path="/gallery" component={Gallery}/>
+              <Route  exact path="/gallery" component={Gallery}/>
               <PrivateRoute exact path="/intro" component={Intro}/>
               <PrivateRoute exact path="/userinfo" component={UserInfo}/>
               <PrivateRoute exact path="/gamecontent" component={GameContent}/>

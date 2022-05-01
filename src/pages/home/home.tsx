@@ -18,12 +18,14 @@ import Desc2 from 'assets/images/stage/Desc2.png'
 import Desc3 from 'assets/images/stage/Desc3.png'
 import axios from 'axios';
 import Landing from './landing';
+import { NotiModal} from 'pages/gamecontent/styles/stage.styles';
 
 const { Title, Text } = Typography;
 
 function Home() {
     const history = useHistory();
     const [visible, setVisibleModal] = useState(false)
+    const [visibleNotice, setVisibleNotice] = useState(false)
     const [isAnimate, setIsAnimate] = useState(false)
     const { cardNum, setCardNum, setCardInfo } = useAppContext();
     const cardLeft = (200 - cardNum).toString();
@@ -132,7 +134,14 @@ function Home() {
       sessionStorage.removeItem('token')
       window.location.href = 'https://forms.gle/KHey59mC6QmCxpbc8'
     }
-
+    const createCards = () => {
+      if (parseInt(cardNum) >= 200){
+        return setVisibleNotice(true)
+      }else{
+        return history.push('/intro')
+      }
+      
+    }
     const RowStyle ={
       rowGap: "5px",
       margin: "20px 15px",
@@ -142,6 +151,13 @@ function Home() {
       display: "flex",
       alignItems: "center"
     }
+    const handleOk = () => {
+      setVisibleNotice(false);
+  }
+  const StyleButtonSpecial = {
+    boxShadow: 'none',
+    margin: '10px 10px' 
+  }
     return (
        isLoading ? <Landing/> :
        <LayoutHome>
@@ -170,6 +186,24 @@ function Home() {
           <TextLink onClick={goToTurtorial}>คู่มือการใช้งานเว็บ</TextLink>
           </Box>
         </HomeDrawer>
+        <NotiModal
+                visible={visibleNotice}
+                onOk={handleOk}
+                title={<Text type="secondary" style={{fontSize: '18px',fontWeight: '800', justifyContent: 'center', display: 'flex', textAlign: 'center', color: '#41653A'}}>การ์ดหมดแล้ว!!</Text>}
+                closable={false}
+                footer={[
+                    <Box justify='center' align='center' direction='row'>
+                    <ButtonStyle key="back" typebutton='Medium' backgroundbutton={'#A6CD9C'} style={StyleButtonSpecial} sizebutton={40} onClick={handleOk}>
+                        ตกลง
+                    </ButtonStyle>
+                    </Box>
+                ]}
+            >
+                <Box justify='center' align='center' direction='column'>
+                <p>เสียใจด้วยนะ เราผลิตการ์ดครบ200ใบแล้ว ไว้โอกาสหน้าเข้ามาใหม่นะคะ</p>
+                <p><Text type="secondary" style={{fontSize: '12px',fontWeight: '400' , textAlign: 'center', color: '#595F64'}}>สามารถดูการ์ดที่ผลิตไปแล้วได้ตรงเมนู "สมุดภาพ" ด้านขวาบนค่ะ</Text></p>
+                </Box>
+            </NotiModal>
            <ContainerHome>
            <Box justify='flex-end' align='center' direction='row' onClick={handleButton}
             style={{ padding: '30px 16px',position: 'absolute', zIndex: '999' }}> 
@@ -205,7 +239,7 @@ function Home() {
                   backgroundbutton={'#F9A186'} 
                   sizebutton={50} 
                   style={{margin: '90px 0px'}}
-                  onClick={() => history.push('/intro')}>สร้างการ์ด</ButtonStyle>
+                  onClick={createCards}>สร้างการ์ด</ButtonStyle>
             </Box>
            <ImgContainer>
            <ImgSection  className="cloud"  width={730} src={cloud} preview={false} />
